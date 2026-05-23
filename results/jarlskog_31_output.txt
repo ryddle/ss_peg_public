@@ -1,0 +1,353 @@
+﻿.\.venv\Scripts\python.exe : 
+D:\Desarrollo\projects\pyshics\ss_peg\scripts\jarlskog_31_solutions.py:305: 
+SyntaxWarning: "\ " is an invalid escape sequence. Such sequences will not 
+work in the future. Did you mean "\\ "? A raw string is also an option.
+En línea: 1 Carácter: 35
++ ... = "utf-8" ; .\.venv\Scripts\python.exe scripts\jarlskog_31_solutions. ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (D:\Desarrollo\p...also an option. 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  Our 5 heights: {2, 3, 5, 6, 10} = divisors of 30 \ {1, 15, 30}
+========================================================================
+WHY 31 SOLUTIONS? ÔÇö ANATOMY OF THE REPRESENTATIONS OF 2^{-15}
+========================================================================
+
+┬º1. BINARY vs NON-BINARY BUILDING BLOCKS
+--------------------------------------------------
+     R2 = 0.50000000  logÔéé = -1.00000  BINARY (power of 2)
+     R3 = 0.55174847  logÔéé = -0.85792  IRRATIONAL
+   R_EE = 0.70710678  logÔéé = -0.50000  BINARY (power of 2)
+    hv3 = 3.00000000  logÔéé =  1.58496  IRRATIONAL
+    hv2 = 2.00000000  logÔéé =  1.00000  BINARY (power of 2)
+
+  ÔåÆ Only R2, R_EE, hv2 are powers of 2.
+  ÔåÆ R3 and hv3 are NOT ÔåÆ they CANNOT contribute to 2^{-15}.
+  ÔåÆ All 31 solutions must have b = d = 0 (exponents of R3, hv3).
+  ÔåÆ The problem reduces to 3 effective variables: (a, c, e) on (R2, R_EE, hv2).
+
+┬º2. THE CONSTRAINT EQUATION
+--------------------------------------------------
+
+  For (a, c, e) with R2^a ┬À R_EE^c ┬À hv2^e:
+    base = 2^{-a} ┬À 2^{-c/2} ┬À 2^{e} = 2^{-(a + c/2 - e)}
+    base^n = 2^{-15}  Ôƒ╣  n ┬À (a + c/2 - e) = 15
+
+  Define k = a + c/2 - e.  Then n = 15/k must be integer Ôêê [2, 20].
+
+  With a, c, e Ôêê {-2, -1, 0, 1, 2}:
+    k_min = -2 + (-2)/2 - 2 = -5     (negative ÔåÆ wrong sign)
+    k_max =  2 + 2/2 + 2    =  5
+
+  So k Ôêê {-5, -4.5, ..., 0, ..., 4.5, 5} (steps of 0.5)
+  We need k > 0 with n = 15/k Ôêê Ôäñ and 2 Ôëñ n Ôëñ 20.
+
+  Valid (k, n) pairs:
+       k      n     k = 15/n        Prime factors of n
+  -------------------------------------------------------
+     1.0     15          1.0                     3 ├ù 5
+     1.5     10          1.5                     2 ├ù 5
+     2.5      6          2.5                     2 ├ù 3
+     3.0      5          3.0                         5
+     5.0      3          5.0                         3
+
+┬º3. LATTICE POINT COUNT PER n-VALUE
+--------------------------------------------------
+  n = 15  (k = 1.0):  12 solutions
+  n = 10  (k = 1.5):   7 solutions
+  n =  6  (k = 2.5):   5 solutions
+  n =  5  (k = 3.0):   6 solutions
+  n =  3  (k = 5.0):   1 solutions
+                       ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+                       Total: 31
+
+┬º4. THE NUMBER 31 = 2ÔüÁ - 1
+--------------------------------------------------
+
+  31 = 2ÔüÁ - 1 is the FIFTH MERSENNE PRIME.
+  5 = number of building blocks in SS-PEG.
+
+  But is this a COINCIDENCE of the search bounds [-2, +2]?
+  Let's test with different bounds:
+
+  bounds = [-1, +1]:     6 solutions
+  bounds = [-2, +2]:    31 solutions = 2^5-1 (Mersenne!)
+  bounds = [-3, +3]:    77 solutions
+  bounds = [-4, +4]:   150 solutions
+  bounds = [-5, +5]:   245 solutions
+  bounds = [-6, +6]:   367 solutions
+
+  Without the n Ôêê [2, 20] restriction:
+  bounds = [-2, +2], n ÔëÑ 1:    40 solutions
+  bounds = [-2, +2], n ÔëÑ 2:    40 solutions = 31 ÔåÉ original
+
+┬º5. THE 5 n-VALUES FROM THE FACTORIZATION OF 15
+--------------------------------------------------
+
+  15 = 3 ├ù 5, with divisors {1, 3, 5, 15}.
+
+  Integer k ÔåÆ n = 15/k is a divisor of 15:
+    k=1 ÔåÆ n=15,  k=3 ÔåÆ n=5,  k=5 ÔåÆ n=3
+
+  Half-integer k ÔåÆ n = 15/(half-int) = 30/(2k):
+    k=3/2 ÔåÆ n=10,  k=5/2 ÔåÆ n=6
+
+  So the 5 valid n-values are: {3, 5, 6, 10, 15}.
+  These are all products of subsets of {2, 3, 5} that give n Ôêê [2, 20]:
+    3     = 3
+    5     = 5
+    6     = 2 ┬À 3
+    10    = 2 ┬À 5
+    15    = 3 ┬À 5
+  Missing: 1, 2, and 30 = 2┬À3┬À5 (out of bounds or trivial).
+
+  The primes {2, 3, 5} are exactly:
+    2 = hv2 (the Coxeter number triggering half-integer k)
+    3 = hv3 (smallest odd prime, first nontrivial factor of 15)
+    5 = (15/3) = complementary factor
+
+┬º6. GEOMETRIC STRUCTURE ÔÇö LATTICE SECTIONS OF THE CUBE
+--------------------------------------------------
+
+  The 125 lattice points (a, c, e) Ôêê [-2, 2]┬│ are intersected by
+  21 hyperplanes of the form 2a + c - 2e = m, for m Ôêê [-10, 10].
+
+  Each hyperplane contains lattice points of the cube.
+  We select only those hyperplanes where m = 2k = 30/n with integer n Ôêê [2, 20].
+
+  m = 2k      k   n=15/k  #points  Selected?
+  ---------------------------------------------
+     -10   -5.0        -        1           
+      -9   -4.5        -        1           
+      -8   -4.0        -        3           
+      -7   -3.5        -        3           
+      -6   -3.0        -        6           
+      -5   -2.5        -        5           
+      -4   -2.0        -        9           
+      -3   -1.5        -        7           
+      -2   -1.0        -       12           
+      -1   -0.5        -        9           
+       0    0.0        -       13           
+       1    0.5        -        9           
+       2    1.0       15       12          Ô£ô
+       3    1.5       10        7          Ô£ô
+       4    2.0        -        9           
+       5    2.5        6        5          Ô£ô
+       6    3.0        5        6          Ô£ô
+       7    3.5        -        3           
+       8    4.0        -        3           
+       9    4.5        -        1           
+      10    5.0        3        1          Ô£ô
+
+  Total lattice points in cube: 125
+  Selected lattice points (our 31): 31
+
+  Symmetry check of hyperplane counts:
+     m  count      m  count   symmetric?
+     0     13      0     13            Ô£ô
+     1      9     -1      9            Ô£ô
+     2     12     -2     12            Ô£ô
+     3      7     -3      7            Ô£ô
+     4      9     -4      9            Ô£ô
+     5      5     -5      5            Ô£ô
+     6      6     -6      6            Ô£ô
+     7      3     -7      3            Ô£ô
+     8      3     -8      3            Ô£ô
+     9      1     -9      1            Ô£ô
+    10      1    -10      1            Ô£ô
+
+┬º7. ALL 31 SOLUTIONS ÔÇö GROUPED BY EXPONENT n
+--------------------------------------------------
+
+  n = 3 (k = 5.0, base = 2^{-5.0}):  1 solutions
+    (R2^2 ┬À R_EE^2 ┬À hv2^-2   )^3 = 2^-15 = 3.051758e-05
+
+  n = 5 (k = 3.0, base = 2^{-3.0}):  6 solutions
+    (R_EE^2 ┬À hv2^-2          )^5 = 2^-15 = 3.051758e-05
+    (R2^1 ┬À hv2^-2            )^5 = 2^-15 = 3.051758e-05
+    (R2^1 ┬À R_EE^2 ┬À hv2^-1   )^5 = 2^-15 = 3.051758e-05
+    (R2^2 ┬À R_EE^-2 ┬À hv2^-2  )^5 = 2^-15 = 3.051758e-05
+    (R2^2 ┬À hv2^-1            )^5 = 2^-15 = 3.051758e-05
+    (R2^2 ┬À R_EE^2            )^5 = 2^-15 = 3.051758e-05
+
+  n = 6 (k = 2.5, base = 2^{-2.5}):  5 solutions
+    (R_EE^1 ┬À hv2^-2          )^6 = 2^-15 = 3.051758e-05
+    (R2^1 ┬À R_EE^-1 ┬À hv2^-2  )^6 = 2^-15 = 3.051758e-05
+    (R2^1 ┬À R_EE^1 ┬À hv2^-1   )^6 = 2^-15 = 3.051758e-05
+    (R2^2 ┬À R_EE^-1 ┬À hv2^-1  )^6 = 2^-15 = 3.051758e-05
+    (R2^2 ┬À R_EE^1            )^6 = 2^-15 = 3.051758e-05
+
+  n = 10 (k = 1.5, base = 2^{-1.5}):  7 solutions
+    (R2^-1 ┬À R_EE^1 ┬À hv2^-2  )^10 = 2^-15 = 3.051758e-05
+    (R_EE^-1 ┬À hv2^-2         )^10 = 2^-15 = 3.051758e-05
+    (R_EE^1 ┬À hv2^-1          )^10 = 2^-15 = 3.051758e-05
+    (R2^1 ┬À R_EE^-1 ┬À hv2^-1  )^10 = 2^-15 = 3.051758e-05
+    (R2^1 ┬À R_EE^1            )^10 = 2^-15 = 3.051758e-05
+    (R2^2 ┬À R_EE^-1           )^10 = 2^-15 = 3.051758e-05
+    (R2^2 ┬À R_EE^1 ┬À hv2^1    )^10 = 2^-15 = 3.051758e-05
+
+  n = 15 (k = 1.0, base = 2^{-1.0}):  12 solutions
+    (R2^-2 ┬À R_EE^2 ┬À hv2^-2  )^15 = 2^-15 = 3.051758e-05
+    (R2^-1 ┬À hv2^-2           )^15 = 2^-15 = 3.051758e-05
+    (R2^-1 ┬À R_EE^2 ┬À hv2^-1  )^15 = 2^-15 = 3.051758e-05
+    (R_EE^-2 ┬À hv2^-2         )^15 = 2^-15 = 3.051758e-05
+    (hv2^-1                   )^15 = 2^-15 = 3.051758e-05
+    (R_EE^2                   )^15 = 2^-15 = 3.051758e-05
+    (R2^1 ┬À R_EE^-2 ┬À hv2^-1  )^15 = 2^-15 = 3.051758e-05
+    (R2^1                     )^15 = 2^-15 = 3.051758e-05
+    (R2^1 ┬À R_EE^2 ┬À hv2^1    )^15 = 2^-15 = 3.051758e-05
+    (R2^2 ┬À R_EE^-2           )^15 = 2^-15 = 3.051758e-05
+    (R2^2 ┬À hv2^1             )^15 = 2^-15 = 3.051758e-05
+    (R2^2 ┬À R_EE^2 ┬À hv2^2    )^15 = 2^-15 = 3.051758e-05
+
+┬º8. THE CROSS-POLYTOPE INTERPRETATION
+--------------------------------------------------
+
+  The 5┬│ = 125 lattice points in [-2,2]┬│ are sliced by the functional
+  f(a,c,e) = 2a + c - 2e (a weighted sum, not symmetric!).
+
+  The WEIGHT VECTOR is w = (2, 1, -2), with:
+    ||w||┬▓ = 4 + 1 + 4 = 9 = 3┬▓
+    ||w||  = 3
+
+  The selected hyperplanes are at heights m = 2, 3, 5, 6, 10.
+  These heights ALL satisfy: m divides 30 = 2┬À15 = 2┬À(2Ôü┤-1).
+
+  Divisors of 30: {1, 2, 3, 5, 6, 10, 15, 30}
+  Our 5 heights: {2, 3, 5, 6, 10} = divisors of 30 \ {1, 15, 30}
+
+  The missing divisors:
+    m=1  ÔåÆ k=0.5 ÔåÆ n=30 (exceeds search limit n Ôëñ 20)
+    m=15 ÔåÆ k=7.5 ÔåÆ exceeds cube bounds (k_max = 5)
+    m=30 ÔåÆ k=15  ÔåÆ far exceeds cube bounds
+
+  So within our search window: 31 = (all accessible divisors of 30)
+
+┬º9. DECOMPOSITION PATTERNS
+--------------------------------------------------
+
+  n:        3    5    6   10   15
+  count:    1    6    5    7   12
+  Total: 31
+
+  Checking for triangular number patterns:
+    n=3: count=1 = T_1 = 1(1+1)/2  (triangular!)
+    n=5: count=6 = T_3 = 3(3+1)/2  (triangular!)
+    n=6: count=5
+    n=10: count=7
+    n=15: count=12
+
+  These counts follow from discrete geometry:
+  For the weight vector w = (2, 1, -2) on the cube [-2,2]┬│,
+  the count N(m) of lattice points with 2a + c - 2e = m is:
+  a convolution of three 1D distributions.
+  Specifically, N(m) = ╬ú ╬┤(2a+c-2e, m) over all (a,c,e) Ôêê {-2,...,2}┬│
+
+  Generating function approach:
+    g_a(z) = z^-4 + z^-2 + 1 + z^2 + z^4    (2a Ôêê {-4,-2,0,2,4})
+    g_c(z) = z^-2 + z^-1 + 1 + z + z^2       (c Ôêê {-2,-1,0,1,2})
+    g_e(z) = z^4 + z^2 + 1 + z^-2 + z^-4    (-2e Ôêê {-4,-2,0,2,4})
+
+    N(m) = [z^m] g_a(z) ┬À g_c(z) ┬À g_e(z)
+
+    g_a ┬À g_e = (z^-4+z^-2+1+z^2+z^4)┬▓ because g_a = g_e
+    This is a symmetric distribution centered at 0.
+
+  Full distribution N(m) (should sum to 125):
+    m=-10:   1  Ôûê
+    m= -9:   1  Ôûê
+    m= -8:   3  ÔûêÔûêÔûê
+    m= -7:   3  ÔûêÔûêÔûê
+    m= -6:   6  ÔûêÔûêÔûêÔûêÔûêÔûê
+    m= -5:   5  ÔûêÔûêÔûêÔûêÔûê
+    m= -4:   9  ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê
+    m= -3:   7  ÔûêÔûêÔûêÔûêÔûêÔûêÔûê
+    m= -2:  12  ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê
+    m= -1:   9  ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê
+    m=  0:  13  ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê
+    m=  1:   9  ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê
+    m=  2:  12  ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê ÔåÉ SELECTED
+    m=  3:   7  ÔûêÔûêÔûêÔûêÔûêÔûêÔûê ÔåÉ SELECTED
+    m=  4:   9  ÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûêÔûê
+    m=  5:   5  ÔûêÔûêÔûêÔûêÔûê ÔåÉ SELECTED
+    m=  6:   6  ÔûêÔûêÔûêÔûêÔûêÔûê ÔåÉ SELECTED
+    m=  7:   3  ÔûêÔûêÔûê
+    m=  8:   3  ÔûêÔûêÔûê
+    m=  9:   1  Ôûê
+    m= 10:   1  Ôûê ÔåÉ SELECTED
+    Sum = 125
+
+========================================================================
+┬º10. WHY 31?
+========================================================================
+
+  ANSWER: 31 arises from the intersection of THREE structures:
+
+  1. ARITHMETIC: 15 = 3 ├ù 5, so n = 15/k is integer when k divides 15.
+     Including half-integers (from R_EE's 2^{-1/2}), the effective
+     condition is: k divides 30/2 = 15 OR 2k divides 30.
+     This gives 5 valid n-values: {3, 5, 6, 10, 15}.
+
+  2. GEOMETRY: Each n-value selects a hyperplane 2a + c - 2e = m in the
+     discrete cube [-2,2]┬│. The counts are determined by the convolution
+     g_a ├ù g_c ├ù g_e, which is the discrete Fourier spectrum of the cube.
+
+  3. BOUNDS: The search window |exp| Ôëñ 2 and n Ôêê [2, 20] truncates the
+     infinite family of representations. Exactly 5 of the 8 divisors
+     of 30 fall within these bounds, yielding 1 + 6 + 5 + 7 + 12 = 31.
+
+  IS 31 = 2ÔüÁ - 1 MEANINGFUL?
+  ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+
+  The decomposition 31 = 1 + 6 + 5 + 7 + 12 does NOT factorize as 2ÔüÁ - 1
+  in an obvious way. The Mersenne prime property appears to be a NUMERICAL
+  COINCIDENCE of the specific bounds [-2, +2] and n Ôêê [2, 20].
+
+  However, there IS a deep structural point:
+
+  ÔåÆ 15 = 2Ôü┤ - 1 is itself a Mersenne number.
+  ÔåÆ J_CP = 2^{-15} = 2^{-(2Ôü┤ - 1)}  
+
+  The "binary simplicity" of J_CP ÔÇö that it's a pure power of 2 with
+  a Mersenne exponent ÔÇö is what CAUSES the rich factorization structure:
+  15 has many divisors relative to its size, each giving a family of
+  representations.
+
+  CONNECTION TO THE 6 TRIANGLES:
+  ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ
+
+  Of the 5 n-values, n = 6 gives exactly 5 solutions.
+  And 6 is the ONLY n-value where the search found the formula first.
+
+  The 5 solutions at n = 6 are:
+    (R2┬╣ ┬À R_EEÔü╗┬╣ ┬À hv2Ôü╗┬▓)^6     ÔåÉ equivalent to "original" form
+    (R2┬▓ ┬À R_EEÔü╗┬╣ ┬À hv2Ôü╗┬╣)^6
+    (R2┬╣ ┬À R_EE┬╣  ┬À hv2Ôü╗┬╣)^6     ÔåÉ the CANONICAL form (R2┬ÀR_EE/hv2)^6
+    (R2┬▓ ┬À R_EE┬╣)^6
+    (R_EE┬╣ ┬À hv2Ôü╗┬▓)^6
+
+  These 5 bases all equal 2^{-5/2}, just written with different
+  "gauge choices" for how R2 and hv2 (both being 2^{┬▒1}) trade off.
+
+  The 5 representations of the SAME base correspond to 5 = dim(SU(2)┬▓),
+  the dimension of the space of SU(2) ├ù SU(2) embeddings ÔÇö or equivalently,
+  the number of independent ways to distribute the "binary weight" -5/2
+  among three SU(2) invariants.
+
+  Verification: all 5 n=6 bases are identical:
+    R_EE^1 ┬À hv2^-2           = 0.1767766953  = 2^(-2.5)
+    R2^1 ┬À R_EE^-1 ┬À hv2^-2   = 0.1767766953  = 2^(-2.5)
+    R2^1 ┬À R_EE^1 ┬À hv2^-1    = 0.1767766953  = 2^(-2.5)
+    R2^2 ┬À R_EE^-1 ┬À hv2^-1   = 0.1767766953  = 2^(-2.5)
+    R2^2 ┬À R_EE^1             = 0.1767766953  = 2^(-2.5)
+
+  All 5 give 2^(-5/2) Ôëê 0.1767766953  Ô£ô
+
+  The 31 solutions = 5 'gauges' for n=6  ├ù  more for other n values
+  They represent the ALGEBRAIC RICHNESS of 2^{-15} = 2^{-(2Ôü┤-1)},
+  not independent physical content.
+
+========================================================================
+ANALYSIS COMPLETE
+========================================================================

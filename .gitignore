@@ -1,0 +1,67 @@
+# Git LFS tracking for large files
+*.npz
+*.log
+*.json
+
+# Virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+desktop.ini
+Thumbs.db
+
+# Build artifacts
+*.aux
+*.log
+*.bbl
+*.blg
+*.out
+*.toc
+*.lof
+*.lot
+*.dvi
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# PDF papers (go to arXiv only)
+*.pdf
+
+# Old/obsolete
+old/
+
+# Multimedia
+podcasts/
+
+# External tool outputs
+graphify-out/
+
+# Separate projects
+"Fast Radio Bursts and Cosmic Voids - A Cross-Correlation Analysis"/
+
+# Paper versions (historical)
+paper_ss-peg/projects_v00*/
+paper_ss-peg/projects_v01*/
+
+# Paper NN (separate publication)
+paper_nn/
+
+# Working documents (not scientific)
+ACTION_PLAN_*.md
+ARTICULO_DIVULGATIVO.md
+ToyModelEmergenciasSU(2)_issues.md
+ciclo_grafo_particulas_minimo.md
+particles_mass_results.md
+TASKS.md
