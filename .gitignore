@@ -37,9 +37,6 @@ Thumbs.db
 *.fls
 *.fdb_latexmk
 
-# PDF papers (go to arXiv only)
-*.pdf
-
 # Old/obsolete
 old/
 
