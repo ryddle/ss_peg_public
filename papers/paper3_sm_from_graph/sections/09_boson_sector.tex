@@ -1,0 +1,120 @@
+\section{The Boson Sector: W, Z, and Higgs on the Mass Lattice}\label{sec:boson_sector}
+
+The boson sector---W, Z, and Higgs---represents a critical test of the SS-PEG program. Unlike fermions, which are organized into three generational families, the bosons are single particles with no generations. The question is: do they fall on the same lattice as the fermions, or do they require a separate structure?
+
+The answer is striking: \textbf{the W, Z, and Higgs bosons fall on the same 3D lattice as the 9 fermions}, with mean error $0.742\%$ and all coordinates exactly half-integer. The bosons are not an afterthought---they are integral to the mass lattice.
+
+\subsection{Boson Lattice Coordinates}\label{sec:boson_coordinates}
+
+\begin{table}[h]
+\centering
+\caption{Boson lattice coordinates}
+\label{tab:boson_coordinates}
+\begin{tabular}{lccccc}
+\hline\hline
+Boson & $g$ & $p$ & $q$ & $r$ & $m_{\mathrm{pred}}$ (MeV) \\
+\hline
+$Z$ & 1 & $+8$ & $-11$ & $0$ & $90679.16$ \\
+$W$ & 2 & $+11/2$ & $-10$ & $+2$ & $79600.56$ \\
+$H$ & 3 & $+7$ & $-9$ & $+2$ & $124223.07$ \\
+\hline\hline
+\end{tabular}
+\end{table}
+
+All three coordinates are exactly half-integer (the same quantization as fermions). The ordering $Z \to W \to H$ corresponds to $g = 1, 2, 3$.
+
+\subsection{Boson Parabolic Curve}\label{sec:boson_parabola}
+
+The three bosons lie on a \textbf{single parabolic curve} in the lattice:
+\begin{equation}
+\xF_{\mathrm{boson}}(g) = \aF_{\mathrm{boson}} \, g^2 + \bF_{\mathrm{boson}} \, g + \cF_{\mathrm{boson}},
+\end{equation}
+with coefficients:
+\begin{equation}
+\aF_{\mathrm{boson}} = (2, 0, -1), \qquad
+\bF_{\mathrm{boson}} = (-17/2, 1, 5), \qquad
+\cF_{\mathrm{boson}} = (29/2, -12, -4).
+\end{equation}
+
+\textbf{Key structural feature:} The boson trajectory is the \textbf{unique sector with mass inversion} ($A > 0$ in the scalar curvature). All fermion sectors have $A < 0$ (masses decrease in the parabolic turning point direction), while the bosons have $A > 0$ (masses increase). This inversion is a structural difference between fermions and bosons encoded in the graph topology.
+
+\textbf{Minimum kinetic action:} The boson sector has the minimum kinetic action $S_K = 107/12$ among all five sectors. This reflects the structural stability of the boson trajectory.
+
+\subsection{The Weinberg Angle as Lattice Displacement}\label{sec:boson_weinberg}
+
+The Weinberg angle~\cite{pdg2024} emerges from the boson lattice as a \textbf{lattice displacement}:
+\begin{equation}
+\cos\theta_W = \frac{9\Rthree}{4\sqrt{2}} \approx 0.8759.
+\end{equation}
+Experimental value: $\cos\theta_W = \sqrt{1 - 0.2312} = 0.8815$. \textbf{Error: $0.44^\circ$ (0.63\%)}
+
+This formula is derived from the difference between the Z and W lattice coordinates. The Weinberg angle is not an independent parameter---it is a \textbf{geometric property of the boson trajectory} in the mass lattice.
+
+\subsection{The Higgs Mechanism as Coordinate Activation}\label{sec:higgs_mechanism}
+
+The Higgs mechanism~\cite{chamseddine1997spectral} is reinterpreted in the SS-PEG framework as \textbf{coordinate activation} on the mass lattice:
+
+\begin{itemize}
+\item \textit{Before SSB:} The SU(2)$_L \times$ U(1)$_Y$ gauge group has 4 massless gauge bosons ($W^1, W^2, W^3, B$), all massless, plus the Higgs doublet (4 real components).
+\item \textit{After SSB:} The physical bosons $W^\pm$, $Z$, and $H$ \textbf{appear on the lattice} at specific coordinates. The photon $\gamma$ is \textbf{absent from the lattice}.
+\end{itemize}
+
+\textbf{Why is the photon absent?} For a massless particle: $m = 0 \implies \ln(m/m_e) \to -\infty$. This requires at least one coordinate $p, q, r \to -\infty$. The photon is not a point on the lattice---it is the \textbf{limit of the lattice at infinity}.
+
+\textbf{Physical interpretation:} The Higgs mechanism is the \textbf{activation of coordinates} on the mass lattice. Before SSB, the coordinates are ``off the lattice'' (at infinity). After SSB, the coordinates ``turn on'' and the massive bosons appear at finite lattice positions. The photon remains at infinity (massless).
+
+\subsection{Boson-Fermion Comparison}\label{sec:boson_fermion_comparison}
+
+\begin{table}[h]
+\centering
+\caption{Boson-fermion structural comparison}
+\label{tab:boson_fermion}
+\begin{tabular}{lccccc}
+\hline\hline
+Sector & $\sum a_k$ & $\sum b_k$ & $\sum c_k$ & $a_p a_q a_r$ & $S_K$ \\
+\hline
+Lepton & $1/2$ & $-13/2$ & $-4$ & $-3/4$ & $389/16$ \\
+Up & $1/4$ & $-1/4$ & $-16$ & $-21/16$ & $317/8$ \\
+Down & $0$ & $5$ & $-20$ & $0$ & $45/2$ \\
+Neutrino & $-3$ & $-19$ & $5$ & $-15$ & $3743/48$ \\
+\textbf{Boson} & $\mathbf{1}$ & $\mathbf{-13/2}$ & $\mathbf{-17/2}$ & $\mathbf{0}$ & $\mathbf{107/12}$ \\
+\hline\hline
+\end{tabular}
+\end{table}
+
+\textbf{Key observations:}
+\begin{itemize}
+\item \textit{Boson as structural hybrid:} The boson $q$-coordinate structure is inherited from the down quark, while the $r$-coordinate structure is inherited from the lepton. The boson is a \textbf{structural hybrid} of fermion sectors.
+\item \textit{Zero curvature product:} The boson curvature product $a_p a_q a_r = 0$ (because $a_q = 0$), meaning the $q$-coordinate evolves linearly. This is shared only with the down quark sector.
+\item \textit{Minimum kinetic action:} The boson has $S_K = 107/12 \approx 8.92$, the minimum of all five sectors. This reflects the structural stability of the boson trajectory.
+\end{itemize}
+
+\subsection{Boson Ordering: Z$\to$W$\to$H vs Z$\to$H$\to$W}\label{sec:boson_ordering}
+
+Both orderings Z$\to$W$\to$H and Z$\to$H$\to$W have $r$-flatness ($b_r/a_r = -5$). They share the same $r$-coefficients because $r_W = r_H = 2$. The disambiguation is resolved by:
+\begin{itemize}
+\item The Z$\to$W$\to$H ordering minimizes the Frobenius distance to the identity: $\|N - I\|_F^2 = 222$ (unique minimum among candidates).
+\item The Z$\to$W$\to$H ordering is consistent with the mass ordering $m_Z > m_W$ (the Z is heavier than the W, so it appears at $g = 1$ in the ordering).
+\end{itemize}
+
+\subsection{Summary}\label{sec:boson_summary}
+
+The boson sector predictions of the SS-PEG program are summarized in Table~\ref{tab:boson_summary}.
+
+\begin{table}[h]
+\centering
+\caption{Summary of boson predictions}
+\label{tab:boson_summary}
+\begin{tabular}{lcc}
+\hline\hline
+Quantity & Graph Value & Experiment \\
+\hline
+$m_W$ & $79.60$ GeV & $80.38$ GeV \\
+$m_Z$ & $90.68$ GeV & $91.19$ GeV \\
+$m_H$ & $124.22$ GeV & $125.10$ GeV \\
+$\cos\theta_W$ & $0.8759$ & $0.8815$ \\
+\hline\hline
+\end{tabular}
+\end{table}
+
+All three bosons fall on the same 3D lattice as the fermions, with mean error $0.742\%$ and all coordinates exactly half-integer. The Weinberg angle is a lattice displacement. The Higgs mechanism is coordinate activation. The boson trajectory is the unique sector with mass inversion ($A > 0$) and minimum kinetic action ($S_K = 107/12$). The boson is a structural hybrid of fermion sectors.

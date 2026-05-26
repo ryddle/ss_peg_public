@@ -1,0 +1,43 @@
+\section{RAG Experiments: Methodology}\label{app:rag_experiments}
+
+\subsection{Experimental Setup}\label{app:rag_setup}
+
+The RAG (Retrieval-Augmented Graph) experiments test whether the Killing form $T_K$ creates or selects non-commutative structure. The protocol uses a knowledge graph with $N$ operators and measures the evolution of Killing matrix quality under different constraint protocols.
+
+\subsection{G\_RAG-21: Diagnostic vs. Generative}\label{app:g_rag_21}
+
+\textbf{Setup:} $N = 128$ operators, $51$ seeds, $100$ epochs per seed. Two protocols:
+\begin{enumerate}
+    \item \textbf{Killing-only:} Minimize $T_K$ without cycle pressure.
+    \item \textbf{Killing + closure:} Minimize $T_K + T_{\mathrm{closure}}$.
+\end{enumerate}
+
+\textbf{Result:} Killing-only evolution drives operators toward commuting configurations (abelian collapse). Non-commutativity only persists when cycle pressure is present. $\Rightarrow$ Killing is diagnostic, not generative.
+
+\subsection{G\_RAG-25: Tempering Effect}\label{app:g_rag_25}
+
+\textbf{Setup:} Two-phase protocol:
+\begin{enumerate}
+    \item \textbf{Dosing (0--200 epochs):} Cycle pressure ON ($T_{\mathrm{closure}} + T_K + T_{\mathrm{ortho}}$).
+    \item \textbf{Withdrawal (200--400 epochs):} Cycle pressure OFF ($T_K + T_{\mathrm{ortho}}$ only).
+\end{enumerate}
+
+\textbf{Result:} $\Kil_{\mathrm{rr}}$ $\AUC$ improves from $0.52$ (post-dose) to $0.98$ (post-withdrawal). The Killing signal is maximally pure after withdrawal of cycle pressure.
+
+\subsection{G\_RAG-23: Two-Phase Crystallization}\label{app:g_rag_23}
+
+\textbf{Setup:} Fine-grained monitoring of $\Kil_{\mathrm{rr}}$ retention across $300$ epochs.
+
+\textbf{Result:} Sharp hardening threshold between D100 and D200. Before D100: collapse ($\Kil_{\mathrm{rr}} \approx 0.32$). After D200: amplification ($\Kil_{\mathrm{rr}} > 0.93$). The transition is first-order-like.
+
+\subsection{G\_RAG-19: Abelian Collapse}\label{app:g_rag_19}
+
+\textbf{Setup:} Mixed knowledge graphs with $T_K$ minimization without cycle pressure.
+
+\textbf{Result:} Operators evolve toward commuting configurations. The non-simple product states represent partial abelian collapse. Explains the $53.1\%$ non-simple rate in the $128$-seed Monte Carlo.
+
+\subsection{G\_RAG-16: Dissociation $T_K$--Holonomy}\label{app:g_rag_16}
+
+\textbf{Setup:} B2 experiment comparing $T_K$ collapse and holonomy separation under Adam optimizer.
+
+\textbf{Result:} $T_K$ collapses from $88.25 \to 80.72$ while retaining $\mathrm{hol\_sep} = 14.17\times$. The Killing signal and holonomy structure are algebraically independent.

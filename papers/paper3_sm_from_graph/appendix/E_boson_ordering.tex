@@ -1,0 +1,126 @@
+\section{Boson Ordering Analysis}\label{app:boson_ordering}
+
+This appendix presents the detailed analysis that disambiguates the two possible boson orderings: Z$\to$W$\to$H and Z$\to$H$\to$W. Both orderings have $r$-flatness ($b_r/a_r = -5$), and they share the same $r$-coefficients because $r_W = r_H = 2$. The boson mass values are from PDG 2024~\cite{pdg2024}.
+
+\subsection{The Ordering Ambiguity}\label{app:boson_ambiguity}
+
+The three bosons (Z, W, H) occupy three points on a parabolic curve in the lattice. There are $3! = 6$ possible orderings, but only two are consistent with $r$-flatness:
+
+\begin{center}
+\captionof{table}{Boson orderings consistent with $r$-flatness}
+\label{tab:boson_orderings}
+\begin{tabular}{lcc}
+\hline\hline
+Ordering & Flat coordinate & $b_r/a_r$ \\
+\hline
+Z$\to$W$\to$H & $r$ & $-5.000$ \\
+Z$\to$H$\to$W & $r$ & $-5.000$ \\
+\hline\hline
+\end{tabular}
+\end{center}
+
+Both orderings satisfy the flatness condition. The disambiguation requires additional criteria.
+
+\subsection{Coefficient Comparison}\label{app:boson_coefficients}
+
+\begin{center}
+\captionof{table}{Coefficient comparison for Z$\to$W$\to$H vs Z$\to$H$\to$W}
+\label{tab:boson_coeff_compare}
+\begin{tabular}{lccc}
+\hline\hline
+Coefficient & Z$\to$W$\to$H & Z$\to$H$\to$W & Difference \\
+\hline
+$a_p$ & $-7/4$ & $-1/4$ & $-1.5$ \\
+$a_q$ & $3/2$ & $-3/2$ & $3.0$ \\
+$a_r$ & $2$ & $2$ & $0$ (shared) \\
+$b_p$ & $31/4$ & $9/4$ & $5.5$ \\
+$b_q$ & $-11/2$ & $11/2$ & $-11.0$ \\
+$b_r$ & $5$ & $5$ & $0$ (shared) \\
+$c_p$ & $-1/2$ & $7/2$ & $-4.0$ \\
+$c_q$ & $-6$ & $-14$ & $8.0$ \\
+$c_r$ & $8$ & $0$ & $8.0$ \\
+\hline\hline
+\end{tabular}
+\end{center}
+
+\subsection{Frobenius Distance to Identity}\label{app:boson_frobenius}
+
+The transition matrix $\Nmat$ for each ordering is computed from the coefficients. The Frobenius distance to the identity is:
+
+\begin{center}
+\captionof{table}{Frobenius distance to identity for each ordering}
+\label{tab:boson_frobenius}
+\begin{tabular}{lcc}
+\hline\hline
+Ordering & $\|N - I\|_F^2$ & Rank \\
+\hline
+Z$\to$W$\to$H & \textbf{222} & 1 \\
+Z$\to$H$\to$W & 234 & 2 \\
+\hline\hline
+\end{tabular}
+\end{center}
+
+The Z$\to$W$\to$H ordering has the \textbf{unique minimum} Frobenius distance to the identity (222 vs 234). This is consistent with the trace maximization principle: the physical matrix is the one closest to the identity.
+
+\subsection{Trace Comparison}\label{app:boson_trace}
+
+\begin{center}
+\captionof{table}{Trace comparison}
+\label{tab:boson_trace}
+\begin{tabular}{lcc}
+\hline\hline
+Ordering & $\mathrm{tr}(N)$ & Rank \\
+\hline
+Z$\to$W$\to$H & \textbf{+1} & 1 \\
+Z$\to$H$\to$W & $-2$ & 2 \\
+\hline\hline
+\end{tabular}
+\end{center}
+
+The Z$\to$W$\to$H ordering has the \textbf{unique maximum trace} (+1 vs $-2$). This is the trace maximization principle (S6b).
+
+\subsection{Mass Ordering}\label{app:boson_mass}
+
+The three bosons have physical masses~\cite{pdg2024} $m_W \approx 80.4$ GeV, $m_Z \approx 91.2$ GeV, $m_H \approx 125.1$ GeV. The ordering $m_W < m_Z < m_H$ is the only one consistent with the lattice coordinates:
+
+\begin{equation}
+W: (11/2, -10, 2) \;\to\; \ln(m_W/m_e) \approx 11.29, \newline \\
+\end{equation}
+\begin{equation}
+Z: (8, -11, 0) \;\to\; \ln(m_Z/m_e) \approx 11.42, \newline \\
+\end{equation}
+\begin{equation}
+H: (7, -9, 2) \;\to\; \ln(m_H/m_e) \approx 11.73.
+\end{equation}
+
+The $r$-coordinate is shared by W and H ($r_W = r_H = 2$), which is why the flatness condition selects $r$ as the flat coordinate: the difference between W and H is entirely in the $p$ and $q$ coordinates. The Z boson has $r_Z = 0$, making it the unique point in the $r$-direction among the three bosons.
+
+\textbf{Important:} The bosons do \textbf{not} have a generation ordering in the same sense as fermions. The assignment $W \to g=1$, $Z \to g=2$, $H \to g=3$ is a mathematical convenience for fitting a parabola to three points---any three points determine a parabola exactly. The physical masses are not ordered by generation index: $m_W < m_Z < m_H$ is a consequence of the lattice coordinates, not a generation hierarchy.
+
+\subsection{Spectral Radius}\label{app:boson_spectral}
+
+\begin{center}
+\captionof{table}{Spectral radius comparison}
+\label{tab:boson_spectral}
+\begin{tabular}{lcc}
+\hline\hline
+Ordering & $\rho(N)$ & Rank \\
+\hline
+Z$\to$W$\to$H & \textbf{4.562} & 1 \\
+Z$\to$H$\to$W & 9.217 & 2 \\
+\hline\hline
+\end{tabular}
+\end{center}
+
+The Z$\to$W$\to$H ordering has the \textbf{unique minimum spectral radius} (4.562 vs 9.217). This is consistent with the mass hierarchy growing as slowly as possible across generations.
+
+\subsection{Summary}\label{app:boson_summary}
+
+The Z$\to$W$\to$H ordering is uniquely selected by three independent criteria:
+\begin{enumerate}
+\item \textbf{Minimum Frobenius distance to identity:} 222 (unique minimum)
+\item \textbf{Maximum trace:} +1 (unique maximum)
+\item \textbf{Minimum spectral radius:} 4.562 (unique minimum)
+\end{enumerate}
+
+The mass ordering $m_W < m_Z < m_H$ is consistent with the lattice coordinates: $\ln(m_W/m_e) \approx 11.29$, $\ln(m_Z/m_e) \approx 11.42$, $\ln(m_H/m_e) \approx 11.73$. The bosons do \textbf{not} have a generation ordering in the fermion sense---the parabola fit is a mathematical convenience for three points. The Z$\to$H$\to$W ordering is ruled out by all three criteria.

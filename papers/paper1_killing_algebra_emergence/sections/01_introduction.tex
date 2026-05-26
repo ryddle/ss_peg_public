@@ -1,0 +1,115 @@
+\section{Introduction}\label{sec:introduction}
+
+\subsection{The Problem of Symmetry Emergence}\label{sec:problem}
+
+The Standard Model of particle physics rests on a foundation of postulated symmetries. The gauge group SU(3) $\times$ SU(2) $\times$ U(1) is taken as an axiom---a starting assumption from which all physical consequences are derived. This paradigm, established over a century of theoretical physics, treats continuous symmetry as fundamental, irreducible, and unexplained. ``Why SU(3)?'' has no answer within the theory itself. The three coupling constants---electromagnetic, weak, and strong---are measured and inserted by hand, with no explanation for their values or their hierarchy. The dimension of spacetime (3+1) is presupposed, not derived.
+
+This paper inverts that logic. We present experimental evidence that the symmetry group is not an input but an \textbf{output}---the inevitable consequence of a geometric variational principle acting on a space of operators. The commutation relations, the Jacobi identity, Casimir operators, dual Coxeter numbers, and all representation-theoretic invariants arise as \textit{consequences}, not assumptions.
+
+The central claim can be stated precisely:
+
+\begin{quote}
+\emph{Given $n$ random matrices with appropriate structural constraints, the minimization of the Killing tension $T_K = \|K - K_{\mathrm{target}}\|^2$ under norm stabilization converges to an exact realization of the unique simple compact Lie algebra of dimension $n$, with \SI{100}{\percent} probability. The Jacobi identity is satisfied at machine precision without being imposed.}
+\end{quote}
+
+The word ``exact'' is not hyperbole. Casimir eigenvalues match theory at $\sim 10^{-16}$ (machine zero). Structure constants are proportional to the expected tensors with zero standard deviation. All spurious entries vanish identically.
+
+\subsection{The SS-PEG Proposal}\label{sec:sspeg}
+
+The SS-PEG framework (Space of States and Projections of the Evolution Graph) proposes a deeper principle: reality is not made of things but of relations. The framework is built on a single ontological chain:
+
+\begin{equation}
+\text{Potential} \;\to\; \text{Relation} \;\to\; \text{Cycle} \;\to\; \text{Invariant}
+\end{equation}
+
+\begin{itemize}
+\item \textbf{Potentials} are the primary relational substrate (connections on fiber bundles).
+\item \textbf{Relations} connect potentials (covariant derivatives, parallel transport).
+\item \textbf{Cycles} probe global structure (holonomy loops, closed paths).
+\item \textbf{Invariants} are the objective, observer-independent residue (curvature, charges, coupling constants).
+\end{itemize}
+
+In this relational ontology, the chain is realized concretely: the Killing metric is the potential, the adjoint action is the cycle, and the Lie algebra is the invariant. The variational principle minimizes the tension between the emergent Killing form and a target geometry. The unique algebra compatible with that geometry crystallizes automatically.
+
+This framework inverts the traditional hierarchy of physics. In the Newtonian picture:
+
+\begin{equation}
+\text{Mass} \longrightarrow \text{Force} \longrightarrow \text{Field} \longrightarrow \text{Potential}
+\end{equation}
+
+Mass is the cause; the potential is the consequence. SS-PEG proposes the inversion:
+
+\begin{equation}
+\text{Potentials / Relational structures} \longrightarrow \text{Cause (primary)}
+\end{equation}
+$$
+\text{Mass} \longrightarrow \text{Stable realization / condensed phase of the potentials}
+$$
+
+Mass does not generate the potential: mass \textit{occupies} regions where the potential allows stability. A particle is not a fundamental billiard ball; it is a \textbf{process that persists}---a stable cluster of energy and information within a relational network.
+
+\subsection{Historical Motivation}\label{sec:history}
+
+The experimental program began with a single toy model experiment: can two cycles sharing vertices in a simple graph generate the generators of the su(2) algebra? The answer was yes.
+
+The toy model constructed a graph with 4 vertices and 5 edges (a square with a diagonal), assigned unitary operators to edges, and computed holonomies around two intersecting cycles. The linearized generators $A_i \approx -i(W_i - I)$ extracted from the Wilson loops satisfied the su(2) commutation relations $[A_i, A_j] = i\,\varepsilon_{ijk}\,A_k$ exactly. The key topological requirement was that the two cycles share at least one edge or vertex---disjoint cycles would yield commuting generators and an abelian algebra.
+
+This result was remarkable but isolated: could it work for \textit{all} Lie algebras? The full experimental program was designed to answer this question systematically. The toy model revealed that the non-commutativity of holonomies---the source of all non-abelian gauge physics---arises naturally from the topology of intersecting cycles in a graph. The variational principle extends this insight: if intersecting cycles produce non-commuting generators, then minimizing the Killing tension should select the unique algebra that those generators naturally close into.
+
+\subsection{Main Results of Phase I}\label{sec:results}
+
+Phase I of the SS-PEG experimental program reports results from 51 independent test programs, 17 Lie algebras, 4 classical families (SU, SO, Sp, SL), 3 exceptional algebras (G$_2$, F$_4$, E$_6$), abelian emergence, non-compact real forms, and $\sim 1650$ optimization runs. All computations were performed on an NVIDIA RTX 5070 Ti GPU (16 GB VRAM) with 16 CPU cores and 128 GB DDR5 RAM, using Python 3.14 and PyTorch (CUDA 13).
+
+The key findings are:
+
+\begin{enumerate}[label=\arabic*.]
+\item \textbf{Killing-only ablation} (Test 3.1): The Killing metric alone uniquely determines the algebra. Removing the non-commutativity tension $T_{\mathrm{nc}}$ entirely: SU(2) still emerges perfectly. Removing $T_K$ and keeping only $T_{\mathrm{nc}}$: no algebraic structure emerges. The Killing metric---defined through commutators as $K_{ab} = \mathrm{Tr}(\mathrm{ad}_a \circ \mathrm{ad}_b)$---contains \textit{more} information than the commutators themselves. It encodes the global geometric pattern of how all commutators relate to each other.
+
+\item \textbf{Universality across families}: Every classical simple compact Lie algebra family emerges with \SI{100}{\percent} success: SU($N$) for $N=2\ldots 5$, SO($N$) for $N=3\ldots 6$, Sp($2N$) for $N=1\ldots 3$. The exceptional algebras G$_2$, F$_4$, E$_6$ also emerge with \SI{100}{\percent} success under constructive conditions. The only input that changes between families is the parameterization---the structural constraint on the matrices (hermitian traceless, antisymmetric, or symplectic). The variational principle is identical across all cases.
+
+\item \textbf{Isomorphism verification}: SU(2) $\cong$ Sp(2), SU(4) $\cong$ SO(6), and SO(5) $\cong$ Sp(4) yield bit-identical invariants from different parameterizations, proving that the variational principle accesses the abstract algebra, not a representation artifact.
+
+\item \textbf{Exceptional algebras}: G$_2$ and F$_4$ are discovered blindly via closure-driven optimization from random initial matrices, without knowledge of octonionic structures. E$_6$ resists blind discovery (0/144 trials), requiring specific warm-start conditions.
+
+\item \textbf{Density phase transition}: A mathematical step function at $\rho = n_{\mathrm{gen}}/(d^2-1) = 1$---\SI{0}{\percent} closure for $n_{\mathrm{gen}} = 2\ldots 14$, \SI{100}{\percent} at $n_{\mathrm{gen}} = 15$ for SU(4). There are no intermediate states. No ``partial SU(4)''. This is the gauge-theoretic analogue of percolation.
+
+\item \textbf{Spacetime symmetry}: so(3,1) emerges with \SI{100}{\percent} success rate (5/5 seeds) from $\eta$-preserving parameterization with indefinite target. The Killing eigenvalue signature is $(3+,3-)$---exactly 3 rotation generators and 3 boost generators. When a compact Killing target conflicts with the $\eta$-preserving constraint, the optimizer \textit{kills the boost generators entirely}, leaving only the rotation subalgebra so(3). It knows compact boosts are impossible without being told.
+
+\item \textbf{Abelian emergence}: U(1) appears in the Killing kernel when trace is permitted. With $d^2$ generators, the optimizer discovers $\mathfrak{u}(d) = \mathfrak{u}(1) \oplus \mathfrak{su}(d)$, with the abelian factor appearing as a zero eigenvalue of the Killing matrix.
+
+\item \textbf{Universal $h^\vee$ formula}: $h^\vee = I_R \cdot |K|/\kappa^2$ relating Killing eigenvalues to the dual Coxeter number, verified across 15 algebras with zero exceptions.
+
+\item \textbf{F$_4$ bifurcation}: The basin of F$_4$ exists in the extended phase space $(\theta, m, v)$ of parameters plus Adam momentum plus Adam second moment. With fresh Adam state: P(F$_4$) = \SI{0}{\percent}. With preserved Adam state from a successful trajectory: P(F$_4$) = \SI{100}{\percent}. The symmetry that crystallizes depends on the dynamical history of the system.
+
+\item \textbf{Landscape measure}: A Monte Carlo analysis with 128 random seeds in $\mathfrak{so}(27)$ reveals that non-simple products dominate (53.1\% of seeds converge to closed but non-simple structures). Simple exceptional algebras have vanishingly small basins of attraction. The Standard Model's non-simple product structure is the generic outcome of the variational principle.
+
+\item \textbf{Gravity from entanglement}: Following Jacobson~\cite{Jacobson1995,Jacobson1998}, the Einstein equations emerge from entanglement thermodynamics $\delta S = \delta\langle K \rangle$. The same relational density $\rho$ that controls the gauge symmetry phase transition also controls the emergence of gravity---gauge forces and spacetime curvature emerge simultaneously at $\rho_c \approx 1$.
+
+\item \textbf{Dark matter as connection}: The framework predicts that ``dark matter'' is not a particle but the footprint of the Levi-Civita connection in regions of intermediate relational density. This yields distinctive predictions (filamentary topology, cored profiles, no self-annihilation) that align with recent ultrafaint dwarf galaxy observations~\cite{SanchezAlmeitaTrujilloPlastino2024} and are testable via weak lensing surveys.
+\end{enumerate}
+
+\subsection{Beyond Symmetry: The Ultimate Goal}\label{sec:ultimate_goal}
+
+The ultimate goal of this program is not merely to demonstrate that symmetries emerge, but to propose that the fundamental parameters of the Standard Model---those numbers we currently treat as ``hand-tuned''---are, in fact, the spectral accounting of the evolution graph. What we call coupling constants or masses are nothing more than the net balance of relations and cycles within the Killing structure; they are the numerical residues of an architecture that self-organizes to maintain its structural stability.
+
+This hypothesis transforms the Standard Model from a theory with 19+ free parameters into a theory with zero free parameters: every observable quantity would be a prediction of the relational graph's spectral topology. Paper III pursues this program, deriving $\alpha_{\mathrm{EM}}$, $\alpha_s$, and $\alpha_W$ from the Ramanujan ratios of the SU(2) and SU(3) subgraphs with sub-percent precision, and predicting the entire fermion mass spectrum from the Cartan--Weyl root graph geometry.
+
+\subsection{Paper Organization}\label{sec:organization}
+
+This paper is organized as follows. Section~\ref{sec:relational_framework} develops the relational--cyclic framework: the evolution graph as fundamental object, the potential $\to$ relation $\to$ cycle $\to$ invariant chain, the Aharonov--Bohm effect, the Berry phase, Lagrangian mechanics, and general relativity as different projections of the same relational graph. It introduces relational density as the order parameter controlling gauge symmetry emergence, and establishes the Cartan--Weyl graph as the bridge between discrete topology and continuous algebra. Section~\ref{sec:variational_principle_detail} presents the variational principle: the Killing metric, the variational functional, and the classification of classical and exceptional algebras. Section~\ref{sec:methodology} presents the experimental methodology: computational setup, optimization protocol, and success metrics.
+
+Section~\ref{sec:classical} narrates the discovery journey through classical families---SU($N$), SO($N$), Sp($2N$)---and exceptional algebras G$_2$, F$_4$, E$_6$, documenting the \SI{100}{\percent} success rates and exact $h^\vee$ matches. Section~\ref{sec:ablative} presents ablation studies: the Killing-only result ($T_K$ essential, $T_{\mathrm{nc}}$ redundant), the closure tension analysis, and the uniqueness of the SM result among all $\su(a) \times \su(b)$ pairs.
+
+Section~\ref{sec:density} presents the density phase transition: a mathematical step function at $\rho = 1$ with no intermediate states, the gauge-theoretic analogue of percolation, and its physical interpretation. Section~\ref{sec:spacetime} treats the emergence of spacetime symmetry: so(3,1) from indefinite Killing target, the $(3+,3-)$ signature, and the philosophical implication that spacetime is the pattern of non-compact directions in the emergent Killing form. It also establishes the P$\to$R$\to$C$\to$I mapping between the SS-PEG relational chain and general relativity, derives gravity from entanglement thermodynamics following Jacobson~\cite{Jacobson1995,Jacobson1998} (showing that gauge forces and spacetime curvature emerge simultaneously at the density threshold $\rho_c \approx 1$), and proposes dark matter as ``connection without particles'' with testable predictions (filamentary topology, cored profiles) consistent with recent ultrafaint dwarf galaxy observations~\cite{SanchezAlmeitaTrujilloPlastino2024}. Section~\ref{sec:landscape} presents the landscape analysis: Monte Carlo results, the F$_4$ bifurcation, and the multi-layer probability argument for why SU(2) $\times$ SU(3) is the most accessible structure. Section~\ref{sec:why_sm} unifies these arguments through three independent criteria: topological dominance, the Ramanujan spectral filter, and accessibility.
+
+Section~\ref{sec:discussion} discusses the implications for theoretical physics, compares the SS-PEG framework with existing approaches, and outlines the path toward Papers II and III. Section~\ref{sec:conclusion} summarizes the principal results and contributions.
+
+Section~\ref{sec:discussion} discusses the implications: comparison with Connes' spectral action principle, the inversion of the symmetry-postulation paradigm, and connections to Papers II and III. Section~\ref{sec:conclusion} summarizes the contributions of Phase I and outlines the path forward.
+
+\subsection{Cross-Reference}\label{sec:cross-reference}
+
+This paper establishes the core result: Lie algebra emergence from Killing metric minimization. Paper II (``Graph Topology \& Spectral Analysis'') develops the graph-topological interpretation, classifying edges as cyclic, free, or decoupled according to the Killing spectrum, and establishing the Ramanujan property as a criterion of spectral optimality. Paper III (``Standard Model from Graph Topology'') derives the Standard Model mass spectrum, coupling constants, and flavor mixing from the same graph topology with sub-percent precision.
+
+\subsection{Notation and Conventions}\label{sec:notation}
+
+Throughout this paper, we use the following conventions. Lie algebras are denoted by fraktur letters: $\mathfrak{g}$, $\su(n)$, $\so(n)$, $\sp(2n)$. The Killing metric is $K_{ab} = \mathrm{Tr}(\mathrm{ad}_a \circ \mathrm{ad}_b)$, where $\mathrm{ad}_a(X) = [G_a, X]$ for generator $G_a$. The Killing tension is $T_K = \|K - K_{\mathrm{target}}\|^2$. For compact algebras, $K_{\mathrm{target}} = -c \cdot I$ with $c > 0$. The dual Coxeter number is denoted $h^\vee$. The Dynkin index of representation $R$ is $I_R$. The Frobenius norm of a matrix $M$ is $\|M\|_F = \sqrt{\mathrm{Tr}(M^\dagger M)}$. We use natural units $\hbar = c = 1$.

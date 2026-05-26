@@ -1,0 +1,154 @@
+\section{Theoretical Framework}\label{sec:theoretical_framework}
+
+\subsection{The Evolution Graph as Fundamental Object}\label{sec:evolution_graph_detail}
+
+The evolution graph $\Gra = (V, E, \Holo, \{U_e\})$ is the central object of this paper. It provides the structural bridge between the algebraic data produced by the variational principle (Paper 1) and the physical observables that Paper 3 will derive.
+
+\paragraph{Vertices.} The vertex set $V$ represents relational states in the emergent Hilbert space. In the SS-PEG framework, states are not fundamental; they emerge from the relational substrate as the variational principle finds stable configurations. Each vertex corresponds to a configuration that is invariant under a subset of the generator adjoint actions.
+
+\paragraph{Edges.} The edge set $E = \{e_a\}_{a=1}^n$ has one edge per generator $T_a$. The topology of each edge---cyclic, free, or decoupled---is determined by the Killing eigenvalue $\Kil_{\la_a}$ associated with $T_a$:
+
+\begin{equation}
+\Kil_{\la_a} \begin{cases}
+< -\eps & \longrightarrow \text{cyclic edge } e_a \text{ (compact direction)} \\
+| \Kil_{\la_a} | < \eps & \longrightarrow \text{decoupled edge } e_a \text{ (abelian direction)} \\
+> +\eps & \longrightarrow \text{free edge } e_a \text{ (non-compact direction)}
+\end{cases}
+\end{equation}
+
+where $\eps \sim 10^{-6}$ is a numerical threshold. Here $\Kil_{\la_a}$ denotes the eigenvalue of the Killing matrix in the eigenbasis corresponding to generator $T_a$.
+
+\paragraph{Holonomies.} For each independent cycle $C$ in the graph, the holonomy
+\begin{equation}
+U_C = \exp\!\left(i \oint_C A_a T_a\,dl\right)
+\end{equation}
+measures the physical content of the cycle. For non-abelian algebras, $U_C \neq I$ encodes the gauge field strength $F_{\mu\nu}^a$. The number of independent non-trivial holonomies equals the rank of the algebra (number of independent Casimir operators).
+
+\paragraph{Edge operators.} The adjoint action $\ad_a \circ \ad_b$ defines how edges couple to one another. The Killing form $\Kil_{ab} = \mathrm{Tr}(\ad_a \circ \ad_b)$ measures the strength of this self-feedback:
+\begin{equation}
+\Kil_{aa} = \sum_{c,d} f_{acd} f_{adc} = -\sum_{c,d} |f_{acd}|^2\,,
+\end{equation}
+where $f_{acd}$ are the structure constants. The sign and magnitude of $\Kil_{aa}$ determine the edge's topology through the self-feedback mechanism.
+
+\subsection{The Three Edge Classes}\label{sec:three_edge_classes}
+
+The Killing eigenvalue spectrum $\{\Kil_\la\}$ classifies every generator's edge into one of three topological classes. Each class has a precise graph-theoretic interpretation and a distinct physical role.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c c c}
+\hline\hline
+$\Kil_\la$ & Edge Class & Graph Symbol & Topology \\
+\hline
+$\Kil_\la < 0$ & \textbf{Cyclic} (enrolled) & $\circlearrowleft$ & Edge re-enters via adjoint feedback \\
+$\Kil_\la > 0$ & \textbf{Free} (non-compact) & $\rightarrow$ & Edge evolves without re-closure \\
+$\Kil_\la = 0$ & \textbf{Decoupled} (kernel) & $\cdots$ & Edge has zero adjoint feedback \\
+\hline\hline
+\end{tabular}
+\caption{Classification of edges by Killing eigenvalue.}
+\end{table}
+
+\paragraph{Cyclic edges ($\Kil_\la < 0$).} Strong self-feedback: the generator's commutators with other generators point back toward itself. The corresponding edge forms a closed loop---the adjoint action creates a cycle that returns to the starting configuration. This is the hallmark of compact directions: rotations that can be undone. For simple compact algebras, the Killing form is proportional to the identity ($\Kil = -h^\vee \cdot g$), meaning all cycles have the same strength---the graph is \emph{homogeneous}.
+
+\paragraph{Free edges ($\Kil_\la > 0$).} Anti-feedback: the generator's commutators push \emph{away} from itself. The edge evolves in one direction without returning---it is an open path in the graph. This is the hallmark of non-compact directions: boosts that mix coordinates irreversibly. A non-compact generator $T_{\mathrm{boost}}$ satisfies $\Kil_{\mathrm{boost}} > 0$, meaning its commutators with other generators push away from the boost direction.
+
+\paragraph{Decoupled edges ($\Kil_\la = 0$).} Zero feedback: the generator commutes with everything ($f_{acd} = 0$ for all $c, d$). The edge exists but is disconnected from the adjoint network---a free strand, not participating in any cycle. This is the abelian direction.
+
+\subsection{Why This Classification Works}\label{sec:why_classification_works}
+
+The classification above is not arbitrary---it follows from the mathematical structure of the Killing form. The Killing form $\Kil_{ab} = \mathrm{Tr}(\ad_a \circ \ad_b)$ measures how generator $T_a$ \emph{feeds back onto itself} through the adjoint representation. Concretely:
+
+\begin{equation}
+\Kil_{aa} = \sum_{c,d} f_{acd} f_{adc} = -\sum_{c,d} |f_{acd}|^2\,,
+\end{equation}
+
+where $f_{acd}$ are the structure constants. The sign and magnitude of this self-feedback determine the edge's topology:
+
+\begin{itemize}
+    \item \textbf{$\Kil_\la < 0$ (cyclic):} Strong self-feedback. The generator's commutators with other generators \emph{point back towards itself}. The corresponding edge in the graph forms a closed loop---the adjoint action creates a cycle that returns to the starting configuration. This is the hallmark of compact directions: rotations that can be undone.
+    
+    \item \textbf{$\Kil_\la > 0$ (free):} Anti-feedback. The generator's commutators push \emph{away from itself}. The edge evolves in one direction without returning---it is an open path in the graph. This is the hallmark of non-compact directions: boosts that mix coordinates irreversibly.
+    
+    \item \textbf{$\Kil_\la = 0$ (decoupled):} Zero feedback. The generator commutes with everything ($f_{acd} = 0$ for all $c, d$). The edge exists but is disconnected from the adjoint network---a free strand, not participating in any cycle. This is the abelian direction.
+\end{itemize}
+
+This is why the classification works: the Killing form measures self-feedback through commutators, and the sign of that feedback determines whether the edge closes (cyclic), opens (free), or disconnects (decoupled).
+
+\subsection{Experimental Verification: 20+ Algebras}\label{sec:experimental_verification}
+
+Every one of the $17$ algebras tested in the experimental program confirms the classification. The following table summarizes the results:
+
+\begin{center}
+\small
+\begin{longtable}{c c c c c l}
+\caption{Experimental verification of edge classification for $19$ algebras tested.}
+\label{tab:experimental_verification} \\
+\hline\hline
+\textbf{Algebra} & \textbf{$\Kil$ spectrum} & \textbf{Cyclic} & \textbf{Free} & \textbf{Decoupled} & \textbf{Graph type} \\
+\hline
+\endfirsthead
+
+\caption[]{Experimental verification of edge classification for $19$ algebras tested (continued).} \\
+\hline
+\textbf{Algebra} & \textbf{$\Kil$ spectrum} & \textbf{Cyclic} & \textbf{Free} & \textbf{Decoupled} & \textbf{Graph type} \\
+\hline
+\endhead
+
+\hline 
+\endfoot
+
+$\su(2)$ & $(0^+, 0_0, 3^-)$ & 3 & 0 & 0 & Pure cycle \\
+$\su(3)$ & $(0^+, 0_0, 8^-)$ & 8 & 0 & 0 & Pure cycle \\
+$\su(4)$ & $(0^+, 0_0, 15^-)$ & 15 & 0 & 0 & Pure cycle \\
+$\su(5)$ & $(0^+, 0_0, 24^-)$ & 24 & 0 & 0 & Pure cycle \\
+$\so(3)$ & $(0^+, 0_0, 3^-)$ & 3 & 0 & 0 & Pure cycle \\
+$\so(4)$ & $(0^+, 0_0, 6^-)$ & 6 & 0 & 0 & Pure cycle \\
+$\so(5)$ & $(0^+, 0_0, 10^-)$ & 10 & 0 & 0 & Pure cycle \\
+$\so(6)$ & $(0^+, 0_0, 15^-)$ & 15 & 0 & 0 & Pure cycle \\
+$\spc(2)$ & $(0^+, 0_0, 3^-)$ & 3 & 0 & 0 & Pure cycle \\
+$\spc(4)$ & $(0^+, 0_0, 10^-)$ & 10 & 0 & 0 & Pure cycle \\
+$\spc(6)$ & $(0^+, 0_0, 21^-)$ & 21 & 0 & 0 & Pure cycle \\
+$G_2$ & $(0^+, 0_0, 14^-)$ & 14 & 0 & 0 & Pure cycle \\
+$F_4$ & $(0^+, 0_0, 52^-)$ & 52 & 0 & 0 & Pure cycle \\
+$E_6$ & $(0^+, 0_0, 78^-)$ & 78 & 0 & 0 & Pure cycle \\
+$\slg(2,\R)$ & $(1^+, 0_0, 2^-)$ & 2 & 1 & 0 & Mixed \\
+$\so(3,1)$ & $(3^+, 0_0, 3^-)$ & 3 & 3 & 0 & Mixed (balanced) \\
+$\su(2,2)$ & $(8^+, 0_0, 7^-)$ & 7 & 8 & 0 & Mixed (free-dominated) \\
+$\fu(2)$ & $(0^+, 1_0, 3^-)$ & 3 & 0 & 1 & Cycle + strand \\
+$\fu(3)$ & $(0^+, 1_0, 8^-)$ & 8 & 0 & 1 & Cycle + strand \\
+\end{longtable}
+\end{center}
+
+All compact simple algebras (SU, SO, Sp, G$_2$, F$_4$, E$_6$) exhibit pure cyclic graphs with all eigenvalues negative. The non-compact algebras sl(2,$\mathbb{R}$), so(3,1), and su(2,2) exhibit mixed graphs with both positive and negative eigenvalues. The unitary algebras U(2) and U(3) exhibit cycle-plus-strand graphs with one zero eigenvalue.
+
+\subsection{The Ontological Chain: P$\to$C$\to$K$\to$I}\label{sec:onological_chain}
+
+The foundational chain of the SS-PEG framework acquires a precise graph-theoretic realization in Paper 2. Paper 1 formulated the chain as P$\to$R$\to$C$\to$I (Potential $\to$ Relation $\to$ Cycle $\to$ Invariant). Paper 2 refines this to P$\to$C$\to$K$\to$I (Potential $\to$ Cycle $\to$ Killing $\to$ Invariant), where the Killing form acts as a \emph{selector} rather than a \emph{generator}---a result established by the RAG experiment G\_RAG-21:
+
+\begin{theorem}[G\_RAG-21]\label{th:g_rag_21}
+The Killing form is \textbf{diagnostic, not generative}. $T_K$ alone does not create non-commutativity---it selects and purifies structures that are already present from the topological (cycle) dynamics.
+\end{theorem}
+
+The refined chain is:
+
+\begin{equation}
+\underbrace{\Kil_{ab}}_{\text{Potential}} \;\xrightarrow{\;\mathrm{adjoint\ action}\;}\; \underbrace{\fabc}_{\text{Cycle}} \;\xrightarrow{\;\mathrm{holonomy}\;}\; \underbrace{\hve, \, C_\la, \, I_R}_{\text{Invariant}} \;\xrightarrow{\;\mathrm{spectral\ lattice}\;}\; \underbrace{m_i, \, \alpha_X, \, \theta_{ij}}_{\text{Observable}}
+\end{equation}
+
+This chain has four stages:
+
+\begin{enumerate}
+    \item \textbf{Potential} = Killing matrix $\Kil_{ab}$: the ``landscape'' of adjoint self-interactions. Determines which edges can form cycles, which evolve freely, which decouple. This is the primary data---the graph's metric.
+    
+    \item \textbf{Cycle} = Structure constants $\fabc$: the commutator relations that describe how edges connect and close. These are emergent from $\Kil$ via the variational principle---they are the graph's \emph{topology}, read off from the metric.
+    
+    \item \textbf{Invariant} = $\hve$, Casimirs, representations: the topological invariants of the cycle structure. These are properties of the graph that do not depend on how you parameterize the edges---they are the \emph{physics}.
+    
+    \item \textbf{Observable} = masses, couplings, mixing angles: the physical observables computed from the spectral lattice of graph invariants.
+\end{enumerate}
+
+The experimental program has demonstrated that the first arrow (potential $\to$ cycle) is realized by Killing metric minimization, and the second arrow (cycle $\to$ invariant) follows mathematically. The entire chain is automatic, universal, and exact.
+
+\subsection{The Cartan-Weyl Graph as Adjacency Graph}\label{sec:cartan_weyl_graph}
+
+The Cartan-Weyl (CW) basis of a Lie algebra provides a natural graph structure: vertices are the CW generators (Cartan subalgebra + root vectors), and edges connect generators with non-vanishing commutators $[T_a, T_b] \neq 0$. This CW graph is topologically isomorphic to the evolution graph $\Gra$ defined above. The CW root system defines the adjoint commutation graph, whose adjacency spectrum determines the Ramanujan property analyzed in Section~\ref{sec:spectral_quality}.

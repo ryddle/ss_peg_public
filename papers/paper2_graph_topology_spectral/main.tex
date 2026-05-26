@@ -1,0 +1,176 @@
+\documentclass[aps,prd,amsmath,amssymb,superscriptaddress,groupedaddress,nofootinbib]{revtex4-2}
+\usepackage{anyfontsize}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{mathtools}
+\usepackage{cancel}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{amsthm}
+\usepackage{physics}
+\usepackage{tensor}
+\usepackage{longtable}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!70!black,
+    citecolor=blue!70!black,
+    urlcolor=blue!70!black,
+}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\su}{\mathfrak{su}}
+\newcommand{\so}{\mathfrak{so}}
+\newcommand{\spc}{\mathfrak{sp}}
+\newcommand{\slg}{\mathfrak{sl}}
+\newcommand{\fu}{\mathfrak{u}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\kcg}{\mathfrak{k}}
+\newcommand{\ad}{\mathrm{ad}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\spann}{\mathrm{span}}
+\newcommand{\kerl}{\ker}
+\newcommand{\diml}{\dim}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\p}{\partial}
+\newcommand{\la}{\lambda}
+\newcommand{\Lam}{\Lambda}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\Ga}{\Gamma}
+\newcommand{\de}{\delta}
+\newcommand{\De}{\Delta}
+\newcommand{\Si}{\Sigma}
+\newcommand{\ph}{\phi}
+\newcommand{\Ph}{\Phi}
+\newcommand{\om}{\omega}
+\newcommand{\Om}{\Omega}
+\newcommand{\Th}{\Theta}
+\newcommand{\vt}{\vartheta}
+\newcommand{\io}{\iota}
+\newcommand{\ka}{\kappa}
+\newcommand{\ro}{\rho}
+\newcommand{\ta}{\tau}
+\newcommand{\muf}{\mu}
+\newcommand{\nuo}{\nu}
+\newcommand{\ps}{\psi}
+\newcommand{\Ps}{\Psi}
+\newcommand{\ze}{\zeta}
+\newcommand{\et}{\eta}
+\newcommand{\hve}{h^\vee}
+\newcommand{\Ramanujan}{\mathcal{R}}
+\newcommand{\Gra}{\mathcal{G}}
+\newcommand{\Holo}{\mathcal{H}}
+\newcommand{\Tens}{\mathcal{T}}
+\newcommand{\Kil}{K}
+\newcommand{\fabc}{f_{abc}}
+\newcommand{\Kdiag}{K_{\mathrm{rr}}}
+\newcommand{\AUC}{\mathrm{AUC}}
+
+\begin{document}
+
+\title[Graph Topology from the Killing Form: How to Draw the SS-PEG Evolution Graph]{Graph Topology from the Killing Form:\\How to Draw the SS-PEG Evolution Graph}
+
+\author{Jos\'e M. Moreno and Claude Opus 4.6}
+\date{\today}
+
+\begin{abstract}
+We determine the graph topology induced by the Killing form eigenvalue spectrum for every Lie algebra that emerges from the SS-PEG variational principle. Each Killing eigenvalue classifies one generator's edge as cyclic ($\Kil_\lambda < 0$), free ($\Kil_\lambda > 0$), or decoupled ($\Kil_\lambda = 0$), yielding five distinct graph archetypes: pure cycle, mixed, cycle-plus-strand, pure free, and frustrated. We establish exact construction rules mapping any emergent algebra to its evolution graph, including the density percolation threshold at $\ro = 1$ and the spacetime hierarchy as graph evolution across five ontological levels. The spectral quality of these graphs is analyzed via the Ramanujan property: $19/37$ simple Lie algebras satisfy the optimal spectral expansion bound, with a sharp transition at Coxeter number $h^* \approx 9.5$. The Ihara zeta function of adjoint commutation graphs reveals a soft equivalence between spectral and zeta Ramanujan properties, with pole migration serving as an order parameter for the Ramanujan phase transition. We prove that Ramanujan algebras are maximally chaotic (negative average OTOC, $2\times$ faster mixing) and that the Standard Model gauge group is the unique spectrally optimal outcome: simultaneously Ramanujan, maximally chaotic, in the ordered phase, composable, signature-invariant, and landscape-dominant. The Killing form is shown to be diagnostic, not generative---cycles create topology, Killing selects and purifies---via RAG experiments demonstrating a two-phase crystallization (activation + hardening) and a tempering effect where withdrawal of cycle pressure purifies the Killing signal. We introduce a triple balance of competing tensions (aggregation/expansion/entropy) formalized as a tensegrity functional $\Tens[\Kil]$, and show how the evolution graph's spectral sectors encode the Standard Model's coupling constants and mass ratios via five graph-topological building blocks---bridging to the third paper in this series.
+\end{abstract}
+
+%\begin{keywords}
+%evolution graph, Killing eigenvalues, graph archetypes, Ramanujan graphs, Ihara zeta function, spectral expansion, tensegrity, triple balance, emergent gauge %symmetry, quantum chaos
+%\end{keywords}
+
+\maketitle
+
+%==========================================================================
+% SECTION 1: INTRODUCTION
+%==========================================================================
+\input{sections/01_introduction}
+
+%==========================================================================
+% SECTION 2: THEORETICAL FRAMEWORK
+%==========================================================================
+\input{sections/02_theoretical_framework}
+
+%==========================================================================
+% SECTION 3: GRAPH CONSTRUCTION RULES
+%==========================================================================
+\input{sections/03_graph_construction_rules}
+
+%==========================================================================
+% SECTION 4: FIVE GRAPH ARCHETYPES
+%==========================================================================
+\input{sections/04_graph_archetypes}
+
+%==========================================================================
+% SECTION 5: SPACETIME HIERARCHY AS TOPOLOGICAL EVOLUTION
+%==========================================================================
+\input{sections/05_spacetime_hierarchy}
+
+%==========================================================================
+% SECTION 6: SPECTRAL QUALITY -- RAMANUJAN PROPERTY
+%==========================================================================
+\input{sections/06_spectral_quality}
+
+%==========================================================================
+% SECTION 7: IHARA ZETA AND POLE STRUCTURE
+%==========================================================================
+\input{sections/07_ihara_zeta}
+
+%==========================================================================
+% SECTION 8: TRIPLE BALANCE AND TENSEGRITY
+%==========================================================================
+\input{sections/08_triple_balance}
+
+%==========================================================================
+% SECTION 9: KILLING DIAGNOSTIC VS GENERATIVE
+%==========================================================================
+\input{sections/09_killing_diagnostic}
+
+%==========================================================================
+% SECTION 10: FROM GRAPH TO OBSERVABLES -- BRIDGE TO PAPER 3
+%==========================================================================
+\input{sections/10_bridge_to_paper3}
+
+%==========================================================================
+% SECTION 11: DISCUSSION
+%==========================================================================
+\input{sections/11_discussion}
+
+%==========================================================================
+% SECTION 12: CONCLUSIONS
+%==========================================================================
+\input{sections/12_conclusions}
+
+%==========================================================================
+% APPENDICES
+%==========================================================================
+\appendix
+\input{appendix/A_appendix_selberg_details}
+\input{appendix/B_appendix_rag_experiments}
+
+%==========================================================================
+% REFERENCES
+%==========================================================================
+\bibliography{references}
+
+\end{document}

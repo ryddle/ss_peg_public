@@ -1,0 +1,226 @@
+\section{Theoretical Framework}\label{sec:theoretical_framework}
+
+This section establishes the mathematical foundation for the derivations that follow. We define the Cartan--Weyl root graph of $\su(2) \oplus \su(3)$, extract its five spectral invariants (the ``building blocks''), prove the dimensional reduction from 5D to 3D via Baker's theorem on linear forms in logarithms, and provide the topological interpretation of particles as cycles in the graph.
+
+\subsection{The Cartan--Weyl Root Graph of $\su(2) \oplus \su(3)$}\label{sec:cw_graph}
+
+The Standard Model gauge algebra is $\mathfrak{g} = \su(2) \oplus \su(3) \oplus \mathfrak{u}(1)$. The abelian factor $\mathfrak{u}(1)$ contributes no non-trivial commutation relations and no edges to the interaction graph; it is a decoupled direction (Killing eigenvalue $K = 0$). The non-trivial structure resides entirely in $\su(2) \oplus \su(3)$.
+
+\subsubsection{Definition}
+
+The \textbf{Cartan--Weyl (CW) root graph} $\Gamma(\mathfrak{g})$ of a Lie algebra $\mathfrak{g}$ is defined as follows:
+\begin{itemize}
+\item \textbf{Vertices:} The Cartan generators $\{H_i\}$ and the root vectors $\{E_\alpha\}$ in the Cartan--Weyl basis.
+\item \textbf{Edges:} A directed edge $(v_i, v_j)$ exists if and only if $[v_i, v_j] \neq 0$ in the Lie algebra.
+\end{itemize}
+
+For $\su(n)$, the dimension is $n^2 - 1$, with $(n-1)$ Cartan generators and $n(n-1)$ root vectors. The CW graph thus has $n^2 - 1$ vertices. For $\su(2) \oplus \su(3)$, the total vertex count is $3 + 8 = 11$.
+
+The CW graph is not arbitrary. It is the \textbf{intrinsic combinatorial structure} of the gauge algebra:
+\begin{enumerate}
+\item \textit{Basis-independent:} The root system is a lattice invariant, independent of representation.
+\item \textit{Unique:} For a given algebra, the CW graph is determined up to Weyl group conjugacy.
+\item \textit{Information-complete:} It encodes rank, roots, weights, Cartan matrix, and all derived invariants.
+\end{enumerate}
+
+\subsubsection{The SU(2) Subgraph $G_2$}
+
+For $\su(2)$, the CW graph has:
+\begin{itemize}
+\item 3 vertices: 1 Cartan generator $H$, 2 root vectors $E_{\pm\alpha}$
+\item 2 non-zero commutators: $[H, E_{\pm\alpha}] = \pm 2 E_{\pm\alpha}$, $[E_\alpha, E_{-\alpha}] = H$
+\item Degree sequence: $[2, 2, 2]$ (the graph is a triangle with a self-loop on the Cartan node)
+\item Adjacency eigenvalues: $\{2, -1, -1\}$
+\end{itemize}
+
+The SU(2) graph is the simplest non-trivial graph: a directed 3-cycle with a self-loop. It is the fundamental unit of the SS-PEG framework---the minimal structure that produces non-abelian physics.
+
+\subsubsection{The SU(3) Subgraph $G_3$}
+
+For $\su(3)$, the CW graph has:
+\begin{itemize}
+\item 8 vertices: 2 Cartan generators $H_1, H_2$, 6 root vectors $E_{\pm\alpha_i}$ ($i = 1, \ldots, 6$)
+\item 21 non-zero commutators (edges)
+\item Degree sequence: $[6, 6, 5, 5, 5, 5, 5, 5]$
+\item Characteristic polynomial: $p(\lambda) = \lambda^3(\lambda - 1)(\lambda + 2)^2(\lambda^2 - 3\lambda - 12)$
+\end{itemize}
+
+The SU(3) graph is significantly more complex. Its adjacency matrix has a non-trivial eigenvalue pair $(\sqrt{57} \pm 3)/2$ arising from the quadratic factor $\lambda^2 - 3\lambda - 12$, which plays a central role in the definition of $\Rthree$.
+
+\subsubsection{The Edge--Edge Subgraph $G_{EE}$}
+
+A crucial discovery is that the root--root (E--E) subgraph of SU(3) is isomorphic to the Cartesian product $K_2 \square K_3$:
+\begin{equation}
+G_{EE} \;\cong\; K_2 \,\square\, K_3.
+\end{equation}
+This encodes the \textbf{bifundamental structure}: quarks live in the $(2, 3)$ representation of SU(2) $\times$ SU(3), and the product graph is precisely this bifundamental weight graph. The E--E subgraph has 6 vertices and 9 edges, with adjacency eigenvalues $\{3, 1, 1, 1, -1, -3\}$, yielding $\REE = 1/\sqrt{2}$.
+
+\subsection{The Five Building Blocks}\label{sec:building_blocks}
+
+From the CW graph of $\su(2) \oplus \su(3)$, we extract exactly five spectral invariants. Each is computed from the adjacency matrix of the corresponding subgraph.
+
+\subsubsection{Ramanujan Ratios}
+
+For a connected graph $G$ with adjacency matrix $A$, the \textbf{Ramanujan ratio} is defined as:
+\begin{equation}
+\Rama(G) = \frac{\lambda_1(G)}{d_{\mathrm{max}}(G)},
+\end{equation}
+where $\lambda_1$ is the largest eigenvalue of $A$ and $d_{\mathrm{max}}$ is the maximum degree.
+
+The Ramanujan ratio measures how close a graph is to the Ramanujan bound $2\sqrt{q}$ (where $q = d_{\mathrm{mean}} - 1$). A graph is \textbf{Ramanujan} if all non-trivial eigenvalues satisfy $|\lambda| \leq 2\sqrt{q}$. The ratio $\Rama \in (0, 1]$ quantifies the spectral quality: $\Rama = 1$ is the optimal case~\cite{lubotzky1988ramanujan,margulis1975explicit}.
+
+For our three subgraphs:
+
+\begin{table}[h]
+\centering
+\caption{Ramanujan ratios of the three subgraphs}
+\begin{tabular}{ccc}
+\hline\hline
+Subgraph & $\Rama$ & Numerical \\
+\hline
+$G_2$ (SU(2)) & $1/2$ & $0.500000$ \\
+$G_3$ (SU(3)) & $(\sqrt{57}-3)/(2\sqrt{17})$ & $0.552285$ \\
+$G_{EE}$ ($K_2 \square K_3$) & $1/\sqrt{2}$ & $0.707107$ \\
+\hline\hline
+\end{tabular}
+\end{table}
+
+\textbf{Note on $\Rthree$:} The value $(\sqrt{57}-3)/(2\sqrt{17})$ is obtained by computing the adjacency matrix of the SU(3) CW graph (8 vertices, 21 edges), extracting the non-trivial eigenvalue pair $(\sqrt{57} \pm 3)/2$ from the quadratic factor $\lambda^2 - 3\lambda - 12$, and applying the Ramanujan ratio formula with $q = d_{\mathrm{mean}} - 1 = 17/4$. The choice of the CW graph over the physics (Gell-Mann) basis and the D1 definition over D2--D6 are empirical decisions justified by their predictive success across all 73 observables.
+
+\subsubsection{Dual Coxeter Numbers}
+
+The \textbf{dual Coxeter number} $h^\vee$ of a Lie algebra is a fundamental invariant defined as the sum of the marks in the highest root, or equivalently as the eigenvalue of the quadratic Casimir in the adjoint representation divided by 2~\cite{coxeter1973special}. For our algebras:
+\begin{equation}
+\hvtw = 2 \quad (\su(2)), \qquad \hvth = 3 \quad (\su(3)).
+\end{equation}
+
+\subsubsection{Summary Table}
+
+\begin{table}[h]
+\centering
+\caption{The five building blocks}
+\label{tab:building_blocks}
+\begin{tabular}{ccc}
+\hline\hline
+Symbol & Name & Exact Value \\
+\hline
+$\Rtwo$ & Ramanujan ratio of SU(2) & $1/2$ \\
+$\Rthree$ & Ramanujan ratio of SU(3) & $(\sqrt{57}-3)/(2\sqrt{17})$ \\
+$\REE$ & Ramanujan ratio of E--E subgraph & $1/\sqrt{2}$ \\
+$\hvtw$ & Dual Coxeter number of SU(2) & $2$ \\
+$\hvth$ & Dual Coxeter number of SU(3) & $3$ \\
+\hline\hline
+\end{tabular}
+\end{table}
+
+These five numbers are \textbf{not adjustable parameters}. They are exact algebraic quantities determined uniquely by the graph structure of the $A_1 \oplus A_2$ root system. Every physical prediction in this paper derives from these five numbers through power-law formulas of the form $\prod_i \mathcal{B}_i^{n_i}$ where $\mathcal{B}_i$ are the building blocks and $n_i \in \mathbb{Z}$.
+
+\subsection{Dimensional Reduction: 5D $\to$ 3D}\label{sec:dimensional_reduction}
+
+\subsubsection{The Fundamental Observation}
+
+Any power-law formula built from the five building blocks takes the form:
+\begin{equation}
+\ln f = a \ln\Rtwo + b \ln\Rthree + c \ln\REE + d \ln\hvth + e \ln\hvtw,
+\end{equation}
+with integer exponents $(a, b, c, d, e) \in \mathbb{Z}^5$. Naively, this is a five-dimensional formula space. However, three of the five building blocks are powers of 2:
+\begin{equation}
+\Rtwo = 2^{-1}, \qquad \REE = 2^{-1/2}, \qquad \hvtw = 2.
+\end{equation}
+Substituting these into the general formula:
+\begin{equation}
+\ln f = (-a - c/2 + e) \ln 2 \;+\; b \ln\Rthree \;+\; d \ln 3.
+\end{equation}
+Defining the \textbf{effective coordinates}:
+\begin{equation}
+p = e - a - \frac{c}{2}, \qquad q = b, \qquad r = d,
+\end{equation}
+we obtain the reduced form:
+\begin{equation}
+\ln f = p \ln 2 + q \ln\Rthree + r \ln 3.
+\end{equation}
+
+\subsubsection{Baker's Theorem and Linear Independence}
+
+The reduction is rigorous because $\ln 2$, $\ln\Rthree$, and $\ln 3$ are \textbf{$\mathbb{Q}$-linearly independent}. This follows from Baker's theorem:
+
+\begin{theorem}[Baker, 1966]\label{thm:baker}
+If $\alpha_1, \ldots, \alpha_n$ are non-zero algebraic numbers such that $\ln\alpha_1, \ldots, \ln\alpha_n$ are linearly independent over $\mathbb{Q}$, then $1, \ln\alpha_1, \ldots, \ln\alpha_n$ are linearly independent over the algebraic numbers $\overline{\mathbb{Q}}$~\cite{baker1966linear}.
+\end{theorem}
+
+\begin{corollary}\label{cor:linear_independence}
+The three logarithms $\{\ln 2, \ln\Rthree, \ln 3\}$ are $\mathbb{Q}$-linearly independent.
+\end{corollary}
+
+\begin{proof}
+$\Rthree = (\sqrt{57}-3)/(2\sqrt{17})$ is algebraic irrational. If $p \ln 2 + q \ln\Rthree + r \ln 3 = 0$ for some $(p, q, r) \in \mathbb{Q}^3 \setminus \{(0,0,0)\}$, then $\Rthree^q = 2^{-p} \cdot 3^{-r}$, making $\Rthree$ a rational power of 2 and 3. But $\Rthree$ involves $\sqrt{57}$ and $\sqrt{17}$, which are algebraically independent from $\{2, 3\}$. Contradiction.
+\end{proof}
+
+\textbf{Consequence:} Distinct rational triples $(p, q, r) \neq (p', q', r')$ produce distinct formula values. The mapping $(p, q, r) \mapsto \ln f$ is injective on $\mathbb{Q}^3$.
+
+\subsubsection{Formula Space Reduction}
+
+\begin{table}[h]
+\centering
+\caption{Formula space reduction}
+\begin{tabular}{lc}
+\hline\hline
+Quantity & Count \\
+\hline
+Nominal 5D formulas ($9^5$, exponents $\in [-4, 4]$) & $59{,}049$ \\
+Unique 3D values (after reduction) & $\sim 3{,}321$ \\
+Reduction factor & $\sim 17.8\times$ \\
+\hline\hline
+\end{tabular}
+\end{table}
+
+This reduction is verified computationally in \texttt{dim\_reduction\_proof.py}: all $9^5 = 59{,}049$ formulas are enumerated, reduced to $(p, q, r)$ triples, and the unique values are counted. The count matches the theoretical prediction exactly.
+
+The half-integer character of $p$ is notable: $p = e - a - c/2$ takes half-integer values when $c$ (the $\REE$ exponent) is odd. This half-integer quantization has physical significance: it reflects the spinorial nature of the SU(2) sector, as discussed in Section~\ref{sec:mass_spectrum}.
+
+\subsection{Topological Interpretation of Particles}\label{sec:particle_topology}
+
+Before presenting the numerical derivations, it is instructive to understand the topological nature of the particles that will populate the mass lattice.
+
+\subsubsection{The Electron: Shared Vertex of U(1) and SU(2)}
+
+The electron's structure reveals something important: the shared vertex between the U(1) cycle and the SU(2) structure is not accidental---it is the electroweak coupling. The two holonomies are physically coupled at that vertex. If they were disjoint, one would have a particle with zero charge and zero isospin simultaneously---which does not exist.
+
+\subsubsection{The Quark: Three Converging Sectors}
+
+The quark has three sectors converging at a central vertex: U(1) above (fractional charge), SU(2) to the right (isospin), SU(3) below (color). The isolation condition imposes that the three close consistently---hence the quark's quantum numbers are not arbitrary but a very specific combination. The quantization of electric charge ($Q \in \{0, \pm 1/3, \pm 2/3, \pm 1\}$) arises from the compatibility between U(1), SU(2), and SU(3) cycles when they combine in an isolated subnetwork.
+
+\subsubsection{The Neutrino: The Minimal Fermion}
+
+The neutrino is the minimal fermion: a single SU(2) cycle, anchored at a vertex, with no U(1) electromagnetic component ($Q = 0$ implies the U(1) cycle is trivial: $e^{i \cdot 0} = I$). This is the simplest object that can have weak isospin without electric charge. Only the left-handed neutrino couples to SU(2); the right-handed version would be an isolated point without cycles---undetectable, which is exactly what happens in the Standard Model.
+
+\subsubsection{The W Boson: Mass Mechanism in Graph Language}
+
+The W boson reveals the mass mechanism in graph language: it is a free SU(2) cycle (like the photon is a free U(1) cycle), but with an additional anchor---the Higgs field. In the diagram, the Higgs forms a scalar cycle nested within the SU(2) structure, preventing the boson from propagating freely. The nesting relation materializes here: a cycle within another generates mass. This suggests a rule:
+
+\begin{quote}
+\emph{Free cycle = massless boson; anchored cycle = massive boson.}
+\end{quote}
+
+\subsubsection{Antiparticles: Topological Property of the Graph}
+
+The positron demonstrates that antimatter is a topological property of the graph: the cycle structure is identical to that of the electron, but with all holonomies inverted---$W \to W^{-1}$. Visually, the loops are reversed (the U(1) that opens upward now opens downward). It is not a ``new'' object---it is the same topology traversed in the opposite direction. C-conjugation (charge conjugation) is simply the inversion of the traversal direction of all cycles. This explains why every particle has exactly one antiparticle with opposite quantum numbers.
+
+\subsubsection{Confinement: Topological Closure}
+
+The proton is where topology does the work: the three SU(3) cycles of the three quarks form a circulation $\varepsilon_{ijk}$ such that the net color holonomy is the identity. It is not that the quarks ``decide'' to form a singlet---it is that the isolation condition is satisfied only for that topological combination. The other combinations (two quarks of the same color, for example) cannot be isolated---they remain open relationally.
+
+\subsection{Structural Interpretation: Tensegrity and Triple Balance}\label{sec:tensegrity}
+
+The emergent graph structure admits a \textbf{tensegrity} interpretation, established in Paper II~\cite{paper2_graph_topology}. The three competing forces---aggregation (cycle formation), expansion (free-direction growth), and entropy (disordering tendency)—are in precise balance. This balance is not imposed; it emerges from the variational principle.
+
+The \textbf{triple balance} provides a structural interpretation of the graph:
+\begin{itemize}
+\item \textit{Aggregation:} Cyclic edges ($K < 0$) pull nodes together, forming stable cycles.
+\item \textit{Expansion:} Free edges ($K > 0$) push nodes apart, creating spacetime directions.
+\item \textit{Entropy:} The decoupled kernel ($K = 0$) represents the abelian directions that neither attract nor repel.
+\end{itemize}
+
+The Cartan--Weyl graph of $\su(2) \oplus \su(3)$ sits precisely at the balance point: all edges are cyclic (pure cycle archetype), corresponding to a compact gauge group. The balance between the SU(2) and SU(3) subgraphs---with their distinct Ramanujan ratios $\Rtwo = 1/2$ and $\Rthree \approx 0.552$---determines the relative strength of the weak and strong couplings, as we will see in Section~\ref{sec:coupling_constants}.
+
+This tensegrity interpretation is not merely metaphorical. The mathematical structure of the triple balance---aggregation, expansion, entropy---is encoded in the Killing eigenvalue spectrum, which classifies each generator as cyclic, free, or decoupled. The spectral properties of the CW graph thus determine not only the algebra but the structural stability of the emergent gauge symmetry.

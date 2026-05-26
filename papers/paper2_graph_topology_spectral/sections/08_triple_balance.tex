@@ -1,0 +1,91 @@
+\section{Triple Balance and Tensegrity}\label{sec:triple_balance}
+
+\subsection{Three Tensions in a Single Spectrum}\label{sec:three_tensions}
+
+The three edge classes are not merely taxonomic---they represent three competing \emph{physical tensions} that coexist in the Killing eigenvalue spectrum $\{\Kil_\la\}$:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c l l}
+\hline\hline
+Tension & Edge Class & $\Kil_\la$ & Physical role \\
+\hline
+\textbf{Aggregation} & Cyclic & Negative & Structure-forming: adjoint feedback closes cycles, crystallizes gauge symmetry \\
+\textbf{Expansion} & Free & Positive & Causal/irreversible: opens directions that do not close, creates spacetime \\
+\textbf{Entropy} & Decoupled + pre-$\ro_c$ & Zero / absent & Disordered degrees of freedom: no feedback, no structure, maximum freedom \\
+\hline\hline
+\end{tabular}
+\caption{The three tensions in the Killing spectrum.}
+\end{table}
+
+This is not a metaphor---the three tensions are the literal eigenvalue sectors of the same Killing matrix $\Kil_{ab}$. The graph archetype is determined by \textbf{which tension dominates}:
+
+\begin{itemize}
+    \item \textbf{Archetype I (pure cycle):} Aggregation wins completely. All eigenvalues negative. Structure maximized.
+    \item \textbf{Archetype II (mixed):} Aggregation and Expansion coexist. Both negative and positive eigenvalues. Structure + causality.
+    \item \textbf{Archetype III (cycle + strand):} Aggregation + Entropy. Negative eigenvalues + zero eigenvalues. Structure with abelian residue.
+    \item \textbf{Archetype IV (pure free):} Expansion wins completely. All eigenvalues positive. Pure causality, no structure.
+    \item \textbf{Archetype V (frustrated):} Aggregation attempted on incompatible substrate $\to$ partial Entropy. Structure collapses to maximal compact subgroup.
+    \item \textbf{Level 0 ($\ro < 1$):} Entropy wins completely. No eigenvalues at all---the graph is too sparse for any tension to operate.
+\end{itemize}
+
+\subsection{The Hierarchy as a Tension Sequence}\label{sec:tension_sequence}
+
+The spacetime hierarchy can now be read as a narrative of competing tensions:
+
+{\tiny
+\begin{equation}
+\begin{array}{lcl}
+\text{Entropy} \quad & \rule{4cm}{0.4pt} & \quad \ro < 1\text{: no physics} \\
+\quad & \downarrow \ro \to 1 & \quad \\
+\text{Aggregation} \quad & \rule{4cm}{0.4pt} & \quad \ro = 1, \text{ compact: gauge symmetry} \\
+\quad & \downarrow \et \text{ constraint + indef. target} & \quad \\
+\text{Aggregation + Expansion} \quad & \rule{4cm}{0.4pt} & \quad \ro = 1, \text{ mixed: spacetime} \\
+\quad & \downarrow \text{larger } \et, \text{ more generators} & \quad \\
+\text{Aggregation + Expansion (expansion-dominated)} \quad & \rule{4cm}{0.4pt} & \quad \text{conformal} \\
+\quad & \downarrow \text{product of independent subgraphs} & \quad \\
+\text{Multiple Aggregation pockets + strand(s)} \quad & \rule{4cm}{0.4pt} & \quad \text{Standard Model}
+\end{array}
+\end{equation}
+}
+
+At each transition, a new tension \emph{activates}---not replacing the previous one but coexisting with it. The universe's graph is the equilibrium configuration of all three tensions acting simultaneously.
+
+\subsection{Selberg Diagnostics of Each Tension}\label{sec:tension_diagnostics}
+
+\begin{itemize}
+    \item \textbf{Aggregation quality} $\to$ Ramanujan property of the cyclic subgraph. Optimal aggregation = optimal spectral expansion = SM-scale algebras ($\Phi < 0.3$). Degraded aggregation = non-Ramanujan ($\Phi > 0.5$, E$_7$, E$_8$).
+    
+    \item \textbf{Expansion quality} $\to$ Non-compact Dynkin invariance (P8). Good expansion = free edges that do not degrade the cyclic core's spectral quality. All $12/12$ tested non-compact forms preserve this.
+    
+    \item \textbf{Entropy measure} $\to$ Composite order parameter $\Phi$ and landscape accessibility sigmoid. High $\Phi$ = high entropy cost for crystallization = hard to access variationally. Low $\Phi$ = low entropy cost = easy to access.
+\end{itemize}
+
+\subsection{Analogy with Structural Tensegrity}\label{sec:tensegrity_analogy}
+
+The triple balance has a natural structural analogy: \textbf{tensegrity}---structures that maintain their form through the equilibrium of compression (bars) and tension (cables), with no element bearing both.
+
+\begin{table}[h]
+\fontsize{7pt}{10pt}\selectfont
+\centering
+\begin{tabular}{l l l}
+\hline\hline
+Tensegrity element & Graph analogue & Killing sector \\
+\hline
+\textbf{Cables} (tension) & Cyclic edges --- topological bonds that pull generators into closed structures & $\Kil_\la < 0$ (Aggregation) \\
+\textbf{Bars} (compression) & Free edges --- rigid directions that push the structure open, create extent & $\Kil_\la > 0$ (Expansion) \\
+\textbf{Void space} & Decoupled strands + absent edges --- the freedom between structural elements & $\Kil_\la = 0$ (Entropy) \\
+\hline\hline
+\end{tabular}
+\caption{Tensegrity analogy: cables, bars, and void space in the evolution graph.}
+\end{table}
+
+\subsection{Toward the Tensegrity Equation}\label{sec:tensegrity_equation}
+
+The variational minimum of $T_K$---the configuration that the universe ``selects''---is the equilibrium where these three forces balance. The form of the tensegrity equation remains to be derived, but the ingredients are now identified:
+
+\begin{equation}
+\Tens[\Kil] = f\!\left(\underbrace{\sum_{\Kil_\la < 0} g(\Kil_\la)}_{\text{Aggregation}}, \; \underbrace{\sum_{\Kil_\la > 0} g(\Kil_\la)}_{\text{Expansion}}, \; \underbrace{\diml(\ker \Kil) + (d^2 - 1 - n_{\mathrm{gen}})}_{\text{Entropy}}\right)
+\end{equation}
+
+where $g(\Kil_\la)$ encodes the spectral weight of each eigenvalue sector, and the Entropy term counts both the Killing kernel and the ``missing'' generators below $\ro = 1$.

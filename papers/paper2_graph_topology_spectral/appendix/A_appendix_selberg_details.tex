@@ -1,0 +1,79 @@
+\appendix
+
+\section{Selberg Zeta Program: Computational Details}\label{app:selberg_details}
+
+\subsection{Ramanujan Classification Protocol}\label{app:ramanujan_protocol}
+
+For each simple Lie algebra $\g$ of rank $r$ and dimension $d_\g$, the adjoint representation defines a graph $\Gra_{\mathrm{ad}}$ as follows:
+
+\begin{enumerate}
+    \item Vertices: the $d_\g$ generators in the Cartan-Weyl basis.
+    \item Edges: directed edges $a \to b$ whenever $[T_a, T_b] \neq 0$.
+    \item Adjacency matrix: $A_{ab} = 1$ if $[T_a, T_b] \neq 0$, $0$ otherwise.
+    \item Degree matrix: $Q_{ab} = \deg_a \delta_{ab}$.
+\end{enumerate}
+
+The Ramanujan ratio is computed as:
+
+\begin{equation}
+\Ramanujan = \frac{\max_{|\la_i| < q+1} |\la_i|}{2\sqrt{q}}
+\end{equation}
+
+where $\la_i$ are the adjacency eigenvalues and $q+1$ is the maximum degree. $\Ramanujan \leq 1$ indicates the Ramanujan property.
+
+\subsection{Ihara Zeta Function Computation}\label{app:ihara_computation}
+
+The Ihara zeta function is computed via the Hashimoto formula:
+
+\begin{equation}
+Z(u)^{-1} = (1-u^2)^{r-1} \det(I - uA + u^2 Q)
+\end{equation}
+
+where $r = d_\g - \mathrm{rank}(\g) + 1$ is the cyclomatic number. Poles are found by numerical root-finding of $\det(I - uA + u^2 Q) = 0$.
+
+\subsection{Pole Migration Velocity}\label{app:pole_migration}
+
+The pole migration velocity is defined as:
+
+\begin{equation}
+v_{\mathrm{mig}} = \frac{\Delta(\mathrm{inner\_pole\_ratio})}{\Delta h}
+\end{equation}
+
+where $\mathrm{inner\_pole\_ratio} = \min_i |u_i| / r_c$ with $r_c = 1/\sqrt{q}$. The velocity is computed across consecutive algebras in each family.
+
+\subsection{Composite Order Parameter}\label{app:order_parameter}
+
+The composite order parameter $\Phi(h)$ is constructed from three spectral observables:
+
+\begin{equation}
+\Phi = w_1 \cdot \Phi_{\mathrm{Ram}} + w_2 \cdot \Phi_{\mathrm{mix}} + w_3 \cdot \Phi_{\mathrm{pole}}
+\end{equation}
+
+where $\Phi_{\mathrm{Ram}}$ is the Ramanujan ratio, $\Phi_{\mathrm{mix}}$ is the mixing time, and $\Phi_{\mathrm{pole}}$ is the pole density. The weights $w_i$ are normalized so that $\sum w_i = 1$.
+
+The fitted relation is:
+
+\begin{equation}
+\Phi(h) \approx 0.289 \cdot h^{0.557}
+\end{equation}
+
+with the critical value $\Phi_c = 0.31$ determining the Ramanujan phase boundary.
+
+\subsection{Product Graph Composability}\label{app:composability_details}
+
+For direct sum $\g_1 \oplus \g_2$, the adjoint graph is the disconnected union $\Gra_1 \cup \Gra_2$. The Ramanujan property of the product is tested under six definitions:
+
+\begin{enumerate}
+    \item D1: Spectral ratio of the product adjacency matrix.
+    \item D2: Spectral ratio of the Hashimoto non-backtracking operator.
+    \item D3: Ihara zeta pole concentration.
+    \item D4: Mixing time ratio.
+    \item D5: Spectral gap ratio.
+    \item D6: Degree heterogeneity ratio.
+\end{enumerate}
+
+Under all six definitions, Ramanujan $\times$ Ramanujan $\to$ Ramanujan unanimously.
+
+\subsection{Non-Compact Form Invariance}\label{app:noncompact_invariance}
+
+For each compact algebra $\g_{\mathbb{R}}$ and its $12$ non-compact real forms $\g_{\mathbb{R}}^{(i)}$, the Ramanujan classification is tested. All $12/12$ forms preserve the Ramanujan classification of the compact counterpart. The classification is a \emph{Dynkin-diagram invariant}.

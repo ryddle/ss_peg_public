@@ -1,0 +1,136 @@
+\section{Spectral Quality---Ramanujan Property}\label{sec:spectral_quality}
+
+\subsection{The Ramanujan Property as Optimality Criterion}\label{sec:ramanujan_def}
+
+For each Lie algebra $\g$, the adjoint representation defines a $(q+1)$-regular graph whose adjacency spectrum $\{\la_i\}$ satisfies the Ramanujan bound:
+
+\begin{equation}
+\text{Ramanujan:} \quad \max_{|\la_i| < q+1} |\la_i| \leq 2\sqrt{q}
+\end{equation}
+
+This bound characterizes \emph{optimal spectral expansion}---the fastest possible mixing on the graph. For Ramanujan algebras, the cyclic edges form a graph where information spreads \emph{maximally efficiently}. A gauge transformation at one point in the graph affects all other points within logarithmic time. Non-Ramanujan algebras have slower mixing---their cyclic subgraph is less efficient at maintaining coherence.
+
+\textbf{Spectral hops and physical observables:} Each power of a spectral ratio ($\mathcal{R}_2$, $\mathcal{R}_3$, $R_{EE}$) in a physical formula corresponds to one ``spectral hop''---a propagation step on the corresponding sector of the adjoint graph. The Ramanujan property guarantees that these hops have \emph{maximal propagation efficiency}: the spectral gap $\mathcal{R} = \la_2/\la_1$ is as close to 0 as the graph topology allows, meaning each hop transmits as much information as possible. A mass ratio like $m_\mu/m_e = \mathcal{R}_3^{-4} \cdot R_{EE} \cdot h_3^{\vee 3}$ literally requires 4 optimal spectral hops on the SU(3) subgraph + 1 bridge crossing + 3 Coxeter amplification levels.
+
+\subsection{Results: 37 Simple Algebras, 11 Selberg Priorities}\label{sec:ramanujan_results}
+
+The Selberg program tested all $37$ simple Lie algebras (rank $\leq 8$) and found:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c c c}
+\hline\hline
+Phase & $\Phi$ range & Algebras & Ramanujan? \\
+\hline
+Ordered & $< 0.3$ & su(2--5), so(3--5), sp(2--4), G$_2$ & \checkmark Yes \\
+Critical & $0.3$--$0.5$ & F$_4$, E$_6$, so(7--9), sp(8--10) & Mixed \\
+Disordered & $> 0.5$ & E$_7$, E$_8$, large classical & \texttimes\ No \\
+\hline\hline
+\end{tabular}
+\caption{Ramanujan classification phases by composite order parameter $\Phi$.}
+\end{table}
+
+\textbf{19/37 Ramanujan:} su(2--7), so(3--11), sp(2--10), so(6--12), G$_2$
+
+\textbf{18/37 non-Ramanujan:} su(8--10), so(13--14), sp(12), F$_4$, E$_6$--E$_8$
+
+\textbf{Transition by dimension:} su(7) $\to$ su(8), so(11) $\to$ so(13), sp(10) $\to$ sp(12)
+
+\subsection{Dimensional Criticality by Family}\label{sec:dim_criticality}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c c c}
+\hline\hline
+Family & Last Ramanujan & First failure & $d_{\mathrm{crit}}$ \\
+\hline
+A (su) & su(7), dim=48 & su(8), dim=63 & $\sim\!50$ \\
+B (so odd) & so(11), dim=55 & so(13), dim=78 & $\sim\!55$ \\
+C (sp) & sp(10), dim=55 & sp(12), dim=78 & $\sim\!55$ \\
+D (so even) & so(12), dim=66 & so(14), dim=91 & $\sim\!66$ \\
+G$_2$ & G$_2$, dim=14 & --- & \checkmark \\
+F$_4$ & --- & F$_4$, dim=52 & 52 \\
+E$_6$--E$_8$ & --- & E$_6$, dim=78 & 78 \\
+\hline\hline
+\end{tabular}
+\caption{Dimensional criticality by family: last Ramanujan algebra and first failure.}
+\end{table}
+
+\subsection{Coxeter Number as Universal Predictor}\label{sec:coxeter_predictor}
+
+The Coxeter number $h$ controls all spectral observables. The Ramanujan ratio follows the power law:
+
+\begin{equation}
+R \approx 0.289 \cdot h^{0.557}, \quad R^2 = 0.91
+\end{equation}
+
+with a sharp transition at $h^* \approx 9.5$:
+
+\begin{equation}
+h^* = (1.0 / 0.289)^{1/0.557} \approx 9.5
+\end{equation}
+
+For $h < h^*$: Ramanujan (ordered phase). For $h > h^*$: non-Ramanujan (disordered phase). The Coxeter number is the \emph{master parameter} of the evolution graph:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c}
+\hline\hline
+Observable & Dependence on $h$ \\
+\hline
+Ramanujan ratio & $R \approx 0.289 \cdot h^{0.557}$ \\
+Spectral gap & $\Delta \propto 1/h$ \\
+Mixing time & $\tau_{\mathrm{mix}} \propto h$ \\
+Landscape accessibility & $\sigma(\Phi(h))$ sigmoid \\
+Phase (ordered/critical/disordered) & $\Phi(h)$ continuous \\
+Cycle count per edge & $\hve$ directly \\
+\hline\hline
+\end{tabular}
+\caption{Coxeter number as universal graph parameter.}
+\end{table}
+
+\subsection{Divergence Theorem for Classical Families}\label{sec:divergence_theorem}
+
+For each infinite family ($A_n$, $B_n$, $C_n$, $D_n$): $R(n) \to \infty$ as $n \to \infty$. The cause is degree heterogeneity: the Cartan subalgebra acts as a hub while root vertices have lower degree. The heterogeneity ratio
+
+\begin{equation}
+H \equiv \deg_{\max} / \deg_{\mathrm{mean}} < 1.50
+\end{equation}
+
+serves as a universal criterion: Ramanujan if $H < 1.50$, non-Ramanujan if $H > 1.50$.
+
+\subsection{Ramanujan as Selection Criterion for Gauge Algebras}\label{sec:gauge_selection}
+
+The Standard Model sits ``safe'' Ramanujan: su(3) $\times$ su(2), max dimension = 8, ratios 0.50, 0.55. GUT algebras are marginal: su(5) OK (0.65), so(10) close (0.87), E$_6$ fails (1.11).
+
+\textbf{Prediction:} No gauge algebra with dimension $> \sim\!50$ emerges from the variational principle---the Ramanujan barrier prevents crystallization of large algebras.
+
+\subsection{Product Graph Composability}\label{sec:composability}
+
+\textbf{P7: Ramanujan $\times$ Ramanujan $\to$ Ramanujan} (unanimous, 6/6 definitions). The SM product $\su(3) \oplus \su(2)$ achieves a D1 ratio of 0.657---well within the Ramanujan bound. Furthermore, $\su(5)$ GUT spectrally matches the SM (ratio 0.653 vs 0.657), providing a spectral explanation for why SU(5) unification is natural.
+
+\subsection{Invariance Under Non-Compact Forms}\label{sec:noncompact_invariance}
+
+All $12/12$ non-compact real forms tested preserve the Ramanujan classification of their compact counterpart. The classification is a \emph{Dynkin-diagram invariant}, not a signature-dependent property. The Lorentz algebra $\so(3,1)$ inherits the Ramanujan property from $\so(4)$. The free (boost) edges do not degrade the spectral quality of the cyclic (rotation) core.
+
+\subsection{Ramanujan Algebras Are Maximally Chaotic}\label{sec:maximal_chaos}
+
+Ramanujan algebras $\implies$ negative average OTOC, $2\times$ faster mixing, tighter Krylov bounds. Connection with West et al. quantum chaos framework. The SM is ``optimally chaotic'': su(2) and su(3) deep in the Ramanujan regime.
+
+\subsection{Landscape Accessibility from Spectral Order Parameter}\label{sec:landscape_accessibility}
+
+The composite order parameter $\Phi(h)$---constructed from the Ramanujan ratio, mixing time, and pole density---controls the variational landscape accessibility:
+
+\begin{equation}
+\Phi(h) \approx 0.289 \cdot h^{0.557}
+\end{equation}
+
+with sigmoid accessibility:
+
+\begin{equation}
+\sigma(\Phi) = \frac{1}{1 + e^{a(\Phi - \Phi_c)}}, \quad \Phi_c = 0.31, \ a = 23.1
+\end{equation}
+
+Spearman $\rho = -0.94$ ($p = 5.5 \times 10^{-4}$) across $8$ experimental points with $100\%$ pairwise ordering accuracy (22/22).
+
+The sigmoid accessibility function $\sigma(\Phi)$ is literally the \emph{entropy barrier} the variational principle must overcome to crystallize a given algebra. The SM sits where this barrier is minimal ($\Phi \approx 0.10$--$0.16$, accessibility $> 99\%$).

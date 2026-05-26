@@ -1,0 +1,79 @@
+\section{From Graph to Observables---Bridge to Paper 3}\label{sec:bridge}
+
+\subsection{The Three Spectral Sectors as Graph Substructures}\label{sec:three_sectors}
+
+The formula interpretation analysis of COMPREHENSIVE RESULTS identifies three well-defined \textbf{spectral sectors} within the evolution graph, each corresponding to a distinct subgraph with its own propagation characteristics:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c c c}
+\hline\hline
+Sector & Subgraph & Spectral ratio & Coxeter amplifier \\
+\hline
+\textbf{SU(2)} & Binary cycle ($\hve_2 = 2$) & $\mathcal{R}_2 = \la_2^{(2)}/\la_1^{(2)}$ & $h_2^{\vee 4} = 16$ \\
+\textbf{SU(3)} & Ternary cycle ($\hve_3 = 3$) & $\mathcal{R}_3 = \la_2^{(3)}/\la_1^{(3)}$ & $h_3^{\vee 4} = 81$ \\
+\textbf{Bridge (E--E)} & Cross-sector link & $R_{EE} = E_7/E_6$ ratio & --- \\
+\hline\hline
+\end{tabular}
+\caption{The three spectral sectors as graph substructures.}
+\end{table}
+
+\paragraph{SU(2) sector.} The binary cycle with Coxeter number $\hve_2 = 2$. Controls weak interactions and lepton mass hierarchies. The spectral ratio $\mathcal{R}_2$ is the fundamental propagation constant for SU(2) processes.
+
+\paragraph{SU(3) sector.} The ternary cycle with Coxeter number $\hve_3 = 3$. Controls strong interactions and quark mass hierarchies. The spectral ratio $\mathcal{R}_3$ governs SU(3) propagation. The power $h_3^{\vee 4} = 81$ creates the ``spectral volume'' of 4-dimensional propagation on the SU(3) subgraph.
+
+\paragraph{E--E bridge.} The cross-sector link between the E$_7$ and E$_6$ subgraphs. The ratio $R_{EE} = 1/\sqrt{2}$ controls inter-sector coupling and generation mixing.
+
+\subsection{Topological Building Blocks}\label{sec:topological_blocks}
+
+The invariant of the graph (spectral ratios, Coxeter numbers) is determined exclusively by the topology. These invariants are the natural inputs for any physical observable. The graph not only classifies---it \emph{encodes} observable information.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c c}
+\hline\hline
+Building block & Exact value & Physical domain \\
+\hline
+$\mathcal{R}_2$ & $1/2$ & Weak interactions, lepton masses \\
+$\mathcal{R}_3$ & $(\sqrt{57}-3)/(2\sqrt{17})$ & Strong interactions, quark masses \\
+$R_{EE}$ & $1/\sqrt{2}$ & Inter-sector coupling, generation mixing \\
+$h_2^{\vee 4}$ & $16$ & SU(2) spectral volume \\
+$h_3^{\vee 4}$ & $81$ & SU(3) spectral volume \\
+\hline\hline
+\end{tabular}
+\caption{Five topological building blocks---exact values and physical domains.}
+\end{table}
+
+\subsection{Spectral Propagation and the Mass Lattice}\label{sec:mass_lattice}
+
+Each power of a spectral ratio corresponds to one ``spectral hop''---a propagation step on the corresponding sector of the adjoint graph. The Ramanujan property guarantees that these hops have \emph{maximal propagation efficiency}: the spectral gap is as close to 0 as the graph topology allows, meaning each hop transmits as much information as possible.
+
+The Killing spectrum generates a \emph{discrete lattice} in spectral space. The Standard Model's coupling constants and mass ratios are not imposed---they emerge as points on this lattice, determined by the graph topology. The QCD boundary delineates the domain of the mechanism: Higgs masses vs. QCD binding energy.
+
+\subsection{The Graph as Computational Substrate}\label{sec:graph_computational}
+
+The graph topology described in Sections 1--9 is not merely an organizational schema---it is the \emph{computational substrate} for every observable mass, mixing angle, and coupling constant. Physical formulas are literal descriptions of spectral propagation paths:
+
+\begin{equation}
+\text{Observable} = \prod_{\mathrm{sectors}} \mathcal{R}_s^{n_s} \cdot \prod_{\mathrm{Coxeter}} h_k^{\vee \, d_k} \cdot R_{\mathrm{bridge}}^{n_{\mathrm{bridge}}}
+\end{equation}
+
+where the exponents $n_s$ count the number of spectral hops on sector $s$, and $d_k$ counts the Coxeter amplification levels.
+
+\subsection{The Role of Paper 2 in the Sequence Paper 1 $\to$ 2 $\to$ 3}\label{sec:paper_sequence}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c l l}
+\hline\hline
+Paper & Question & Result & Bridge \\
+\hline
+Paper 1 & ¿Emergen álgebras? & 51 tests, 100\% emergence & Graph invariants \\
+Paper 2 & ¿Qué grafo produce? & 5 archetypes, Ramanujan, tensegrity & Topological blocks \\
+Paper 3 & ¿Qué produce el grafo? & [to derive] & Uses blocks to predict \\
+\hline\hline
+\end{tabular}
+\caption{The sequence: emergence $\to$ topology $\to$ observables.}
+\end{table}
+
+Paper 3 takes the spectral invariants from Paper 2 and uses them to derive the Standard Model parameters. The bridge is conceptual: the graph as a computational substrate. Paper 2 provides the \emph{spectral classification} that justifies why these invariants are the correct ones (Ramanujan, optimal, unique). Paper 2 establishes that the graph is \emph{computational}, not merely organizational---a direct bridge to Paper 3.

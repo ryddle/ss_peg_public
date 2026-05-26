@@ -1,0 +1,101 @@
+\section{Graph Construction Rules}\label{sec:construction_rules}
+
+\subsection{Step-by-Step Recipe: From Algebra to Graph}\label{sec:recipe}
+
+Given an emergent algebra $\g$ with $n$ generators and Killing matrix $\Kil$, the evolution graph is constructed as follows:
+
+\begin{enumerate}
+    \item \textbf{Diagonalize $\Kil$.} Compute eigenvalues $\{\Kil_1, \ldots, \Kil_n\}$ and eigenvectors $\{v_1, \ldots, v_n\}$.
+    
+    \item \textbf{Classify edges.} For each eigenvalue $\Kil_\la$:
+    \begin{itemize}
+        \item $\Kil_\la < -\eps$: \textbf{cyclic edge} (compact direction)
+        \item $|\Kil_\la| < \eps$: \textbf{decoupled strand} (abelian / degenerate)
+        \item $\Kil_\la > +\eps$: \textbf{free edge} (non-compact direction)
+    \end{itemize}
+    where $\eps \sim 10^{-6}$ is a numerical threshold.
+    
+    \item \textbf{Identify the compact core.} The cyclic edges form a closed subalgebra---the maximal compact subalgebra $\kcg \subset \g$. Verify by checking that $[v_i, v_j] \in \spann\{v_k : \Kil_k < 0\}$ for all cyclic eigenvectors $v_i, v_j$.
+    
+    \item \textbf{Identify the non-compact coset.} The free edges transform under the compact core but do not close among themselves: $[v_i, v_j] \in \spann\{v_k : \Kil_k < 0\}$ for free eigenvectors $v_i, v_j$. (Commuting two boosts gives a rotation, not a boost.)
+    
+    \item \textbf{Identify decoupled strands.} The zero-eigenvalue edges commute with everything: $[v_i, v_j] = 0$ for all $j$ when $\Kil_i = 0$.
+    
+    \item \textbf{Draw the graph.}
+    \begin{itemize}
+        \item Compact core: closed loops with bidirectional edges
+        \item Non-compact extension: directed arrows emerging from the core
+        \item Decoupled strands: disconnected dashed lines
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Minimum Emergence Conditions by Archetype}\label{sec:emergence_minima}
+
+The experiments establish precise minimum conditions for each graph archetype to emerge:
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{c c c c c}
+\hline\hline
+Arch. & $n_{\mathrm{gen}}$ & Parameterization & $\Kil_{\mathrm{target}}$ & Emergence \\
+\hline
+I (pure cycle) & $\dim(\g)$ & Herm.\ traceless / antisym. & $\Kil = -I$ & $\ro = 1$ \\
+II (mixed) & $\dim(\g)$ & $\et$-preserving & Indef. $(-,+)$ & $\et$ + indef. \\
+III (cycle+strand) & $d^2$ & Herm. (trace allowed) & $\Kil = -I$ & Trace DOF \\
+IV (pure free) & --- & --- & $\Kil = +I$ & Not observed \\
+V (frustrated) & $\dim(\g)$ & $\et$-preserving & $\Kil = -I$ (incompat.) & Constr. $\leftrightarrow$ target \\
+\hline\hline
+\end{tabular}
+\caption{Minimum emergence conditions for each graph archetype.}
+\end{table}
+
+The key insight: the graph archetype is selected by the interplay of three factors:
+
+\begin{enumerate}
+    \item \textbf{Generator count} ($n_{\mathrm{gen}}$): sets the maximum possible graph dimension.
+    \item \textbf{Parameterization constraint}: selects the \emph{type} of edges available (compact, $\et$-preserving, etc.).
+    \item \textbf{Killing target signature}: selects whether the optimizer seeks cyclic or free edges.
+\end{enumerate}
+
+These three factors are the \emph{emergence minima}---the minimum inputs that determine the graph topology. Everything else (commutation relations, Jacobi identity, Casimir operators, dual Coxeter number) follows as a consequence.
+
+\subsection{The Density Threshold $\ro = 1$ as Percolation}\label{sec:density_threshold}
+
+The density transition establishes a sharp percolation threshold:
+
+\begin{equation}
+\ro = \frac{n_{\mathrm{gen}}}{d^2 - 1} = 1 \quad \Longleftrightarrow \quad \text{Graph crystallizes}
+\end{equation}
+
+\begin{itemize}
+    \item $\ro < 1$: The graph has too few edges. No cycles can close. All edges are dangling. \textbf{No symmetry.}
+    \item $\ro = 1$: Exact threshold. All cycles close simultaneously. The graph transitions from a disconnected fragment to a coherent algebraic structure. \textbf{Full gauge symmetry.}
+    \item $\ro > 1$: Over-determined. Extra edges become degenerate ($\Kil = 0$) and decouple as abelian strands.
+\end{itemize}
+
+This is a \emph{percolation transition} on the graph. Below the critical edge density, the graph is a collection of disconnected fragments---no long-range structure, no cycles, no invariants. Above the threshold, a ``giant component'' of interlocking cycles spans the entire graph, and the gauge algebra crystallizes.
+
+The step-function nature of this transition (0\% $\to$ 100\% with no intermediate states) means: \textbf{there is no partial graph}. Either the full algebraic structure exists, or nothing does. This is the graph-theoretic expression of why gauge symmetries in nature are exact, not approximate.
+
+\subsection{$\hve$ as Cycle Counting Measure}\label{sec:dual_coxeter_cycle}
+
+The universal formula (derived in Paper 1~\cite{paper1_killing_algebra} for $15$ algebras)
+
+\begin{equation}
+\hve = \frac{I_R \cdot |\Kil|}{\ka^2}
+\end{equation}
+
+has a direct graph-theoretic interpretation. The dual Coxeter number $\hve$ counts the \emph{effective number of independent cycles per edge} in the adjoint graph. More precisely:
+
+\begin{itemize}
+    \item $|\Kil|$ = total adjoint feedback per generator (how much each edge feeds back on itself)
+    \item $\ka^2 = \mathrm{Tr}(T_a^2)/d$ = generator norm (edge ``weight'')
+    \item $I_R$ = Dynkin index (representation-dependent normalization)
+\end{itemize}
+
+The ratio $|\Kil|/\ka^2$ is the \emph{feedback-per-unit-weight}---the ``specific cyclicity'' of the edge. Multiplied by $I_R$, this gives $\hve$: the topological invariant that characterizes the graph's cycle structure up to isomorphism.
+
+\textbf{Physical consequence:} $\hve$ determines the 1-loop $\beta$-function coefficient. In QCD: $\be_0 \propto 11 N_c / 3 = 11 \hve(\su(N_c)) / 3$. The running of the coupling constant is controlled by the graph's cycle count. More cycles $\to$ stronger asymptotic freedom $\to$ deeper confinement.
+
+\textbf{The spectral volume connection:} When $\hve$ appears raised to the spacetime dimension $d = 4$ in mass ratio formulas---$h_3^{\vee 4} = 81$, $h_2^{\vee 4} = 16$---it creates the ``spectral volume'' of a $d$-dimensional propagation on the graph. Since $d = \ln(4\pi\alpha_s)/\ln(\mathcal{R}_3/\mathcal{R}_2) = 3.9997$ itself emerges from the graph spectrum, the exponent 4 is not imposed but \emph{derived}: the number of independent cycles per edge, raised to the number of dimensions generated by those same cycles, yields the fundamental mass hierarchy.

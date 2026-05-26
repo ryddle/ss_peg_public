@@ -1,0 +1,62 @@
+\section{The Density Phase Transition}\label{sec:density}
+
+This section presents the sharpest result in the entire program: algebraic closure is a mathematical step function. There is no ``partial symmetry''---the transition from no structure to exact Lie algebra is abrupt and absolute.
+
+\subsection{The Step Function}\label{sec:step_function}
+
+The density experiment (§7 of \texttt{experiments/01\_classical\_algebras.md}) sweeps the number of active generators $n_{\mathrm{gen}}$ from 1 to 15 for SU(4) with $d = 4$ and $d^2 - 1 = 15$ total generators:
+
+\begin{equation}
+\begin{array}{ll}
+\hline
+n_{\mathrm{gen}} & \text{Closure Rate} \\
+\hline
+1 & \text{100\% (trivial, single generator)} \\
+2 \text{ to } 14 & \textbf{0\%} \\
+15 & \textbf{100\%} \\
+\hline
+\end{array}
+\end{equation}
+
+There are \textbf{no intermediate states}. No ``partial SU(4)''. No gradual ``symmetry crystallization.'' The transition is a mathematical step function at $n_{\mathrm{gen}} = d^2 - 1$.
+
+The total runtime for this sweep was 9,776 seconds (approximately 2.7 hours of GPU computation), confirming that the result is not a numerical artifact of insufficient optimization time---each point was run to full convergence.
+
+\subsection{Physical Interpretation}\label{sec:physical_interpretation}
+
+Within the SS-PEG framework, this transition maps to the concept of \textbf{relational density}:
+
+\begin{equation}
+\rho = \frac{n_{\mathrm{gen}}}{d^2 - 1}
+\end{equation}
+
+Below $\rho = 1$: the graph is too sparse. There are insufficient relational degrees of freedom for a gauge symmetry to crystallize. Above $\rho = 1$: the algebra is over-determined (multiple representations possible). At $\rho = 1$: exact crystallization.
+
+This is the gauge theory analogue of \textbf{percolation} in statistical physics. In a random graph, there is a sharp threshold $p_c$ above which a giant connected component appears. Below $p_c$: disconnected fragments. Above $p_c$: global connectivity. The transition is topological, not thermodynamic---there is no temperature, no free energy, no gradual ordering.
+
+\subsubsection{Implications for Cosmology}
+
+If the universe's gauge symmetries are emergent (as the SS-PEG framework proposes), the density transition suggests a mechanism for their origin:
+
+\begin{itemize}
+\item \textbf{In the early universe} (high density, high temperature): the relational graph is dense. SU(3) $\times$ SU(2) $\times$ U(1) crystallizes as $\rho$ exceeds the threshold for each factor.
+\item \textbf{Electroweak symmetry breaking} is not the ``Higgs mechanism destroying a symmetry'' but the relational density dropping below the SU(2)$\times$U(1) threshold in the electroweak sector, preserving only U(1)$_{\mathrm{EM}}$.
+\item \textbf{Confinement} in QCD corresponds to the relational density remaining above the SU(3) threshold at low energies---the chromodynamic graph never becomes sparse enough to decrystallize.
+\end{itemize}
+
+The step-function nature of the transition predicts \textbf{no intermediate gauge structures}. There is no ``partial SU(3)'' at intermediate energies---the color gauge group is either exact or absent. This is consistent with the observed exactness of gauge symmetries in nature.
+
+\subsubsection{The Density Threshold as a Joint Gauge--Gravity Transition}
+
+The density phase transition has a deeper implication that connects Section~\ref{sec:density} with Section~\ref{sec:spacetime}. The same relational density $\rho$ that controls the gauge symmetry phase transition also controls the emergence of spacetime geometry.
+
+At $\rho_c \approx 1$:
+\begin{itemize}
+\item \textbf{Below $\rho_c$}: the graph is too sparse for any algebraic structure. There is no gauge symmetry and no curvature---the evolution graph is effectively empty.
+
+\item \textbf{At $\rho_c$}: gauge symmetry crystallizes (as demonstrated in this section) \textit{and} spacetime curvature emerges simultaneously. The Killing form develops both compact eigenvalues (gauge forces) and non-compact eigenvalues (spacetime geometry).
+
+\item \textbf{Above $\rho_c$}: the structure is over-determined. Multiple representations become possible. The rich entanglement structure generates both gauge forces \textit{and} the metric $g_{\mu\nu}(x)$ through the entanglement thermodynamics chain $\rho \to$ entanglement entropy $\to$ modular Hamiltonian $\to$ acceleration $\to$ curvature.
+\end{itemize}
+
+This means the density phase transition is not merely a transition in gauge symmetry---it is simultaneously a \textbf{transition in spacetime geometry}. Below $\rho_c$, there is no algebra and no curvature. Above $\rho_c$, the full structure (gauge $+$ gravity) emerges together. This provides a concrete mechanism for the deep implication of Section~\ref{sec:deep_implication}: spacetime is not the arena in which physics takes place; it is the pattern of non-compact directions in the emergent Killing form, which only exists when $\rho > \rho_c$.

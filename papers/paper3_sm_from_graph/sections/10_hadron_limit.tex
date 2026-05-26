@@ -1,0 +1,65 @@
+\section{The Hadron Mass Limit: A Negative Result}\label{sec:hadron_limit}
+
+A critical test of the SS-PEG program is whether the mass lattice extends beyond elementary particles to \textbf{composite particles} (hadrons). If the lattice captures fundamental structure, it should also describe hadrons---bound states of quarks held together by QCD. If not, the lattice has a well-defined domain of validity.
+
+The result is \textbf{negative but informative}: the lattice captures Higgs-sector masses, not QCD binding energy.
+
+\subsection{Hadron Catalog}\label{sec:hadron_catalog}
+
+We tested 31 hadrons (baryon octet, baryon decuplet, pseudoscalar meson octet, vector meson nonet) from PDG 2024~\cite{pdg2024}:
+
+\begin{table}[h]
+\centering
+\caption{Selected hadrons on the lattice}
+\label{tab:hadrons_lattice}
+\begin{tabular}{lccc}
+\hline\hline
+Hadron & Quarks & $m_{\mathrm{exp}}$ (MeV) & Fit quality \\
+\hline
+$p$ (proton) & $uud$ & $938.272$ & Fits half-integer lattice \\
+$n$ (neutron) & $udd$ & $939.565$ & Fits half-integer lattice \\
+$\Lambda$ & $uds$ & $1115.683$ & Fits half-integer lattice \\
+$\Sigma^+$ & $uus$ & $1189.370$ & Fits half-integer lattice \\
+$\Xi^0$ & $uss$ & $1314.860$ & Fits half-integer lattice \\
+$\Omega^-$ & $sss$ & $1672.45$ & Fits half-integer lattice \\
+$\pi^+$ & $u\bar{d}$ & $139.57$ & Fits half-integer lattice \\
+$K^+$ & $u\bar{s}$ & $493.68$ & Fits half-integer lattice \\
+$\rho$ & $q\bar{q}$ & $770$ & Fits half-integer lattice \\
+\hline\hline
+\end{tabular}
+\end{table}
+
+\textbf{31 of 31 hadrons fit the half-integer lattice} with mean error $0.017\%$. At first glance, this appears to be a remarkable confirmation. However, the statistical analysis reveals a different story.
+
+\subsection{The Monte Carlo Test}\label{sec:hadron_mc}
+
+\begin{equation}
+\textbf{Monte Carlo test ($N = 50{,}000$):} \quad p = 0.705.
+\end{equation}
+
+\textbf{Interpretation:} Any comparable basis (any set of 3 logarithmic basis elements) achieves similar fit quality. The lattice captures \textbf{Higgs-sector masses}, not QCD binding energy. The 0.017\% fit is not statistically significant.
+
+\subsection{Physical Interpretation}\label{sec:hadron_interpretation}
+
+Hadron masses arise from a combination of:
+\begin{enumerate}
+\item \textbf{Current quark masses} (from the lattice) --- the Higgs sector contribution
+\item \textbf{QCD binding energy} ($\sim 99\%$ of light hadron mass) --- the gauge dynamics contribution
+\item \textbf{Spin-spin interactions} (hyperfine splitting) --- the chromomagnetic contribution
+\item \textbf{Electromagnetic effects} (isospin breaking) --- the QED contribution
+\end{enumerate}
+
+The SS-PEG lattice captures (1) but not (2)--(4). This is expected: the lattice is derived from the \textbf{topology of the gauge group}, not from the \textbf{dynamics of QCD}~\cite{erfanian2024noncommuting}. The lattice describes the masses that quarks would have if they were free (Higgs-generated masses), not the masses they acquire through confinement.
+
+\subsection{Implications}\label{sec:hadron_implications}
+
+The negative result has important implications:
+\begin{itemize}
+\item \textbf{Domain of validity:} The SS-PEG mass lattice describes \textbf{elementary particle masses} (Higgs-generated), not composite particle masses (QCD-generated).
+\item \textbf{QCD is independent:} The QCD binding energy is a dynamical effect that is not captured by graph topology alone. This is consistent with the fact that QCD is a non-abelian gauge theory whose dynamics are not determined by the group topology.
+\item \textbf{Future direction:} Extending the SS-PEG program to describe hadron masses would require incorporating QCD dynamics into the graph framework---a significant challenge.
+\end{itemize}
+
+\subsection{Summary}\label{sec:hadron_summary}
+
+The hadron mass test is a \textbf{negative result}: 31/31 hadrons fit the half-integer lattice (mean $0.017\%$), but the Monte Carlo test yields $p = 0.705$, indicating that any comparable basis achieves similar quality. The lattice captures Higgs-sector masses, not QCD binding energy. This defines the domain of validity of the SS-PEG mass spectrum: elementary particles, not composite states.

@@ -1,0 +1,208 @@
+\section{Spacetime Emergence}\label{sec:spacetime}
+
+The variational principle does not only generate internal gauge symmetries. It also produces spacetime symmetry---with the correct causal structure emerging automatically.
+
+\subsection{The Lorentz Algebra so(3,1)}\label{sec:so31}
+
+The so(3,1) results are among the most physically significant in the program. With $\eta$-preserving parameterization and indefinite Killing target $K_{\mathrm{sorted}} = [-1,-1,-1,+1,+1,+1]$:
+
+\begin{itemize}
+\item \textbf{100\% success rate} (5/5 seeds)
+\item Killing eigenvalue signature: \textbf{(3+, 3$-$)} --- exactly 3 rotation generators and 3 boost generators
+\item The $\mathbb{Z}_2$ symmetry of the root system manifests as $|K_+|/|K_-| = 1.000000$ exactly
+\item Canonical span verified at $10^{-16}$
+\end{itemize}
+
+The constraint $T^\top \eta + \eta T = 0$ with $\eta = \mathrm{diag}(-1,+1,+1,+1)$ yields:
+\begin{itemize}
+\item \textbf{Time-space pairs} $(\mu,\nu)$ with $\eta_{\mu\mu} \neq \eta_{\nu\nu}$: $T_{\mu\nu} = +T_{\nu\mu}$ (symmetric $\to$ boosts)
+\item \textbf{Space-space pairs} with $\eta_{\mu\mu} = \eta_{\nu\nu}$: $T_{\mu\nu} = -T_{\nu\mu}$ (antisymmetric $\to$ rotations)
+\end{itemize}
+
+6 real parameters per generator: 3 boosts $(T_{01}, T_{02}, T_{03})$ + 3 rotations $(T_{12}, T_{13}, T_{23})$. The constraint is enforced \textbf{structurally} by the parameterization.
+
+\subsubsection{Experiment C --- Automatic Subalgebra Discovery}
+
+When the $\eta$-preserving parameterization is paired with a compact Killing target $K = -I$, the optimizer cannot satisfy both constraints simultaneously. It resolves the frustration by \textbf{killing the boost generators entirely}, leaving only the rotation subalgebra $\so(3) \subset \so(3,1)$. This manifests as $K$ signature $(0+, 3 \times 0, 3-)$, with 3 degenerate Killing eigenvalues at $\approx -0.972$. The system ``knows'' that compact boosts are impossible without being told.
+
+\subsection{The Conformal Algebra SU(2,2)}\label{sec:su22}
+
+The conformal algebra of 3+1 spacetime is $\su(2,2) \cong \so(4,2)$, with 15 generators and Killing signature $(8+, 7-)$.
+
+\begin{itemize}
+\item \textbf{100\% success rate} (5/5 seeds)
+\item Killing signature: \textbf{(8+, 7$-$)} exactly matches the expected compact/non-compact split
+\item Closure: 105/105 commutators (100\%)
+\item Canonical span: all 15 generators lie exactly in the span of canonical $\su(2,2)$ generators (residuals $\sim 10^{-16}$)
+\end{itemize}
+
+The spacetime symmetry hierarchy is complete: $\su(2)$ (internal spin) $\to$ $\so(3,1)$ (Lorentz) $\to$ $\su(2,2)$ (conformal).
+
+\subsection{Killing Signature as Discriminator}\label{sec:signature_discriminator}
+
+The Killing form signature provides a clean, universal discriminator between internal gauge symmetry and spacetime symmetry:
+
+\begin{equation}
+\begin{array}{lll}
+\hline
+\textbf{Signature} & \textbf{Type} & \textbf{Physical Role} \\
+\hline
+K \propto -I \text{ (negative definite)} & \text{Compact} & \text{Internal gauge symmetry} \\
+K \text{ indefinite } (p+, q-) & \text{Non-compact} & \text{Spacetime symmetry} \\
+K = 0 & \text{Abelian} & \text{Electromagnetic} \\
+\hline
+\end{array}
+\end{equation}
+
+This classification is not imposed---it \textbf{emerges} from the variational principle:
+\begin{itemize}
+\item Compact target $K_{\mathrm{target}} = -I$ with SO(4) parameterization $\to$ \textbf{so(4)} (internal)
+\item Indefinite target with $\eta$-preserving parameterization $\to$ \textbf{so(3,1)} (spacetime)
+\item Compact target with $\eta$-preserving parameterization $\to$ \textbf{so(3) $\subset$ so(3,1)} (automatic subalgebra)
+\end{itemize}
+
+\subsection{Gravity as Emergent Geometry: The P$\to$R$\to$C$\to$I Mapping}\label{sec:gravity_prci}
+
+The so(3,1) emergence provides the \textit{algebraic skeleton} of spacetime. General relativity fills this skeleton with \textit{geometric flesh}. The SS-PEG Potential $\to$ Relation $\to$ Cycle $\to$ Invariant chain maps onto GR with remarkable precision:
+
+\begin{equation}
+\begin{array}{lll}
+\hline
+\textbf{SS-PEG Stage} & \textbf{GR Object} & \textbf{Role} \\
+\hline
+\textbf{Potential} & g_{\mu\nu} \text{ (metric tensor)} & \text{Encodes all geometric and causal structure} \\
+\textbf{Relation} & \Gamma^\mu_{\alpha\beta} \text{ (Levi-Civita connection)} & \text{Parallel transport between nearby points} \\
+\textbf{Cycle} & \text{Closed spacetime loop} & \text{Holonomy of parallel transport} \\
+\textbf{Invariant} & R, R_{\mu\nu}R^{\mu\nu}, \tau \text{ (curvature scalars, proper time)} & \text{Coordinate-independent observables} \\
+\hline
+\end{array}
+\end{equation}
+
+The Riemann curvature tensor arises as the \textit{cycle discrepancy}---the failure of parallel transport to close:
+
+\begin{equation}
+R^\rho{}_{\sigma\mu\nu} = \partial_\mu \Gamma^\rho_{\nu\sigma} - \partial_\nu \Gamma^\rho_{\mu\sigma} + \Gamma^\rho_{\mu\lambda}\Gamma^\lambda_{\nu\sigma} - \Gamma^\rho_{\nu\lambda}\Gamma^\lambda_{\mu\sigma}
+\end{equation}
+
+This is \textbf{structurally identical} to the gauge field strength $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu + [A_\mu, A_\nu]$. The parallel is not accidental---both are instances of the same relational architecture: a connection (relation) whose holonomy around cycles (invariant) detects curvature. The difference is only in the base group: SO(3,1) for gravity, SU(N) for gauge forces.
+
+In the SS-PEG framework, this structural identity has a deeper origin: both emerge from the same variational principle acting on the Killing metric. The compact eigenvalues produce gauge forces; the non-compact eigenvalues produce spacetime geometry. Gravity and gauge symmetry are \textit{two faces of the same Killing form}.
+
+The P$\to$R$\to$C$\to$I architecture is not specific to GR---it is the universal template of all physical theories. The following structural isomorphism across four foundational domains confirms that the relational ontology operates at every scale:
+
+\begin{equation}
+\begin{array}{lcccc}
+\hline
+\textbf{Feature} & \textbf{Aharonov--Bohm} & \textbf{Berry Phase} & \textbf{Lagrangian Mech.} & \textbf{General Relativity} \\
+\hline
+\text{Potential} & A_\mu & A_n & L & g_{\mu\nu} \\
+\text{Relation} & \text{Phase transport} & \text{Adiabatic transition} & \text{Variational stability} & \Gamma^\mu_{\alpha\beta} \\
+\text{Cycle} & \text{Spatial loop} & \text{Parameter loop} & \text{Periodic orbit} & \text{Spacetime loop} \\
+\text{Invariant} & \Delta\phi & \gamma_n & \text{Conserved qty} & R \\
+\text{Curvature} & \mathbf{B} & \mathbf{F}_n & \text{E--L eqs.} & R^\rho{}_{\sigma\mu\nu} \\
+\hline
+\end{array}
+\end{equation}
+
+Every column is a \textbf{different projection} of the same relational graph $\mathcal{G}$ into a different physical context $\Pi_C$. The potentials are the primary objects; relations connect them locally; cycles probe global structure; and invariants are the only observer-independent reality.
+
+\begin{quote}
+\textbf{``The cycle is all you need.''} From coupling constants (master formula $\alpha_X = e^{S_X}/4\pi$ with direction vectors read from cycle structure) to spacetime curvature (Riemann $=$ cycle discrepancy), everything physical is an invariant of a cycle in the relational graph.
+\end{quote}
+
+\subsection{Emergent Gravity from Entanglement and Relational Density}\label{sec:gravity_entanglement}
+
+Following Jacobson~\cite{Jacobson1995,Jacobson1998}, the Einstein field equations can be derived purely from entanglement thermodynamics:
+
+\begin{equation}
+\delta S = \delta\langle K \rangle
+\end{equation}
+
+where $S$ is the entanglement entropy of a spatial region and $K = -\log \rho_{\mathrm{reduced}}$ is the modular Hamiltonian. This is not merely an analogy---it is a derivation.
+
+In the evolution graph framework, the relational density $\rho(v)$ provides the microscopic substrate for this derivation:
+
+\begin{enumerate}
+\item \textbf{High $\rho$} $\to$ high entanglement between subgraphs $\to$ high entropy $S$
+\item \textbf{Gradients of $\rho$} $\to$ gradients in the modular Hamiltonian $K$ $\to$ effective acceleration
+\item \textbf{Effective acceleration} $\to$ local Rindler horizon $\to$ local curvature via Unruh effect
+\item \textbf{Emergent curvature} $\to$ effective metric $g_{\mu\nu}(x)$ satisfying Einstein's equations
+\end{enumerate}
+
+The critical insight is that $\rho$---the same relational density that controls the gauge symmetry phase transition (Section~\ref{sec:density})---also controls the emergence of gravity. At the density threshold $\rho_c \approx 1$, gauge symmetry crystallizes. Below $\rho_c$, the graph is too sparse for algebraic structure; above $\rho_c$, the rich entanglement structure generates both gauge forces \textit{and} spacetime curvature simultaneously.
+
+This connects directly to our experimental results: the density phase transition (Section~\ref{sec:step_function}) is not just a transition in gauge symmetry---it is simultaneously a transition in spacetime geometry. Below $\rho_c$, there is no algebra and no curvature. Above $\rho_c$, the full structure (gauge $+$ gravity) emerges together.
+
+This provides a concrete mechanism for the deep implication of Section~\ref{sec:deep_implication}: the non-compact directions of the Killing form (spacetime) and the compact directions (gauge forces) are not independent phenomena. They are coupled through the relational density field $\rho(v)$, which acts as the common source. The metric $g_{\mu\nu}$ and the gauge potentials $A_\mu^a$ are both expressions of the same underlying relational structure:
+
+\begin{equation}
+g_{\mu\nu}(x) \;\leftrightarrow\; \text{non-compact Killing eigenvalues of } K_{ab} \text{ at } \rho(x) > \rho_c
+\end{equation}
+\begin{equation}
+A_\mu^a(x) \;\leftrightarrow\; \text{compact Killing eigenvalues of } K_{ab} \text{ at } \rho(x) > \rho_c
+\end{equation}
+
+The Einstein equations emerge not as a fundamental law but as the thermodynamic equilibrium condition of the entanglement structure in the evolution graph.
+
+\subsection{Dark Matter as Connection Without Particles}\label{sec:dark_matter}
+
+The relational framework makes a distinctive prediction about dark matter that follows directly from the gravity-as-connection picture.
+
+\subsubsection{Mechanism}
+
+The Levi-Civita connection $\Gamma$---gravity's ``relation'' in the P$\to$R$\to$C$\to$I chain---can exist in regions where no stable gauge-invariant states (particles) form:
+
+\begin{itemize}
+\item \textbf{High $\rho$} (galaxies, clusters): gravitational $+$ EM $+$ nuclear contexts all active $\to$ visible matter
+\item \textbf{Intermediate $\rho$} (galaxy halos, filaments): gravitational connection active, EM and nuclear contexts too weak $\to$ gravity without particles
+\item \textbf{Low $\rho$} (deep voids): no relational structure $\to$ empty space
+\end{itemize}
+
+This is precisely the Aharonov--Bohm logic: the potential $A$ produces observable effects where $B = 0$. Similarly, the gravitational connection $\Gamma$ produces curvature (observable via lensing) in regions where no local energy density in the traditional sense exists.
+
+\subsubsection{Distinctive Predictions}
+
+The SS-PEG mechanism predicts that ``dark matter'' is not a particle but a gravitational connection $\Gamma$ in regions of intermediate relational density. This yields testable predictions that distinguish it from collisionless cold dark matter (CDM):
+
+\begin{enumerate}
+\item ``Dark matter'' halos trace \textbf{gradients of relational density} $\nabla\rho$, not only gradients of baryonic mass
+\item Distribution follows \textbf{interfaces} between regions of different $\rho$---filaments and void boundaries
+\item Does \textbf{NOT} form self-gravitating substructures (halos within halos)---unlike particulate dark matter
+\item Has \textbf{filamentary/membrane topology}---sheet-like, not cloud-like
+\item Produces \textbf{no self-annihilation or radiation}---it is connection, not matter
+\item Distribution correlates with \textbf{cosmic voids} where $\rho$ changes abruptly
+\end{enumerate}
+
+These predictions are testable via weak lensing topology: the SS-PEG prediction is membranes (connection) rather than clouds (particles). Current surveys (DES, Euclid, Rubin) have the sensitivity to distinguish these topologies.
+
+\subsubsection{Observational Support: Ultrafaint Dwarf Galaxies}
+
+S{\'a}nchez Almeida, Trujillo \& Plastino~\cite{SanchezAlmeitaTrujilloPlastino2024} analyzed six ultrafaint dwarf (UFD) satellites of the Milky Way and LMC using HST imaging. Their key findings provide early evidence consistent with the connection-without-particles picture:
+
+\begin{enumerate}
+\item \textbf{Cored profiles, not cusps.} All six UFDs show stellar distributions with central plateaus (cores), inconsistent with the cuspy NFW potentials predicted by collisionless CDM at $\geq$97\% confidence (Eddington inversion method). This is exactly what Section~\ref{sec:dark_matter} predicts: if ``dark matter'' is a gravitational connection $\Gamma$ rather than self-gravitating particles, the potential should be \textbf{smooth} (cored), not concentrated (cuspy).
+
+\item \textbf{Universal profile.} After trivial rescaling in size and central density, all six galaxies---with stellar masses spanning $6 \times 10^2$ to $2.4 \times 10^4\, M_\odot$ and axial ratios from 0.55 to 1---collapse to \textbf{the same radial profile} ($\chi^2/\nu = 1.06$). This universality is the hallmark of a geometric mechanism (connection topology) rather than a particulate one (which would produce galaxy-dependent substructure).
+
+\item \textbf{Stellar feedback excluded.} The extremely low stellar masses ($10^3$--$10^4\, M_\odot$, more than 100$\times$ below the feedback threshold $\sim 10^6\, M_\odot$) exclude baryonic feedback as explanation. In the SS-PEG picture this is expected: the core is not carved by feedback but is the \textit{natural shape} of a connection-mediated potential.
+
+\item \textbf{Consistent with cored potentials.} Schuster-Plummer (core) and $\rho_{230}$ (core $+$ NFW tail) potentials reproduce the observations perfectly, with physical distribution functions ($f \geq 0$ everywhere). This matches the SS-PEG prediction that at intermediate $\rho$, gravity exists without cusps because there are no collisionless particles to form them.
+\end{enumerate}
+
+The paper's conclusion---that collisionless CDM is disfavored and alternatives producing cored potentials are needed---aligns precisely with the SS-PEG mechanism where dark matter is not an unknown particle but the footprint of the Levi-Civita connection in regions of intermediate relational density.
+
+\begin{quote}
+\textbf{Status:} This moves the dark matter prediction from \textbf{Untested} to \textbf{Partially supported}---the core/cusp test favors SS-PEG over CDM, but the distinctive filamentary topology and void-correlation predictions remain to be tested with upcoming weak lensing surveys.
+\end{quote}
+
+\subsection{The Deep Implication: Causal Structure Is Algebraic}\label{sec:deep_implication}
+
+In the SS-PEG framework, the distinction between ``space'' and ``time'' is not primitive---it is encoded in the signature of the emergent Killing form. Compact (negative) directions correspond to gauge rotations that can be undone; non-compact (positive) directions correspond to boosts that mix space and time irreversibly.
+
+This suggests a radical reinterpretation of spacetime itself:
+
+\begin{quote}
+\textbf{Spacetime is not the arena in which physics takes place. Spacetime is the pattern of non-compact directions in the emergent Killing form of the gauge algebra.}
+\end{quote}
+
+The Minkowski metric $\eta = \mathrm{diag}(-1,+1,+1,+1)$ is not a background structure but a \textit{consequence} of the non-compact Killing eigenvalues of the Lorentz algebra. The ``3+1'' dimensional structure of spacetime reflects the $(3+,3-)$ signature of so(3,1), which in turn reflects the balance between rotational and boost degrees of freedom in the evolution graph.

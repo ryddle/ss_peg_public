@@ -1,0 +1,111 @@
+\section{Spacetime Hierarchy as Topological Evolution}\label{sec:spacetime_hierarchy}
+
+\subsection{The Five Levels of the Evolution Graph}\label{sec:five_levels}
+
+The experimental program reveals a natural hierarchy of graph complexity corresponding to the physical hierarchy of spacetime symmetries:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c c c c}
+\hline\hline
+Level & $\ro$ & Graph & Rol físico & Ejemplo \\
+\hline
+0: Pre-crystallization & $\ro < 1$ & $V$ without $E$ & No physics & Pure potential \\
+1: Internal symmetry & $\ro = 1$, compact & Pure cycle ($\circlearrowleft$) & Gauge interna & Spin, isospin, color \\
+2: Spacetime symmetry & $\ro = 1$, $\et$ & Mixed ($\circlearrowleft + \to$) & Relatividad & Causal structure \\
+3: Conformal & $\ro = 1$, $(2,2)$ & Mixed (exp. dom.) & Escala/CFT & AdS/CFT \\
+4: Standard Model & $\ro = 1$, product & Product graph & SM gauge & SU(3) $\oplus$ SU(2) $\oplus$ U(1) \\
+\hline\hline
+\end{tabular}
+\caption{The five ontological levels of the evolution graph.}
+\end{table}
+
+\paragraph{Level 0: Pre-crystallization ($\ro < 1$).}
+\begin{equation}
+\text{Disconnected nodes } \cdot \quad \cdot \quad \cdot \quad \cdot
+\end{equation}
+No edges, no cycles, no symmetry. Pure potential. The SS-PEG ``level 0''---relational substrate before any structure crystallizes.
+
+\paragraph{Level 1: Internal symmetry ($\ro = 1$, compact target).}
+\begin{equation}
+\text{SU(2): } 3 \text{ edges, } 1 \text{ independent loop.}
+\end{equation}
+Spin. Isospin. Color. The first graph with holonomy---``physics appears when closing a cycle doesn't return the same state.''
+
+\paragraph{Level 2: Spacetime symmetry ($\ro = 1$, $\et$-preserving, indefinite target).}
+\begin{equation}
+\text{so(3,1): } 6 \text{ edges = 3 rotations + 3 boosts.}
+\end{equation}
+Special relativity. Causal structure. The graph acquires open edges---irreversible directions that define ``time.''
+
+\paragraph{Level 3: Conformal symmetry ($\ro = 1$, signature $(2,2)$).}
+\begin{equation}
+\text{su(2,2) $\cong$ so(4,2): } 15 \text{ edges = 7 compact + 8 non-compact.}
+\end{equation}
+Conformal field theory. Scale invariance. AdS/CFT. The graph is now ``more free than cyclic''---the non-compact directions outnumber the compact ones.
+
+\paragraph{Level 4: Standard Model (product of archetypes).}
+\begin{equation}
+\text{su(3) $\oplus$ su(2) $\oplus$ u(1): } 8 + 3 = 11 \text{ cycles + 1 strand.}
+\end{equation}
+The full gauge algebra. The graph has three independent subgraphs---SU(3) color cycles (Archetype I), SU(2) isospin cycles (Archetype I), and a U(1) hypercharge strand (Archetype III). The decoupling of the abelian strand and the independence of the non-abelian factors reflect their lack of mixing at tree level.
+
+\subsection{Transitions Between Levels}\label{sec:level_transitions}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c l l l}
+\hline\hline
+Transition & What changes & Graph operation & Physics \\
+\hline
+$0 \to 1$ & $\ro$ crosses 1 & Disconnected $\to$ cyclic & Gauge symmetry crystallizes \\
+$1 \to 2$ & $\et$ constraint + indef. target & Cycles + open edges & Spacetime emerges \\
+$2 \to 3$ & Larger $\et$, more generators & More open edges & Conformal structure \\
+SM product & Product of independent graphs & Disconnected union & SM gauge product group \\
+\hline\hline
+\end{tabular}
+\caption{Transitions between ontological levels.}
+\end{table}
+
+The critical observation: \textbf{transitions between levels are controlled by the three emergence minima} (generator count, parameterization constraint, Killing target). The graph topology is not a free parameter---it is uniquely determined by these inputs.
+
+\subsection{The Universe's Graph as Layered Composition}\label{sec:universe_graph}
+
+If the SS-PEG framework is correct, the universe's evolution graph looks like:
+
+\begin{equation}
+\begin{array}{c}
+\text{[su(3)$_{\mathrm{color}}$] \ \ [su(2)$_{\mathrm{isospin}}$] \ \ u(1)$_Y$} \\
+\text{Internal (Archetype I + III)} \\
+\downarrow \\
+\text{[so(3,1)]} \\
+\text{Spacetime (Archetype II)} \\
+\downarrow \\
+\text{[su(2,2)]} \\
+\text{Conformal (Archetype II extended)}
+\end{array}
+\end{equation}
+
+The internal gauge cycles (SU(3), SU(2)) and the abelian strand (U(1)) are layered on top of a spacetime backbone (so(3,1)) that is itself embedded in a larger conformal structure (su(2,2)). Each layer is a subgraph with its own cycle structure, and the layers are connected through shared generators (the embedding of algebras).
+
+\textbf{The universe's graph is not one archetype but a layered composition of all five}, with the archetype at each point determined by the local relational density, edge type, and geometric target. The graph is the universe's self-consistent algebraic skeleton---the minimum structure from which all physics follows.
+
+\subsection{Mapping to SS-PEG Ontological Levels}\label{sec:ontological_mapping}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c c}
+\hline\hline
+Ontological Level & Graph Feature & Experimental Evidence \\
+\hline
+0 (relational pure) & Vertices without edges & $\ro < 1$: generators exist but form no cycles \\
+1 (state space) & Edges + cycles & $\ro = 1$: algebraic closure crystallizes \\
+2 (effective projections) & Edge weights ($|\Kil_\la|$) & K$_{\mathrm{diag}}$ survey: Frobenius norm controls $|\Kil|$ \\
+3 (emergent dynamics) & Holonomies $U_\circlearrowleft$ & Structure constants determined from $\Kil$ alone \\
+4 (persistent entities) & Stable cycle patterns & $\hve$ as topological invariant \\
+5 (interactions) & Edge $\leftrightarrow$ edge couplings & Adjoint action: $\ad_a \circ \ad_b$ \\
+6 (observables) & Eigenvalue spectrum & Casimir operators, $\beta$-function coefficients \\
+\hline\hline
+\end{tabular}
+\caption{Mapping from ontological levels to graph features.}
+\end{table}

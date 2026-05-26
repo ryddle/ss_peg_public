@@ -1,0 +1,123 @@
+\section{Introduction}\label{sec:introduction}
+
+\subsection{The Problem of Fundamental Parameters}\label{sec:problem}
+
+The Standard Model of particle physics is the most successfully tested theory in the history of science. It predicts the outcomes of countless experiments with extraordinary precision. Yet it rests on a foundation of \textit{free parameters}: numbers that are measured and inserted by hand, with no explanation for their values or their hierarchy. There are 12 fermion masses (three charged leptons, six quarks, three neutrinos), three gauge coupling constants (electromagnetic, weak, strong), nine parameters in the quark mixing (CKM) matrix, four in the lepton mixing (PMNS) matrix, and the Higgs mass and vacuum expectation value---a total of 26+ independent numbers that define the theory. None of these values is predicted by the Standard Model itself. They are inputs, not outputs.
+
+This is not merely an aesthetic deficiency. The values of these parameters determine whether atoms can form, whether stars can burn, whether carbon can exist, whether life is possible. The fine-structure constant $\alpha \approx 1/137$ could easily have been $1/130$ or $1/145$; the quark masses span six orders of magnitude from the top quark ($172.5$ GeV) to the up quark ($2.16$ MeV); the CKM mixing angles range from $\theta_{13} \approx 0.2^\circ$ to $\theta_{12} \approx 13^\circ$. Why these values? Why this hierarchy? Why this specific gauge group?
+
+In the traditional paradigm, the answer is: \textit{there is no answer}. The parameters are what they are. The gauge group SU(3) $\times$ SU(2) $\times$ U(1) is postulated. The coupling constants are measured. The masses are fitted. The theory is complete only once all parameters have been inserted.
+
+This paper presents evidence for a radically different picture. We show that the complete set of Standard Model observables---masses, coupling constants, and flavor mixing parameters---can be derived from the \textbf{invariant spectral properties of a single mathematical object}: the Cartan--Weyl root graph of the gauge algebra $\su(2) \oplus \su(3)$. Five numbers extracted from the graph's adjacency matrix determine 73 independent physical observables with sub-percent precision, with zero free parameters.
+
+\subsection{The SS-PEG Trilogy: Context and Motivation}\label{sec:trilogy}
+
+This work is the third and culminating paper in the SS-PEG (Space of States and Projections of the Evolution Graph) research program. The trilogy follows a logical progression:
+
+\begin{itemize}
+\item \textbf{Paper I} (``Lie Algebras from the Killing Metric'') demonstrated that simple compact Lie algebras---the mathematical structure underlying all gauge symmetries---emerge from a variational principle on the Killing metric, without imposing any algebraic axioms. Starting from random matrices with no algebraic structure, the minimization of Killing tension $T_K = \|K - K_{\mathrm{target}}\|^2$ produces exact Lie algebras with 100\% success rate across all classical and exceptional families (SU($N$), SO($N$), Sp($2N$), G$_2$, F$_4$, E$_6$) and non-compact families (sl(2,$\mathbb{R}$), so(3,1), su(2,2)). The algebraic structure (commutation relations, Jacobi identities, Casimir operators) emerges automatically~\cite{paper1_killing_algebra}.
+
+\item \textbf{Paper II} (``Graph Topology \& Spectral Analysis'') established the graph-topological interpretation of the emergent algebras. The Killing eigenvalue spectrum classifies each generator's edge as cyclic ($K < 0$), free ($K > 0$), or decoupled ($K = 0$), yielding five graph archetypes. The Ramanujan property---optimal spectral gap---is tested for all 37 emergent algebras, with 19/37 satisfying the property~\cite{lubotzky1988ramanujan,margulis1975explicit}. The Ihara zeta function and non-abelian holonomy are computed, establishing the connection between spectral quality and quantum chaos~\cite{ihara1966discrete,west2025quantum}. The ``triple balance'' (aggregation, expansion, entropy) provides a tensegrity interpretation of the emergent graph structure~\cite{paper2_graph_topology}.
+\end{itemize}
+
+\textbf{Paper III} (this paper) answers the central question: \textit{what numerical values does the graph produce?} The Cartan--Weyl root graph of $\su(2) \oplus \su(3)$---the gauge algebra of the Standard Model---encodes the values of all fundamental coupling constants, mass ratios, CKM mixing parameters, PMNS mixing parameters, and the neutrino mass spectrum. The five building blocks extracted from this graph are:
+
+\begin{equation}
+\Rtwo = \frac{1}{2}, \qquad
+\Rthree = \frac{\sqrt{57}-3}{2\sqrt{17}} \approx 0.5523, \qquad
+\REE = \frac{1}{\sqrt{2}} \approx 0.7071, \qquad
+\hvtw = 2, \qquad
+\hvth = 3.
+\end{equation}
+
+These are not adjustable parameters. They are exact algebraic quantities determined uniquely by the graph structure of the $A_1 \oplus A_2$ root system. Every physical prediction follows from these five numbers through power-law formulas of the form $\prod_i \mathcal{B}_i^{n_i}$ where $\mathcal{B}_i$ are the building blocks and $n_i \in \mathbb{Z}$.
+
+\subsection{Main Results}\label{sec:results}
+
+The principal findings of this paper are:
+
+\begin{enumerate}[label=\arabic*.]
+
+\item \textbf{Mass lattice formula.} Every Standard Model particle $f$ with mass $m_f$ occupies a point $(p_f, q_f, r_f) \in \frac{1}{2}\mathbb{Z}^3$ on a three-dimensional lattice defined by the graph's spectral invariants:
+\begin{equation}
+\ln\frac{m_f}{m_e} = p_f \ln 2 + q_f \ln\Rthree + r_f \ln 3.
+\end{equation}
+All 12 particles (three charged leptons, six quarks, three bosons) fall on half-integer coordinates with mean error $0.710\%$ and maximum error $1.348\%$ (top quark). The electron occupies the origin $(0,0,0)$. The same formula predicts both fermion and boson masses from the same lattice.
+
+\item \textbf{Dimensional reduction.} A rigorous application of Baker's theorem on linear forms in logarithms proves that the five-dimensional formula space collapses to three dimensions~\cite{baker1966linear}: $\ln 2$, $\ln\Rthree$, and $\ln 3$ are $\mathbb{Q}$-linearly independent. The five building blocks $\{\Rtwo, \Rthree, \REE, \hvth, \hvtw\}$ satisfy two algebraic relations ($\Rtwo = 2^{-1}$, $\REE = 2^{-1/2}$, $\hvtw = 2$ are all powers of 2; $\hvth = 3$). The effective formula space is $9^5 = 59{,}049$ nominal formulas reduced to 3,321 unique values.
+
+\item \textbf{Parabolic generation curves.} Within each fermion sector $s \in \{\ell, u, d\}$, the three generations lie on a parabolic curve in the lattice:
+\begin{equation}
+\xF_s(g) = \aF_s \, g^2 + \bF_s \, g + \cF_s, \qquad g \in \{1, 2, 3\}.
+\end{equation}
+The curvature vectors $\aF_s$, velocity vectors $\bF_s$, and offset vectors $\cF_s$ are exact rational numbers (denominators in $\{1, 2, 4\}$). The lepton and up sectors share identical $q$-curvature ($a_q^{(\ell)} = a_q^{(u)} = \frac{1}{2}$), while the down sector has $a_q^{(d)} = 0$ (linear evolution).
+
+\item \textbf{Flatness permutation principle.} Each sector's parabolic mass curve has a turning point (flat coordinate) in exactly one lattice direction between generations 2 and 3: leptons in $r$, up quarks in $q$, down quarks in $p$. These flat coordinates form a permutation matrix across $\{p, q, r\}$. Applied to 2,500 candidate lattice configurations at 2\% tolerance, exactly \textbf{one configuration survives}---the physical reality. The flatness condition $b_{k_{\mathrm{flat}}} = -5\,a_{k_{\mathrm{flat}}}$ is universal across all sectors.
+
+\item \textbf{Complete generating function.} The 36 fermion lattice coordinates (3 sectors $\times$ 3 generations $\times$ 3 coordinates) are given exactly by a generating function $F(2I_3, N_c, g)$ with nine rational coefficient functions:
+\begin{equation}
+x_k(g, s) = a_k(s) \cdot g^2 + b_k(s) \cdot g + c_k(s),
+\end{equation}
+where each coefficient is a linear function of the quantum numbers $(2I_3, N_c)$. The 27 raw parameters collapse to zero free parameters through six structural constraints: electron origin, flatness, $q$-unification, $(2I_3 - N_c)$ reduction, quantum-number ansatz, and half-integer quantization.
+
+\item \textbf{Transition matrix and 2-adic structure.} The generation step operator $\Delta_{12} = x(2) - x(1)$ satisfies $\Nmat = 2\Delta_{12}$, where $\Nmat$ is the transition matrix with integer entries. All entries factor as $n = \pm 2^v \cdot 3^b$ with $v \geq 0$, $b \in \{0, 1\}$. The six free entries are pure powers of 2. The Smith normal form is $\mathrm{diag}(1, 2, 4) = (2^0, 2^1, 2^2)$, with consecutive powers of 2 reflecting the generation hierarchy.
+
+\item \textbf{CKM mixing.} All four independent CKM parameters emerge from the same five building blocks: $\sin\theta_{12} = 0.2248$ (exp.\ $0.2250$, error $0.089\%$), $\sin\theta_{23} = 1/24$ (exp.\ $0.04182$, error $0.367\%$), $\sin\theta_{13} = 0.003654$ (exp.\ $0.003660$, error $0.155\%$), $\delta_{CP}/\pi = 0.3650$ (exp.\ $0.3641$, error $0.230\%$). Twenty-three of 24 derived quantities match at sub-percent precision.
+
+\item \textbf{Exact Jarlskog invariant.} The CP-violating Jarlskog invariant emerges as a perfect sixth power~\cite{jarlskog1985}:
+\begin{equation}
+J_{CP} = \left(\frac{\Rtwo \cdot \REE}{\hvtw}\right)^6 = \left(\frac{1}{4\sqrt{2}}\right)^6 = \frac{1}{32768} = 2^{-15} = 3.0518 \times 10^{-5}.
+\end{equation}
+Experimental value: $3.0519 \times 10^{-5}$. \textbf{Error: $0.003\%$---essentially exact.} A systematic search over 31 representations reveals every one reduces to $2^{-15}$; no irrational ($\Rthree$-dependent) solution exists near $J_{CP}$. The graph autonomously excludes the strong sector from CP violation.
+
+\item \textbf{PMNS mixing.} All 28 PMNS-derived quantities match at sub-percent precision~\cite{maki1962,pontecorvo1967}. $\sin\theta_{23} = \frac{9}{2}\Rthree^3$ is reproduced at $0.000\%$. $\sin^2\theta_{13} = \REE^{11} = 2^{-11/2}$ matches at $0.204\%$. The binary connection $J_{CP}^{\mathrm{CKM}} = \REE^{30}$ and $\sin^2\theta_{13}^{\mathrm{PMNS}} = \REE^{11}$ links quark and lepton CP physics through the SU(2) edge-edge subgraph.
+
+\item \textbf{Neutrino mass spectrum as genuine prediction.} The generating function $F(2I_3, N_c, g)$ was calibrated on three charged-fermion sectors (leptons, up quarks, down quarks). Neutrinos occupy the \textbf{fourth sector} $(2I_3 = +1, N_c = 1)$, never used in the fit. Evaluating $F$ at these quantum numbers is a genuine extrapolation: Dirac masses $m_{D_1} = 233$ keV, $m_{D_2} = 1.42$ GeV, $m_{D_3} = 72.7$ GeV. Seesaw extraction yields Normal Ordering, $m_1 \approx 2.1$ meV, $\Sigma \approx 61$ meV, and Majorana mass ratio $M_{R_3}/M_{R_2} \approx 48.6$.
+
+\item \textbf{Boson sector.} The W, Z, and Higgs bosons fall on the same 3D lattice as the fermions, with mean error $0.742\%$ and all coordinates exactly half-integer. The boson trajectory is the unique sector with mass inversion ($A > 0$) and minimum kinetic action ($S_K = 107/12$). The Weinberg angle emerges as a lattice displacement: $\cos\theta_W = \frac{9\Rthree}{4\sqrt{2}}$ (error $0.44^\circ$ from PDG). The Higgs mechanism is reinterpreted as coordinate activation: the photon is absent from the lattice because $m = 0$ requires coordinates $\to -\infty$.
+
+\item \textbf{Binary/Ternary frontier.} A systematic scan of 65 observables over all $R_{EE}$-power tower combinations reveals a sharp structural divide: two observables ($|V_{tb}| = R_{EE}^0$ at $0.088\%$, $J_{CP} = R_{EE}^{30}$ at $0.485\%$) are pure powers of $R_{EE}$ at sub-$0.5\%$ precision; $\sin^2\theta_{13} \approx R_{EE}^{11}$ is near-binary at $0.68\%$; and 66 composite relations are binary at sub-percent precision, revealing hidden SU(2) constraints invisible when observables are analyzed individually.
+
+\item \textbf{Statistical significance.} The building-block randomization test ($10^7$ trials) finds zero successes: $P < 10^{-7}$ ($>5.2\sigma$) for the boson sector alone. Combined across all 73 observables, the projected significance exceeds $12\sigma$ with Bayes factor $> 10^{25}$ (decisive). The physical configuration is uniquely selected from 262,144 degrees of freedom through the constraint chain: Smith form ($\to 3{,}056$) $\to$ sign rule ($\to 6$) $\to$ trace maximization ($\to 1$).
+
+\end{enumerate}
+
+\subsection{Methodology: Inverse Problem Solving}\label{sec:methodology}
+
+It is essential to state openly that this paper documents a program of \textbf{inverse problem solving}. The methodology followed two distinct phases:
+
+\textbf{Phase I: Numerical search.} An exhaustive search over all power-law formulas of the five building blocks found that 72 of 73 Standard Model observables match within 1\% error. The search space comprised $9^5 = 59{,}049$ candidate formulas per observable (exponents in $[-4, +4]$), with extended searches over $13^5 = 371{,}293$ formulas for small quantities. For CKM parameters, 102 million formulas were evaluated across four complementary search sweeps. The matching was empirical---a discovery of numerical coincidence.
+
+\textbf{Phase II: Structural analysis.} After the numerical matches were found, we searched for structural patterns that explain \textit{why} these numbers work. This yielded: the dimensional reduction theorem (Baker's theorem), the flatness permutation principle (1 of 2,500 configurations), the generating function $F(2I_3, N_c, g)$, the 2-adic transition matrix structure, the Smith normal form selection, and the trace maximization principle. Seven independent selection rules (S1--S6b) were discovered, which then collapsed to \textbf{one theorem plus six consequences}---the generating function fixes all lattice coordinates, and the remaining rules are verifiable consequences.
+
+The \textbf{open problem}---the goal of the SS-PEG program---is to find the forward derivation: \textit{what principle connects $(2I_3, N_c, g)$ to $(p, q, r)$ given only the Cartan--Weyl graph?} Three research directions are proposed in the main text (cross-sector orthogonality, binary encoding minimization, spectral graph principle) and detailed in the open tasks.
+
+This is inverse problem solving in the tradition of Kepler (discovering elliptical orbits from Tycho's data), Dirac (predicting the positron from negative-energy solutions), and Wigner (finding symmetry from spectral patterns). The data is there. The principle is waiting.
+
+\subsection{Paper Organization}\label{sec:organization}
+
+This paper is organized as follows. Section~\ref{sec:theoretical_framework} develops the theoretical framework: the Cartan--Weyl root graph of $\su(2) \oplus \su(3)$, the five spectral invariants (building blocks), the dimensional reduction from 5D to 3D via Baker's theorem, and the topological interpretation of particles as cycles in the graph.
+
+Section~\ref{sec:coupling_constants} presents the coupling constant predictions: the master formula $\alpha_X = e^{S_X}/(4\pi)$, the three gauge couplings with sub-percent precision, the Weinberg angle, orthogonality in spectral space, and uniqueness among all $\su(a) \times \su(b)$ pairs.
+
+Section~\ref{sec:mass_spectrum} is the core of the paper. It presents the mass lattice formula, the 12-particle lattice with coordinates and predicted masses, the parabolic generation curves, the flatness permutation principle, the complete generating function $F(2I_3, N_c, g)$, the transition matrix $\Nmat$ and its 2-adic structure, and the seven selection rules that collapse from 27 parameters to zero free parameters.
+
+Section~\ref{sec:ckm_mixing} treats the CKM quark-mixing matrix: the four independent parameters, 23/24 derived quantities at sub-percent precision, the exact Jarlskog invariant $J_{CP} = 2^{-15}$, and the structural analysis of why the sixth power emerges.
+
+Section~\ref{sec:pmns_mixing} treats the PMNS lepton-mixing matrix: $\sin\theta_{23}$ exact, $\sin^2\theta_{13} = R_{EE}^{11}$, 28/28 quantities at sub-percent precision, and the binary connection to the CKM sector.
+
+Section~\ref{sec:neutrino_spectrum} presents the neutrino mass spectrum as a genuine prediction (extrapolation to an unseen sector): Dirac masses, seesaw extraction, Normal Ordering, $m_1 \approx 2.1$ meV, $\Sigma \approx 61$ meV, and the Majorana mass ratio.
+
+Section~\ref{sec:binary_frontier} maps the $R_{EE}$-power tower across 65 observables, revealing the binary/ternary frontier: two pure-binary observables, one near-binary, and 66 composite binary relations.
+
+Section~\ref{sec:boson_sector} treats the boson sector: W, Z, H on the same lattice, the Weinberg angle as lattice displacement, the Higgs mechanism as coordinate activation, and the structural hybridization of the boson trajectory.
+
+Section~\ref{sec:hadron_limit} presents the negative result for hadron masses: 31/31 hadrons fit the half-integer lattice (mean $0.017\%$), but the Monte Carlo test yields $p = 0.705$, indicating that the lattice captures Higgs-sector masses, not QCD binding energy.
+
+Section~\ref{sec:statistical_significance} consolidates the statistical evidence: the building-block randomization test, flatness selection, trace maximization, and the projected $>12\sigma$ significance.
+
+Section~\ref{sec:conclusions} summarizes the ten foundational claims of the SS-PEG program, presents five falsifiable observational predictions, discusses the open problems (three research directions), and reflects on the methodological implications of inverse problem solving in physics.
+
+\subsection{Notation and Conventions}\label{sec:notation}
+
+Throughout this paper, we use the following conventions. The five building blocks are denoted $\Rtwo$, $\Rthree$, $\REE$, $\hvtw$, and $\hvth$. The mass lattice coordinates are $(p, q, r) \in \frac{1}{2}\mathbb{Z}^3$. The generating function is $F(2I_3, N_c, g)$ with coefficient functions $a_k, b_k, c_k$ for $k \in \{p, q, r\}$. The transition matrix is $\Nmat$ with entries $n_{sk}$. The selection rules are labeled S1 through S6b. PDG 2024 values are used for all experimental comparisons. NuFIT 5.2 is used for neutrino oscillation parameters. We use natural units $\hbar = c = 1$.

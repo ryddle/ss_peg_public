@@ -49,16 +49,6 @@ podcasts/
 # External tool outputs
 graphify-out/
 
-# Separate projects
-"Fast Radio Bursts and Cosmic Voids - A Cross-Correlation Analysis"/
-
-# Paper versions (historical)
-paper_ss-peg/projects_v00*/
-paper_ss-peg/projects_v01*/
-
-# Paper NN (separate publication)
-paper_nn/
-
 # Working documents (not scientific)
 ACTION_PLAN_*.md
 ARTICULO_DIVULGATIVO.md

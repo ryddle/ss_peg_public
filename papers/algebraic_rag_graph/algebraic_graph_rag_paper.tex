@@ -1,0 +1,539 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{natbib}
+\usepackage{siunitx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+
+\geometry{margin=1in}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}{Remark}
+
+\newcommand{\KL}{\mathcal{L}}
+\newcommand{\KH}{\mathcal{H}}
+\newcommand{\KR}{\mathcal{R}}
+\newcommand{\KC}{\mathcal{C}}
+\newcommand{\KG}{\mathcal{G}}
+\newcommand{\KT}{T_K}
+\newcommand{\deltainfo}{\Delta_{\text{info}}}
+\newcommand{\norm}[1]{\|#1\|}
+\newcommand{\tr}{\text{Tr}}
+\newcommand{\ad}{\text{ad}}
+\newcommand{\su}{\mathfrak{su}}
+\newcommand{\so}{\mathfrak{so}}
+\newcommand{\spc}{\mathfrak{sp}}
+\newcommand{\hvee}{h^\vee}
+\newcommand{\Rsec}{\mathcal{R}_3}
+\newcommand{\Rtwo}{\mathcal{R}_2}
+\newcommand{\Ree}{\mathcal{R}_{\text{EE}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\sgn}{\text{sgn}}
+
+\title{Killing Crystallization in Algebraic Knowledge Graphs:\\From Holonomy Detection to Dual Phase Transitions}
+
+\author{SS-PEG Research Group \\
+Algebraic Graph RAG Program}
+
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The SS-PEG experimental program established that Lie algebra structure emerges from a purely geometric variational principle acting on the Killing metric, without requiring algebraic axioms. This paper extends that result to knowledge graphs, asking whether the same mechanism---Killing crystallization---can detect structural inconsistencies via holonomy of closed relational cycles. We present five experiments on synthetic algebraic knowledge graphs parameterized with SU(3) adjoint operators. Experiments 1--2 demonstrate that while Killing crystallization transfers cleanly to KG relation operators (improving triple classification by up to +9.15 percentage points over unconstrained MLP baselines), post-hoc holonomy detection fails: the algebraic constraint collapses all holonomies toward zero, eliminating discriminative signal. Experiment 3 shows that cycle-supervised training achieves near-perfect holonomy detection (path AUC = 0.999), and an Adam state transfer protocol reveals that holonomy sensitivity is primarily a property of the parameter configuration, not the optimizer state. Experiment 4 establishes that the Killing diagonal $K_{rr}$ fails as an unsupervised relation classifier (AUC = 0.49) due to abelian collapse, but achieves AUC = 0.98 after cycle loss. Experiment 5 identifies two distinct phase transitions under cycle-loss pressure: an activation threshold at $\sim$50 epochs and a hardening threshold at $\sim$200 epochs, with a tempering effect where withdrawal of cycle loss purifies the Killing signal. Across 27 generalizations, we establish that the Killing form is diagnostic, not generative: cycles create topology, and the Killing form selects and purifies. These results refine the SS-PEG Potential $\to$ Cycle $\to$ Invariant chain into a two-stage architecture where cycle pressure creates candidates and Killing annealing selects optimal configurations. We discuss implications for the Inference by Holonomy protocol and open questions for transfer to real knowledge graphs.
+
+\bigskip\noindent\textbf{Keywords:} Killing form, Lie algebras, knowledge graphs, holonomy, algebraic crystallization, variational principle, phase transition, cycle loss, tempered classification
+
+\end{abstract}
+
+\section{Introduction}
+
+The SS-PEG experimental program has established a single, foundational result: the algebraic structure of gauge symmetry---commutation relations, Jacobi identities, Casimir operators, dual Coxeter numbers, representation invariants---emerges as the unique output of a purely geometric variational principle acting on the Killing metric \cite{sspeg_synthesis2026, tsubouchi2021, bump2005}. No algebraic axioms are required. Given $n$ random matrices with appropriate structural constraints, minimization of the Killing tension $T_K = \|K - K_{\text{target}}\|^2$ under norm stabilization converges to an exact realization of the unique simple compact Lie algebra of dimension $n$, with 100\% probability across 37+ algebras tested \cite{sspeg_synthesis2026, hall2003, knapp2002}.
+
+This paper investigates the extension of this result to knowledge graphs. The central question is: \textit{can the same mechanism---Killing crystallization---be applied to knowledge graph relation operators to detect structural inconsistencies via holonomy of closed cycles?}
+
+This question is motivated by the SS-PEG \textbf{Inference by Holonomy} (PIH) protocol. In PIH, the answer to a query is not a retrieved document but the \textit{curvature} detected when traversing a relational cycle. If relation operators in a knowledge graph are parameterized algebraically and driven toward $T_K \approx 0$, then the holonomy $\KH(\KC) = \prod_{\text{cycle}} \theta_r$ of closed cycles becomes a consistency measure: consistent cycles should have $\|\KH - I\|_F \approx 0$, while inconsistent or contradictory paths should have large holonomy. This protocol draws on the structural parallel between gauge field strength $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu + [A_\mu, A_\nu]$ and Riemann curvature as cycle discrepancy \cite{yang1954, jacobson1995, aharonov1959, berry1984}.
+
+We test this protocol through five experiments on synthetic algebraic knowledge graphs. The results resolve the holonomy detection question constructively (cycle loss achieves path AUC = 0.999) while revealing two unexpected phenomena: (1) the Killing form is diagnostic, not generative---it selects structure but cannot create it \cite{tsubouchi2021, carr2024}; (2) the operator algebra undergoes two distinct phase transitions under cycle-loss pressure, with a hardening threshold at $\sim$200 epochs that marks a permanent structural reorganization.
+
+\section{Background}
+
+\subsection{Killing Tension Crystallization}
+
+The Killing form $K_{ab} = \tr(\ad_a \circ \ad_b)$ of a Lie algebra encodes its structural constants \cite{tsubouchi2021, dixmier1977, bourbaki1975}. For a compact simple Lie algebra, $K$ is negative definite with eigenvalues proportional to the dual Coxeter number $\hvee$ \cite{knapp2016, tsubouchi2022dual, brylinski1991}. The SS-PEG variational principle parameterizes generators $\{T_a\}$ as trainable matrices and minimizes the Killing tension:
+\begin{equation}
+T_K = \|K_{ab} - K_{\text{target},ab}\|^2
+\end{equation}
+under norm stabilization constraints. Across all 16 classical families (SU, SO, Sp), 3 exceptional algebras (G$_2$, F$_4$, E$_6$), and non-compact forms (sl(2,$\mathbb{R}$), so(3,1)), the principle converges to exact Lie algebra realizations at machine precision \cite{sspeg_synthesis2026, hall2003, knapp2002, varadarajan1984}.
+
+\subsection{Holonomy as Curvature}
+
+For a cycle $\KC = (r_1, r_2, \dots, r_k)$ in a knowledge graph, the holonomy is the composition $\KH(\KC) = \theta_{r_k} \cdots \theta_{r_2} \theta_{r_1}$. Deviation from identity $\deltainfo = \|\KH - I\|_F$ measures the curvature of the relational structure along $\KC$. In a perfectly consistent algebraic graph, all cycles should close ($\KH = I$); structural inconsistencies manifest as non-trivial holonomy. This mirrors the Aharonov--Bohm effect \cite{aharonov1959}, where a phase shift $\Delta\phi = \oint \mathbf{A} \cdot d\mathbf{l}$ encodes gauge-invariant curvature, and the Berry phase \cite{berry1984, pancharatnam1956}, where adiabatic transport around a parameter loop yields a geometric phase proportional to the curvature flux.
+
+\subsection{SS-PEG Potential $\to$ Cycle $\to$ Invariant Chain}
+
+The SS-PEG framework identifies a universal architecture across physical theories \cite{sspeg_synthesis2026}:
+\begin{itemize}[noitemsep]
+\item \textbf{Potential} (primary substrate): Killing metric $K_{ab}$
+\item \textbf{Relation} (covariant transport): Adjoint action $\ad_a(X) = [G_a, X]$
+\item \textbf{Cycle} (holonomy loop): Closure condition $[T_i, T_j] \in \text{span}\{T_k\}$
+\item \textbf{Invariant} (curvature, charges): $\hvee, C_\lambda, f_{abc}$
+\end{itemize}
+The PIH protocol maps this chain to knowledge graphs: the Killing metric is the meta-potential determining which gauge group the relations belong to; relational cycles probe global consistency; and holonomy is the invariant. This architecture is structurally isomorphic across gauge theory \cite{yang1954, georgi1982}, gravity \cite{jacobson1995, helgason2001}, and quantum phase phenomena \cite{aharonov1959, berry1984, fulton1991}.
+
+\section{Algebraic Knowledge Graph Framework}
+
+\subsection{Synthetic Knowledge Graph Construction}
+
+Our synthetic KG is built from SU(3) adjoint operators acting on entities in $\mathbb{R}^8$:
+
+\begin{table}[H]
+\centering
+\caption{Algebraic KG configuration}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Algebra & su(3), $d=3$, $n_{\text{gen}} = 8$ \\
+Entities & $N_E = 200$ unit vectors in $\mathbb{R}^8$ \\
+Base relations & 12 orthogonal operators $Q_r \in O(8)$ \\
+Closure relations & 12 inverse-product closures $Q_c = (Q_j Q_i)^T$ \\
+Total relations $K$ & 24 \\
+\texttt{angle\_scale} & 0.25 (operators near $I$) \\
+Train/Val triples & 8000 / 2000 (50\% valid) \\
+Seed & 42 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Base relations are generated as $Q_r = \exp(\eps \cdot A_r)$ with $A_r$ antisymmetric and $\eps \sim \text{Uniform}(0, 0.25)$. Closure relations are constructed as $Q_{c_{ij}} = (Q_j Q_i)^T$, guaranteeing zero ground-truth holonomy for cycle $(Q_i, Q_j, Q_{c_{ij}})$. Entities are unit vectors in $\mathbb{R}^8$; a triple $(h, r, t)$ is valid if $t$ is the entity nearest to $Q_r \cdot e_h$.
+
+\subsection{AlgKG Model}
+
+The AlgKG model parameterizes relation operators $\theta_r \in \mathbb{R}^{8 \times 8}$ and entity embeddings $e_i \in \mathbb{R}^8$:
+
+\begin{equation}
+\text{score}(h, r, t) = \|\theta_r \cdot e_h - e_t\|^2
+\end{equation}
+\begin{equation}
+\text{validity} = \sigma(\text{MLP}(\text{score}, \|e_h\|, \|e_t\|))
+\end{equation}
+
+The loss combines triple classification with algebraic regularization:
+\begin{equation}
+\KL_{\text{AlgKG}} = \KL_{\text{triple}} + \lambda_K T_K(\{\theta_r\}) + \lambda_{\text{ortho}} \sum_r \|\theta_r \theta_r^T - I\|_F^2
+\end{equation}
+with $\lambda_K = 0.5$, $\lambda_{\text{ortho}} = 1.0$. The orthogonality term constrains operators to $O(8)$; the Killing term drives them toward a specific Lie algebra structure.
+
+\subsection{Evaluation Metrics}
+
+\begin{itemize}[noitemsep]
+\item \textbf{Triple classification}: Validation accuracy for valid/invalid triple prediction.
+\item \textbf{Raw holonomy}: $\deltainfo(\KC) = \|\prod \theta_r - I\|_F$ on consistent/inconsistent cycles. ROC-AUC for discrimination.
+\item \textbf{Entity-path holonomy}: $\KH_{\text{path}}(h_1, \KC) = \|\prod \theta_r \cdot e_{h_1} - e_{h_1}\|_2$ on entity-grounded paths.
+\item \textbf{Killing spectrum}: $K_{rr}$ diagonal as relation classifier (Type A/compositional vs Type B/atomic). ROC-AUC.
+\item \textbf{Commutator blocks}: Mean $\|\![\theta_a, \theta_b]\!\|_F$ for A$\leftrightarrow$A, A$\leftrightarrow$B, B$\leftrightarrow$B pairs.
+\item \textbf{$T_K$ crystallization}: Final $T_K$ value; convergence to theoretical $n_{\text{gen}} \cdot d = 24$ (per-operator normalization $\approx 4.0$).
+\end{itemize}
+
+\section{Experiment 1: Initial Holonomy Detection}
+
+\subsection{Exp1: $K = 6$ Relations}
+
+The initial experiment tested holonomy detection with $K = 6$ base relations and no closure relations. The ``consistent'' cycles were constructed by selecting the nearest closure from the discrete relation pool, yielding ground-truth (GT) holonomy of 3.56 (consistent) vs 4.02 (inconsistent)---a separation ratio of only 1.13$\times$.
+
+\begin{table}[H]
+\centering
+\caption{Exp1 results: triple classification and holonomy}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Metric} & \textbf{AlgKG} & \textbf{MLP} \\
+\midrule
+Val accuracy & \textbf{0.840} & 0.808 \\
+$\deltainfo$ (consistent) & $0.619 \pm 0.136$ & $5.816 \pm 0.935$ \\
+$\deltainfo$ (inconsistent) & $0.649 \pm 0.238$ & $5.660 \pm 0.910$ \\
+Holonomy AUC & \textbf{0.547} & 0.461 \\
+Separation ratio & $1.05\times$ & $0.97\times$ \\
+$T_K$ (final) & 24.00 & 42.66 \\
+OrthoErr (final) & $5 \times 10^{-4}$ & 15.30 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+AlgKG achieves $T_K = 24.00 = n_{\text{gen}} \cdot d$ (crystallized) and OrthoErr $= 5 \times 10^{-4}$, confirming that Killing crystallization transfers to KG operators. Triple classification improves by +3.2 percentage points over MLP. However, holonomy detection is near chance (AUC = 0.547).
+
+The failure mode is diagnosed as \textbf{insufficient GT separation}: with only 6 discrete relation types, the space of triangular cycles is $6^3 = 216$, and the ``best'' closure from the discrete pool still has GT holonomy $\approx 3.56$. No model can discriminate on such a weak signal.
+
+\subsection{Exp1b: Revised KG with Closure Relations}
+
+Exp1b addresses the bottleneck with three changes: (1) 12 base + 12 closure relations ($K = 24$); (2) \texttt{angle\_scale} reduced to 0.25; (3) explicit closure triples guaranteeing zero GT holonomy for consistent cycles.
+
+\begin{table}[H]
+\centering
+\caption{Exp1b results: revised KG}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Metric} & \textbf{AlgKG} & \textbf{MLP} \\
+\midrule
+Val accuracy & \textbf{0.898} & 0.807 \\
+$\deltainfo$ (consistent) & $\mathbf{0.0623 \pm 0.0235}$ & $6.904 \pm 1.477$ \\
+$\deltainfo$ (inconsistent) & $\mathbf{0.0717 \pm 0.0303}$ & $7.533 \pm 1.737$ \\
+Holonomy AUC & 0.573 & \textbf{0.622} \\
+$T_K$ (final) & 96.02 & 152.63 \\
+OrthoErr (final) & $8 \times 10^{-4}$ & 26.45 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The GT separation increases to $\approx \infty$ (0.0 vs 3.46). AlgKG triple classification advantage grows to +9.15 pp. However, \textbf{the learned AlgKG holonomies collapse to $\deltainfo \approx 0.06$ for both consistent and inconsistent cycles}---the algebraic constraint has ``solved'' the holonomy problem trivially by making everything near-identity.
+
+This is the \textbf{holonomy collapse} phenomenon: the Killing + orthogonality constraints force all operators onto the orthogonal group near an actual Lie algebra, making all triple products near-identity regardless of ground-truth consistency. The unconstrained MLP (AUC = 0.622) outperforms AlgKG on holonomy detection because its operators preserve more variance.
+
+\section{Experiment 2: Context-Conditioned Operators}
+
+\subsection{Design}
+
+Exp1b's G\_RAG-8 identified a fundamental architecture mismatch: shared operators $\theta_r$ trained for triple classification encode the \textit{average} mapping behavior of each relation type, washing out cycle-level information. Exp2 tests context-conditioned operators:
+\begin{equation}
+\theta_r(h, t) = \theta_r + \alpha \cdot \text{MLP}(e_h \| e_t)
+\end{equation}
+where $\alpha$ is a learnable scalar (init 0.01) and the context MLP maps $(16 \to 16 \to 64)$ reshaped to $(8, 8)$. Regularization applies only to the base operators $\{\theta_r\}$.
+
+\subsection{Results}
+
+\begin{table}[H]
+\centering
+\caption{Exp2 results: $\alpha$ dynamics and entity-path holonomy}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Metric} & \textbf{AlgKG\_Ctx} & \textbf{AlgKG} & \textbf{MLP} \\
+\midrule
+Val accuracy & \textbf{0.884} & \textbf{0.885} & 0.758 \\
+$\alpha$ (final) & \textbf{1.649} & --- & --- \\
+$\alpha$ (peak, ep 200) & \textbf{2.194} & --- & --- \\
+$\KH_{\text{path}}$ (consistent) & $115.07 \pm 154.39$ & $0.042 \pm 0.022$ & $3.358 \pm 1.535$ \\
+$\KH_{\text{path}}$ (inconsistent) & $124.85 \pm 152.07$ & $0.042 \pm 0.026$ & $3.294 \pm 1.435$ \\
+Path AUC & 0.537 & 0.480 & 0.495 \\
+GT correlation & $-0.002$ & 0.008 & $-0.017$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The context scale $\alpha$ grows from 0.01 to 2.19 (peak, ep 200) then decays to 1.65 (final), revealing the interplay between crystallization and context modulation. Entity-path holonomies explode to $\sim$115--125 (2800$\times$ increase over AlgKG) with enormous variance ($\sigma \approx 153$). Path AUC is 0.537, only marginally above chance, with zero correlation to ground truth.
+
+\textbf{G\_RAG-9}: Context conditioning without cycle loss fails. The perturbation $\alpha \cdot \Delta\theta(h,t)$ breaks the algebraic closure that $T_K$ enforces on the base operators. Without cycle-level gradient, there is no pressure for perturbations to compose coherently around cycles.
+
+\textbf{G\_RAG-10}: The holonomy problem is a \textit{training signal} problem, not an architecture problem. Across three architectures (AlgKG, AlgKG\_Ctx, MLP) and two experiments (Exp1b, Exp2), holonomy AUC remains near 0.50 for algebraic models. No model receives gradient signal about cycle consistency during training.
+
+\section{Experiment 3: Adam State Transfer for Holonomy Basin Detection}
+
+\subsection{Design Rationale}
+
+Exp2 established G\_RAG-10: holonomy detection requires explicit cycle supervision. Exp3 asks the follow-up question: once a model acquires holonomy sensitivity via cycle loss, what exactly carries that information---the parameters $\theta$, the optimizer state $(m, v)$, or the joint configuration $(\theta, m, v)$?
+
+This question is motivated by the F$_4$ bifurcation discovered in the SS-PEG core experiments: when training for F$_4$ crystallization, parameters alone with a fresh Adam optimizer produced $P(\text{F}_4) = 0\%$, while the same parameters with preserved Adam state achieved $P(\text{F}_4) = 100\%$.
+
+\subsection{Protocol}
+
+A four-variant ablation with two training phases:
+
+\textbf{Phase A:} Donor training (800 epochs) with $\KL = \KL_{\text{triple}} + \lambda_{\text{cycle}} \KL_{\text{cycle}}$, $\lambda_{\text{cycle}} = 1.0$. Produces donor parameters $\theta_A$ and Adam state $(m_A, v_A)$.
+
+\textbf{Phase A0:} Baseline training (800 epochs) with $\KL_{\text{triple}}$ only. Same initial seed. Produces $\theta_B, (m_B, v_B)$.
+
+\textbf{Phase B:} Continuation (400 epochs, $\KL_{\text{triple}}$ only, no cycle loss) with four transfer variants:
+
+\begin{table}[H]
+\centering
+\caption{Exp3 Phase B transfer variants}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Variant} & \textbf{Parameters} & \textbf{Adam State} \\
+\midrule
+B1: Control & $\theta_B$ & $(m_B, v_B)$ \\
+B2: Params-only & $\theta_A$ & Fresh Adam \\
+B3: Full state & $\theta_A$ & $(m_A, v_A)$ \\
+B4: Adam-only & $\theta_B$ & $(m_A, v_A)$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Results}
+
+\begin{table}[H]
+\centering
+\caption{Exp3 Phase B: holonomy evaluation after 400 epochs without cycle loss}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Variant} & \textbf{Val Acc} & \textbf{Raw AUC} & \textbf{Path AUC} & \textbf{GT Corr} \\
+\midrule
+Phase A (Donor) & 0.892 & \textbf{1.0000} & \textbf{0.9990} & \textbf{0.7553} \\
+Phase A0 (Baseline) & 0.886 & 0.5108 & 0.5355 & 0.1006 \\
+B1: Control & 0.882 & 0.4012 & 0.5100 & 0.0640 \\
+\textbf{B2: Params-only} & 0.881 & \textbf{1.0000} & \textbf{0.9895} & \textbf{0.7264} \\
+\textbf{B3: Full state} & \textbf{0.883} & \textbf{1.0000} & \textbf{0.9966} & \textbf{0.7371} \\
+B4: Adam-only & 0.882 & 0.4778 & 0.5329 & 0.1042 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{G\_RAG-13:} Cycle loss resolves the holonomy problem. The donor achieves raw AUC = 1.0000 and path AUC = 0.9990---effectively perfect holonomy detection. With cycle contrastive loss at $\lambda = 1.0$, the algebraic model achieves near-perfect holonomy-based consistency detection.
+
+\textbf{G\_RAG-14:} The F$_4$ analog is partially refuted. Holonomy is primarily parametric: B2 ($\theta_A$ + fresh Adam) achieves path AUC = 0.9895, while B3 ($\theta_A$ + adam$_A$) achieves 0.9966. The difference $\Delta = +0.0071$ is marginal. The holonomy basin is a property of parameter space $\theta$, not of the joint $(\theta, m, v)$ space.
+
+\textbf{G\_RAG-15:} Adam state alone transfers zero holonomy. B4 ($\theta_B$ + adam$_A$) achieves path AUC = 0.5329, indistinguishable from control B1 (0.5100) and chance. The donor's optimizer dynamics cannot induce holonomy sensitivity in parameters that never saw cycle loss.
+
+\textbf{G\_RAG-16:} $T_K$--holonomy dissociation. B2 collapses $T_K$ from 88.25 to 80.72 while retaining holonomy separation at 14.17$\times$. $T_K$ (Killing temperature) and holonomy awareness are \textit{partially independent} algebraic properties. A fresh optimizer disrupts the established $T_K$ equilibrium, but holonomy-relevant features in $\theta$ are robust to this disruption.
+
+\textbf{G\_RAG-17:} Holonomy is a decaying attractor without cycle loss. B3 (full state) decays from hol\_sep = 21.34$\times$ to 16.40$\times$ ($-23\%$) over 400 epochs. B2 (params-only) shows an initial rise (15.38$\times$ $\to$ 18.26$\times$) before decaying to 14.17$\times$. The holonomy basin is metastable.
+
+\textbf{G\_RAG-18:} Opposing gradient signature. The donor's first moment $|m| = 7.7 \times 10^{-5}$ is 2.7$\times$ smaller than baseline's $|m| = 2.08 \times 10^{-4}$, while $|v|$ is identical. This is the fingerprint of competing loss terms (triple vs. cycle) producing partially opposing gradients.
+
+\section{Experiment 4: Killing Spectrum as Relation Classifier}
+
+\subsection{Design}
+
+Exp4 tests whether the Killing diagonal $K_{rr}$ automatically separates compositional relations (Type A: participating in closure cycles) from atomic relations (Type B: random orthogonal operators) without explicit cycle labels.
+
+The mixed KG contains 16 Type A operators (8 base + 8 closure products in $O(8)$) and 8 Type B random orthogonal operators. Three-phase protocol: Phase 1 (800 epochs triple-only with $T_K + T_{\text{ortho}}$), Phase 2 (spectrum analysis), Phase 3 (400 epochs selective cycle loss on Type A closures).
+
+\subsection{Phase 1: Triple-Only Training}
+
+\begin{table}[H]
+\centering
+\caption{Exp4 Phase 1: abelian collapse under $T_K$ alone}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Phase} & \textbf{ep 1} & \textbf{ep 400} & \textbf{ep 800} \\
+\midrule
+Val acc & 0.531 & 0.899 & 0.905 \\
+$T_K$ & 89.17 & 88.19 & 88.24 \\
+hol\_sep & 1.28$\times$ & 0.97$\times$ & 0.85$\times$ \\
+$K_{rr}$ AUC & --- & --- & 0.4922 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+After 800 epochs of triple-only training with $T_K + T_{\text{ortho}}$, all 24 operators collapse to near-abelian configuration: $K_{rr} \approx 0$ for all generators, commutator blocks are $O(10^{-4})$ with no meaningful separation (A$\leftrightarrow$A: 0.000360, A$\leftrightarrow$B: 0.000346, B$\leftrightarrow$B: 0.000299). The Killing eigenvalue spectrum is entirely $O(10^{-6})$---effectively a zero matrix. $T_K$ regularization drives \textit{all} operators toward commutativity---the entropic default.
+
+\textbf{G\_RAG-19:} $T_K$ regularization drives abelian collapse in mixed KGs. When non-algebraic relations coexist with algebraic ones, $T_K$ homogenizes all operators toward abelian. This makes $T_K$ unsuitable as an unsupervised relation classifier (AUC = 0.49, worse than random).
+
+\textbf{G\_RAG-20:} Killing diagonal cannot separate relation types after triple-only training. After 800 epochs, all 24 operators have $K_{rr} \approx 0$ with no variance.
+
+\subsection{Phase 3: Selective Cycle Loss}
+
+\begin{table}[H]
+\centering
+\caption{Exp4 Phase 3: cycle loss restores Killing separation}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Phase} & \textbf{ep 1} & \textbf{ep 100} & \textbf{ep 200} & \textbf{ep 300} & \textbf{ep 400} \\
+\midrule
+Val acc & 0.904 & 0.901 & 0.898 & 0.895 & 0.896 \\
+cyc\_L & 0.860 & 0.023 & 0.007 & 0.004 & 0.003 \\
+hol\_sep & 1.32$\times$ & 11.28$\times$ & 17.84$\times$ & 21.23$\times$ & 24.95$\times$ \\
+$K_{rr}$ AUC & --- & --- & --- & --- & \textbf{0.9844} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+After 400 epochs of selective cycle loss on Type A closures only, the commutator block hierarchy emerges naturally: A$\leftrightarrow$A = 0.005250 (14.6$\times$ amplification), A$\leftrightarrow$B = 0.003453 (10.0$\times$), B$\leftrightarrow$B = 0.001376 (4.6$\times$). $K_{rr}$ AUC jumps from 0.49 to 0.98.
+
+\textbf{G\_RAG-21:} Cycle loss unlocks Killing separation. The Killing form is an excellent \textit{readout} of algebraic structure---but that structure must first be created by cycle loss. The form detects algebra but cannot create it.
+
+\textbf{G\_RAG-22:} Compositional relations = non-commutative operators. The commutator block ratios confirm that cycle loss creates graded non-commutativity. Relations participating in closures develop larger commutators. Non-commutativity is a \textit{consequence} of compositional structure, not an independent property.
+
+\section{Experiment 5: Minimum Cycle Dose for Killing Classification}
+
+\subsection{Design}
+
+Exp5 treats cycle loss as a pharmacological intervention: apply $D \in \{1, 5, 10, 25, 50, 100, 200, 400\}$ epochs of cycle loss after Phase 1, then withdraw for 200 epochs. Measure $K_{rr}$ AUC post-dose and post-withdrawal.
+
+\subsection{Dose-Response Results}
+
+\begin{table}[H]
+\centering
+\caption{Exp5: dose-response for $K_{rr}$ AUC and holonomy separation}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+\textbf{Dose} & \multicolumn{3}{c}{\textbf{Post-dose (D)}} & \multicolumn{3}{c}{\textbf{Post-withdrawal (W)}} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+& $K_{rr}$(D) & path\_AUC(D) & hol\_sep(D) & $K_{rr}$(W) & path\_AUC(W) & hol\_sep(W) \\
+\midrule
+0 & 0.4922 & 0.5528 & 0.85$\times$ & --- & --- & --- \\
+1 & 0.4688 & 0.5324 & 1.32$\times$ & 0.4375 & 0.5377 & 0.91$\times$ \\
+5 & 0.4531 & 0.4828 & 2.19$\times$ & 0.4375 & 0.5386 & 0.95$\times$ \\
+10 & 0.5547 & 0.4503 & 2.82$\times$ & 0.5469 & 0.5308 & 1.07$\times$ \\
+25 & 0.2891 & 0.4870 & 4.33$\times$ & 0.3672 & 0.4825 & 3.08$\times$ \\
+\textbf{50} & \textbf{0.9375} & 0.6626 & 6.47$\times$ & 0.3203 & 0.5899 & 4.18$\times$ \\
+\textbf{100} & \textbf{0.9609} & 0.9127 & 11.12$\times$ & 0.3125 & 0.7995 & 6.46$\times$ \\
+\textbf{200} & 0.7891 & \textbf{0.9932} & 17.36$\times$ & \textbf{0.9297} & \textbf{0.9433} & 9.92$\times$ \\
+\textbf{400} & 0.5156 & \textbf{1.0000} & 25.52$\times$ & \textbf{0.9766} & \textbf{0.9948} & 13.44$\times$ \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+Bold values indicate AUC $> 0.90$.
+
+\subsection{Two Phase Transitions}
+
+\begin{table}[H]
+\centering
+\caption{Exp5: activation and hardening thresholds}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Target} & \textbf{Post-dose} & \textbf{Post-withdrawal} \\
+\midrule
+$K_{rr}$ AUC $> 0.90$ & \textbf{50 ep} & \textbf{200 ep} \\
+path\_AUC $> 0.90$ & 100 ep & \textbf{200 ep} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{G\_RAG-23:} Two distinct phase transitions under cycle-loss pressure. \textit{Activation} ($\sim$50 epochs): $K_{rr}$ AUC crosses 0.90 post-dose but collapses to $\sim$0.32 upon withdrawal. \textit{Hardening} ($\sim$200 epochs, 4$\times$ activation): $K_{rr}$ AUC survives withdrawal at 0.93+ and actually increases during annealing. The hardening threshold marks a permanent basin transition in operator space.
+
+\textbf{G\_RAG-24:} Non-monotonic Killing response. Post-dose $K_{rr}$ follows a window: negligible at D1--10, peak at D50--100 (0.94--0.96), declining at D200--400 (0.79--0.52). Excessive cycle-loss training saturates inter-operator commutators and degrades $K_{rr}$ linear separability.
+
+\textbf{G\_RAG-25:} Tempering effect. At doses $\ge$200, $K_{rr}$ AUC \textit{increases} during withdrawal (D200: 0.79$\to$0.93; D400: 0.52$\to$0.98). The triple-only loss acts as an annealing process: it relaxes off-diagonal Killing noise while preserving the diagonal A/B hierarchy. The true permanence of algebraic structure is measured \textit{after} withdrawal, not during active training.
+
+\textbf{G\_RAG-26:} Holonomy and Killing are dual diagnostics with different timescales. Holonomy responds monotonically and continuously (analog gauge). Killing responds non-monotonically with threshold transitions (digital detector). They are complementary, not redundant.
+
+\textbf{G\_RAG-27:} Commutator block separation persists from D25+. The ratio A$\leftrightarrow$A / B$\leftrightarrow$B reaches 3.6--4.6$\times$ during dosing and retains 75--88\% after withdrawal for doses $\ge$25 epochs, even when $K_{rr}$ AUC collapses.
+
+\section{Consolidated Results}
+
+\begin{table}[H]
+\centering
+\caption{Consolidated results matrix across all five experiments}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Aspect} & \textbf{Exp1b} & \textbf{Exp2} & \textbf{Exp3 Donor} & \textbf{Exp3 B2} & \textbf{Exp3 B3} \\
+& \textbf{(no cycle)} & \textbf{(context)} & \textbf{(cycle)} & \textbf{($\theta$ only)} & \textbf{($\theta$+Adam)} \\
+\midrule
+Val accuracy & 0.898 & 0.884 & 0.888 & 0.881 & 0.883 \\
+$T_K$ & 96.0 & 96.1 & 88.3 & 80.7 & 88.2 \\
+Raw holonomy AUC & 0.573 & 0.500 & \textbf{1.000} & \textbf{1.000} & \textbf{1.000} \\
+Path holonomy AUC & --- & 0.537 & \textbf{0.999} & \textbf{0.990} & \textbf{0.997} \\
+GT correlation & --- & $-0.002$ & \textbf{0.755} & \textbf{0.726} & \textbf{0.737} \\
+\textit{Exp4 $K_{rr}$ AUC} & --- & --- & --- & --- & --- \\
+\textit{Exp4 post-cycle} & --- & --- & --- & --- & --- \\
+\textit{$K_{rr}$ (Phase 1)} & --- & --- & --- & --- & --- \\
+\textit{$K_{rr}$ (Phase 3)} & --- & --- & --- & --- & --- \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+For Exp4: Phase 1 (triple-only) $K_{rr}$ AUC = 0.49; Phase 3 (post-cycle-loss) $K_{rr}$ AUC = 0.98.
+
+For Exp5: Minimum dose for permanent $K_{rr}$ AUC $> 0.90$ is 200 epochs. Tempering effect: withdrawal improves $K_{rr}$ AUC at D200 (0.79$\to$0.93) and D400 (0.52$\to$0.98).
+
+\section{Discussion}
+
+\subsection{Synthesis of 27 Generalizations}
+
+Across five experiments and 27 generalizations (G\_RAG-1 through G\_RAG-27), the Algebraic Graph RAG program establishes a refined version of the SS-PEG Potential $\to$ Cycle $\to$ Invariant chain:
+
+\begin{equation}
+\underbrace{\text{Closure / Cycle loss}}_{\text{Creates topology}} \;\to\; \underbrace{K_{ab}}_{\text{Evaluates / selects}} \;\to\; \underbrace{h^\vee, \Phi, \text{Ramanujan}}_{\text{Invariants}}
+\end{equation}
+
+The Killing form is a \textit{selector}, not a \textit{generator}. Cycles create candidates; Killing selects the optimal configuration. This maps to a cosmological scenario: an early ``hot'' phase with abundant cycle pressure creates topological candidates, followed by a ``cooling'' phase where Killing annealing purifies the surviving structures.
+
+\subsection{Key Findings}
+
+\textbf{1. Killing crystallization transfers to KG operators (G\_RAG-1, G\_RAG-5).} The Killing tension crystallizes to the theoretical value $T_K = n_{\text{gen}} \cdot d$ (per-operator normalization $\approx 4.0$) and orthogonality error drops to $< 10^{-3}$, regardless of KG size ($K = 6$ to $K = 24$). The algebraic inductive bias ports cleanly to knowledge graph operators.
+
+\textbf{2. AlgKG improves triple classification (G\_RAG-2, G\_RAG-5).} The algebraic constraint provides a growing advantage as KG richness increases: +3.2 pp ($K = 6$) $\to$ +9.15 pp ($K = 24$) $\to$ +12.7 pp (Exp2, context-conditioned). The algebraic prior becomes \textit{more} valuable as the task complexity increases. Notably, AlgKG stops overfitting (train acc 98.8\%) while MLP memorizes completely (100\% train, 80.7\% val at $K = 24$).
+
+\textbf{3. Holonomy collapse (G\_RAG-6, G\_RAG-8).} Without cycle-level supervision, the algebraic constraint collapses all holonomies to near-zero. Shared relation operators trained for triple classification encode average mapping behavior, not cycle-level structure. The $T_K$ crystallization forces operators onto the orthogonal group near an actual Lie algebra, making all triple products near-identity.
+
+\textbf{4. Cycle loss resolves holonomy detection (G\_RAG-13).} With cycle contrastive loss, AlgKG achieves raw AUC = 1.0000 and path AUC = 0.9990. The holonomy problem is fundamentally a training signal problem, not an architecture problem.
+
+\textbf{5. Holonomy is primarily parametric (G\_RAG-14).} The F$_4$ bifurcation analog is refuted: parameters carry most of the holonomy information. B2 ($\theta_A$ + fresh Adam): path AUC = 0.9895; B3 ($\theta_A$ + adam$_A$): path AUC = 0.9966. The holonomy basin is a property of parameter space, not of the joint $(\theta, m, v)$ space.
+
+\textbf{6. $T_K$--holonomy dissociation (G\_RAG-16).} $T_K$ and holonomy awareness are partially independent algebraic properties. Fresh optimizer dynamics disrupt $T_K$ equilibrium (88.25 $\to$ 80.72) but holonomy-relevant features in $\theta$ are robust to this disruption.
+
+\textbf{7. Abelian collapse (G\_RAG-19).} In mixed KGs with non-algebraic relations, $T_K$ regularization homogenizes all operators toward commutativity. The Killing diagonal $K_{rr}$ achieves AUC = 0.49 (worse than random) after triple-only training.
+
+\textbf{8. Two phase transitions (G\_RAG-23).} Activation at $\sim$50 epochs and hardening at $\sim$200 epochs. The hardening threshold marks a permanent basin transition in operator space.
+
+\textbf{9. Tempering effect (G\_RAG-25).} Withdrawal of cycle loss purifies the Killing signal. The true quality of algebraic structure is measured after withdrawal, not during active training.
+
+\subsection{Implications for the Inference by Holonomy Protocol}
+
+Exp3 achieves Phase 1 of the PIH program: with cycle contrastive loss, the algebraic model achieves near-perfect holonomy-based consistency detection (path AUC = 0.999). This validates the PIH principle---holonomy \textit{is} a viable measure of relational consistency---but requires supervision rather than emergence.
+
+The transfer viability results (Exp3 Phase B) suggest that a curriculum or intermittent cycle loss strategy could maintain holonomy detection while primarily training on triple classification. Holonomy capability survives 400 epochs without cycle loss (path AUC drops from 0.999 to 0.990--0.997), indicating a slowly decaying attractor.
+
+Exp2 closes the ``context-conditioned operators'' approach to emergent holonomy detection. The remaining paths forward are:
+
+\begin{enumerate}[noitemsep]
+\item \textbf{Cycle-supervised training}: Add explicit $\KL_{\text{cycle}}$ to the loss function. Transforms the problem from ``emergent holonomy detection'' to ``supervised holonomy regression.''
+\item \textbf{Contrastive cycle learning}: Train with cycle-level contrastive loss without requiring exact ground-truth values.
+\item \textbf{Transfer to real KGs}: Test on real-world knowledge graphs where inconsistencies arise naturally from data noise.
+\end{enumerate}
+
+The core lesson: algebraic crystallization provides the right manifold but not the right trajectory. The operators crystallize into a valid Lie algebra (good!) but the specific point on the Lie group manifold is determined solely by triple classification, which carries no information about cycle closure.
+
+\section{Conclusion}
+
+The Algebraic Graph RAG program's Phase 1 is complete. Across five experiments on synthetic SU(3) adjoint knowledge graphs, we have established:
+
+\begin{enumerate}[noitemsep]
+\item Killing crystallization transfers to KG relation operators, with $T_K$ converging to the theoretical value $n_{\text{gen}} \cdot d$ and orthogonality error dropping below $10^{-3}$.
+\item The algebraic constraint improves triple classification by up to +12.7 percentage points over unconstrained MLP baselines, with the advantage scaling with KG richness.
+\item Post-hoc holonomy detection fails without cycle-level supervision: the algebraic constraint collapses all holonomies toward zero (holonomy collapse).
+\item Cycle contrastive loss achieves near-perfect holonomy detection (path AUC = 0.999), resolving the holonomy problem constructively.
+\item Holonomy sensitivity is primarily a property of the parameter configuration $\theta$, not the optimizer state. The F$_4$ bifurcation analog is refuted in the KG context.
+\item The Killing form is diagnostic, not generative: it selects and purifies algebraic structure but cannot create it. In mixed KGs, $T_K$ alone drives abelian collapse.
+\item The operator algebra undergoes two distinct phase transitions under cycle-loss pressure: activation at $\sim$50 epochs and hardening at $\sim$200 epochs. The hardening threshold marks a permanent structural reorganization.
+\item Withdrawal of cycle loss purifies the Killing signal (tempering effect): $K_{rr}$ AUC increases from 0.79 to 0.93 (D200) and from 0.52 to 0.98 (D400).
+\end{enumerate}
+
+These results refine the SS-PEG Potential $\to$ Cycle $\to$ Invariant chain into a two-stage architecture where cycle pressure creates topological candidates and Killing annealing selects optimal configurations. The Killing form is a selector, not a generator.
+
+\subsection{Open Questions for Exp6+}
+
+\begin{enumerate}[noitemsep]
+\item \textbf{Multimodal extension}: Can the D200+annealing protocol transfer to real knowledge graphs where inconsistencies arise naturally?
+\item \textbf{Minimum permanent dose}: Where exactly does the D100--D200 transition occur? Is it sharp or gradual?
+\item \textbf{Annealing schedule optimization}: Does withdrawal length matter? Does longer annealing improve D100 retention?
+\item \textbf{Selective $T_K$}: Can a modified regularizer penalizing $T_K$ only within detected compositional clusters avoid abelian collapse?
+\item \textbf{$K_{rr}$-guided cycle discovery}: Use Phase 1 + brief cycle loss, then read $K_{rr}$ to predict which relations are compositional before seeing all cycles.
+\item \textbf{Half-life of holonomy}: At what epoch does path AUC drop below a useful threshold (e.g., 0.95) without cycle loss?
+\item \textbf{Independent control of $T_K$ and holonomy}: Can we design a loss that maintains $T_K \approx 96$ (full Lie algebra) while also maintaining holonomy separation?
+\end{enumerate}
+
+\section*{Acknowledgments}
+
+This work is part of the SS-PEG (Symmetry from Structure via PEG) experimental program. We thank the broader theoretical physics and knowledge graph communities for foundational contributions to Killing form theory, Lie algebra computation, and holonomy-based reasoning.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

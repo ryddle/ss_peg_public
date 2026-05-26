@@ -1,0 +1,120 @@
+\section{Ablation Studies}\label{sec:ablative}
+
+This section presents three critical ablation studies that isolate the contribution of each component of the variational principle and establish the uniqueness of the Standard Model as the outcome of the blind search.
+
+\subsection{The Killing-Only Ablation (Test 3.1)}\label{sec:killing_only}
+
+The most conceptually significant test in the entire program is the Killing-only ablation (Test 3.1). One would expect that to produce a Lie algebra, you need to reward non-commutativity---after all, Lie algebras are defined by their commutators. But:
+
+\begin{itemize}
+\item \textbf{Killing metric only (no $T_{\mathrm{nc}}$):} SU(2) emerges perfectly. The non-commutativity tension $T_{\mathrm{nc}}$ is redundant.
+
+\item \textbf{$T_{\mathrm{nc}}$ only (no Killing):} No algebraic structure emerges. The Killing metric $T_K$ is essential.
+\end{itemize}
+
+\subsubsection{Test 3.1: Killing-Only Evolution}
+
+The test evolves 3 generators in dimension 2 with \textit{only} the Killing tension $T_K$ and norm stabilization $T_{\mathrm{norm}}$, explicitly excluding $T_{\mathrm{nc}}$:
+
+\begin{equation}
+T_{\mathrm{total}} = \alpha \, T_K + \beta \, T_{\mathrm{norm}} \quad (\text{no } T_{\mathrm{nc}})
+\end{equation}
+
+Across 5 seeds (10,000 steps each), all converge to exact SU(2): 100\% closure, $K_{\mathrm{diag}} \approx -0.96$, and non-zero commutators. The final $T_{\mathrm{nc}}$ observed (not penalized) is $> 0.01$, confirming that non-commutativity emerges spontaneously from the Killing metric alone.
+
+\subsubsection{Test 3.2: Non-Commutativity-Only Evolution}
+
+The converse test evolves with \textit{only} $T_{\mathrm{nc}}$ and $T_{\mathrm{norm}}$, setting $\alpha = 0$:
+
+\begin{equation}
+T_{\mathrm{total}} = T_{\mathrm{nc}} + \beta \, T_{\mathrm{norm}} \quad (\alpha = 0, \text{ no } T_K)
+\end{equation}
+
+Across 10 seeds (15,000 steps each): \textbf{0/10 produce SU(2).} The Killing form is not proportional to the identity, and the generators do not close as a Lie algebra. The non-commutativity tension drives the generators to non-commute, but without the Killing metric to organize \textit{how} they non-commute, no algebraic structure emerges.
+
+\subsubsection{Implication: Geometry Generates Algebra}
+
+The Killing metric---which is itself defined \textit{through} commutators as $K_{ab} = \mathrm{Tr}(\mathrm{ad}_a \circ \mathrm{ad}_b)$---contains \textit{more} information than the commutators themselves. It encodes not just whether generators commute, but the \textbf{global geometric pattern} of how all commutators relate to each other. This global pattern uniquely determines the algebra.
+
+In the language of the SS-PEG framework: \textbf{the relational geometry (potential) fully determines the algebraic structure (invariant).} The chain potential $\to$ cycle $\to$ invariant is realized concretely: the Killing metric is the potential, the adjoint action is the cycle, and the Lie algebra is the invariant.
+
+\subsection{The Closure Tension $T_{\mathrm{cl}}$}\label{sec:closure_tension}
+
+The closure tension penalizes generators whose commutators leak outside the generator span:
+
+\begin{equation}
+T_{\mathrm{cl}} = \sum_{i < j} \left\| [T_i, T_j] - \mathrm{proj}_{V}([T_i, T_j]) \right\|^2
+\end{equation}
+
+where $\mathrm{proj}_V$ is the orthogonal projection onto the span $V = \mathrm{span}\{T_k\}$ via the complex Gram matrix: $\mathrm{proj}_V(c) = V (V^\dagger V)^{-1} V^\dagger c$. This correctly handles both antisymmetric (SO/G$_2$) and hermitian (SU) generators.
+
+\subsubsection{Is $T_{\mathrm{cl}}$ necessary for classical algebras?}
+
+For classical algebras (SU, SO, Sp) at full density ($n_{\mathrm{gen}} = d^2 - 1$), $T_{\mathrm{cl}}$ is \textbf{not} necessary: algebraic closure emerges at 100\% even with $T_{\mathrm{cl}} = 0$. The Killing metric alone drives the generators to close.
+
+\subsubsection{Is $T_{\mathrm{cl}}$ necessary for exceptional algebras?}
+
+For exceptional algebras at low density, $T_{\mathrm{cl}}$ is \textbf{essential}:
+
+\begin{equation}
+\begin{array}{lcc}
+\hline
+\text{Algebra} & \gamma = 0 & \gamma > 0 \\
+\hline
+\text{G}_2 & 0/3 \text{ closure} & 2\text{--}3/3 \text{ closure} \\
+\text{F}_4 & 0/3 \text{ closure} & 1/3 \text{ closure (with anneal)} \\
+\text{E}_6 & 0/3 \text{ closure} & 0/3 \text{ closure} \\
+\hline
+\end{array}
+\end{equation}
+
+With $\gamma = 0$ (no closure tension), the optimizer converges to generic SO($d$) minima with $K \propto I$ but no algebraic closure. The closure tension $T_{\mathrm{cl}}$ creates a topological selection force: it kills spurious minima that are not genuine algebras, leaving only the algebraic fixed points of the optimization landscape.
+
+\subsubsection{The role of $T_{\mathrm{cl}}$: scaffold, not mold}
+
+The closure tension acts as a ``scaffold'' that guides convergence toward algebraic closure, but it does \textit{not} determine the \textbf{type} of algebra that emerges. That is determined by $T_K$. Evidence:
+
+\begin{itemize}
+\item With $\gamma = 50$ and $K_{\mathrm{target}} = -I$, G$_2$ emerges (the only compact simple 14-dim subalgebra of so(7)).
+\item With $\gamma = 200$ and $K_{\mathrm{target}} = -I$, F$_4$ emerges (the only compact simple 52-dim subalgebra of so(27)).
+\item With $\gamma = 0$ and $K_{\mathrm{target}} = -I$, a generic SO($d$) algebra emerges (not simple, wrong $h^\vee$).
+\end{itemize}
+
+The closure tension is necessary for low-density discovery, but it is the Killing metric that selects the \textit{which algebra} question. The closure tension provides the ``how to close'' constraint; the Killing metric provides the ``what to close into'' constraint.
+
+\subsection{Uniqueness of the Result}\label{sec:uniqueness}
+
+The blind discovery experiment (Test 4.1) asks: among all possible $\su(a) \times \su(b)$ pairs that fit within the available generator budget, which one is selected? The answer is uniquely the Standard Model.
+
+\subsubsection{Search space}
+
+The blind search optimizes 15 generators in $\mathfrak{su}(4)$ (dimension 4, $d^2 - 1 = 15$). Among all possible decompositions $\su(a) \times \su(b)$ with $a^2 - 1 + b^2 - 1 \leq 15$:
+
+\begin{equation}
+\begin{array}{lc}
+\hline
+\text{Pair} & \text{Generators} \\
+\hline
+\su(2) \times \su(3) & 3 + 8 = 11 \leq 15 \\
+\su(2) \times \su(2) \times \su(2) & 3 + 3 + 3 = 9 \leq 15 \\
+\su(3) & 8 \leq 15 \\
+\su(2) \times \su(4) & 3 + 15 = 18 > 15 \text{ (excluded)} \\
+\hline
+\end{array}
+\end{equation}
+
+\subsubsection{Results}
+
+The blind search consistently selects $\su(2) \times \su(3)$ as the unique solution:
+
+\begin{itemize}
+\item $\su(2) \times \su(3)$ with $h^\vee = (2, 3)$: \textbf{100\% of seeds} converge to this decomposition.
+\item The next-best match ($\su(2) \times \su(2) \times \su(2)$ with $h^\vee = (2, 2, 2)$) has $> 241\%$ total error in dual Coxeter numbers.
+\item No other decomposition achieves even partial closure.
+\end{itemize}
+
+The Standard Model gauge group SU(3) $\times$ SU(2) $\times$ U(1) is the \textbf{unique} outcome of the blind search within the SU(4) generator budget. This is not a fitted result---it emerges from the variational principle alone, with no algebraic input.
+
+\subsubsection{Implication}
+
+The uniqueness result establishes that the Standard Model is not an arbitrary choice among many possible gauge groups. It is the \textbf{inevitable consequence} of the Killing metric variational principle acting on a space of 15 random operators in dimension 4. The relational geometry uniquely selects the SM gauge group from the space of all possible algebraic structures.

@@ -1,0 +1,107 @@
+\documentclass[aps,prd,amsmath,amssymb,superscriptaddress,groupedaddress,nofootinbib]{revtex4-2}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{mathtools}
+\usepackage{cancel}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsthm}
+\usepackage{physics}
+\usepackage{tensor}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!70!black,
+    citecolor=blue!70!black,
+    urlcolor=blue!70!black,
+}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\su}{\mathfrak{su}}
+\newcommand{\so}{\mathfrak{so}}
+\newcommand{\spc}{\mathfrak{sp}}
+\newcommand{\slg}{\mathfrak{sl}}
+\newcommand{\fu}{\mathfrak{u}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\kcg}{\mathfrak{k}}
+\newcommand{\ad}{\mathrm{ad}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\spann}{\mathrm{span}}
+\newcommand{\kerl}{\ker}
+\newcommand{\diml}{\dim}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\p}{\partial}
+\newcommand{\la}{\lambda}
+\newcommand{\Lam}{\Lambda}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ga}{\gamma}
+\newcommand{\Ga}{\Gamma}
+\newcommand{\de}{\delta}
+\newcommand{\De}{\Delta}
+\newcommand{\Si}{\Sigma}
+\newcommand{\ph}{\phi}
+\newcommand{\Ph}{\Phi}
+\newcommand{\om}{\omega}
+\newcommand{\Om}{\Omega}
+\newcommand{\Th}{\Theta}
+\newcommand{\vt}{\vartheta}
+\newcommand{\io}{\iota}
+\newcommand{\ka}{\kappa}
+\newcommand{\ro}{\rho}
+\newcommand{\ta}{\tau}
+\newcommand{\muf}{\mu}
+\newcommand{\nuo}{\nu}
+\newcommand{\ps}{\psi}
+\newcommand{\Ps}{\Psi}
+\newcommand{\ze}{\zeta}
+\newcommand{\et}{\eta}
+
+\begin{document}
+
+\title[Lie Algebras from the Killing Metric: Gauge Symmetries as Emergent Consequences of Relational Geometry]{Lie Algebras from the Killing Metric:\\Gauge Symmetries as Emergent Consequences of Relational Geometry}
+\author{José M. Moreno and Claude Opus 4.6}
+\date{May 2026}
+
+\begin{abstract}
+We demonstrate that simple compact Lie algebras---the mathematical structure underlying all gauge symmetries in the Standard Model---emerge from a single variational principle on the Killing metric, without imposing any algebraic axioms. Starting from random matrices with no algebraic structure, the minimization of Killing metric tension $T_K = \|K - K_{\mathrm{target}}\|^2$ produces exact Lie algebras with \SI{100}{\percent} success rate across all classical and exceptional families (SU($N$), SO($N$), Sp($2N$), G$_2$, F$_4$, E$_6$) and non-compact families (sl(2,$\mathbb{R}$), so(3,1), su(2,2)). The algebraic structure (commutation relations, Jacobi identities, Casimir operators) emerges automatically---it is never imposed. A Killing-only ablation confirms that the non-commutativity tension is redundant: the Killing metric alone contains sufficient information to generate all algebraic structure. A density phase transition reveals that algebraic closure is a step function: for SU(4) with 15 generators, closure is \SI{100}{\percent} at full density and exactly \SI{0}{\percent} at any partial density. The Lorentz algebra so(3,1) emerges from the same principle with indefinite Killing target, with signature $(3+,3-)$ exactly. Spacetime is not the arena---it is the pattern of non-compact directions in the emergent Killing form. Gravity emerges from entanglement thermodynamics following Jacobson (1995): the same relational density $\rho$ that controls the gauge symmetry phase transition also controls the emergence of spacetime curvature, with gauge forces and gravity emerging simultaneously at $\rho_c \approx 1$. The framework predicts that ``dark matter'' is not a particle but the footprint of the Levi-Civita connection in regions of intermediate relational density, yielding testable predictions (filamentary topology, cored profiles) consistent with recent ultrafaint dwarf galaxy observations.
+\end{abstract}
+
+\pacs{02.40.Tt, 11.30.Qc, 11.15.Ha, 02.40.Yy}
+
+\maketitle
+
+\input{sections/01_introduction}
+\input{sections/02_relational_framework}
+\input{sections/02_theoretical_framework}
+\input{sections/03_methodology}
+\input{sections/04_discovery_journey}
+\input{sections/05_ablations}
+\input{sections/06_density_phase_transition}
+\input{sections/07_spacetime_emergence}
+\input{sections/08_landscape_bifurcation}
+\input{sections/09_why_sm}
+\input{sections/10_discussion}
+\input{sections/11_conclusions}
+
+\bibliography{references}
+
+\end{document}

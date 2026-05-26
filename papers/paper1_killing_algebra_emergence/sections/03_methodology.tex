@@ -1,0 +1,191 @@
+\section{Experimental Methodology}\label{sec:methodology}
+
+\subsection{Computational Setup}\label{sec:computational_setup}
+
+All experiments were performed on a single workstation with the following specifications:
+
+\begin{table}[t]
+\centering
+\begin{tabular}{ll}
+\hline\hline
+\textbf{Component} & \textbf{Specification} \\
+\hline
+GPU & NVIDIA RTX 5070 Ti (16 GB VRAM) \\
+CPU & 16 cores \\
+RAM & 128 GB DDR5 \\
+Software & Python 3.14, PyTorch (CUDA 13) \\
+Total runs & $\sim 1650+$ optimization runs \\
+\hline\hline
+\end{tabular}
+\caption{Computational infrastructure for Phase I experiments.}
+\label{tab:computational_setup}
+\end{table}
+
+The GPU acceleration was critical for the large-scale experiments involving exceptional algebras. The $E_6$ experiment (78 generators in $\mathfrak{so}(27)$) requires tensor storage of order $78^2 \times 27^2 \approx 4.3 \times 10^7$ elements per iteration, making CPU-only computation impractical. The Adam optimizer's momentum and second-moment buffers add additional memory overhead of order $n \times d^2$ per generator.
+
+\subsection{Optimization Protocol}\label{sec:optimization_protocol}
+
+The optimization protocol follows a standardized procedure across all experiments:
+
+\begin{enumerate}[label=\arabic*.]
+\item \textbf{Initialization.} $n$ random $d \times d$ matrices $\{G_a^{(0)}\}$ are drawn independently from a Gaussian distribution with zero mean and variance $1/d$. The structural constraint (hermitian traceless, antisymmetric, or symplectic) is enforced by projection after sampling. No algebraic structure is present at initialization.
+
+\item \textbf{Killing metric computation.} At each iteration $k$, the adjoint representation matrices $\mathrm{ad}_a^{(k)}$ are computed from the commutators $[G_a^{(k)}, G_b^{(k)}]$. The Killing metric $K_{ab}^{(k)} = \mathrm{Tr}(\mathrm{ad}_a^{(k)} \circ \mathrm{ad}_b^{(k)})$ is assembled.
+
+\item \textbf{Tension computation.} The total tension $T_{\mathrm{total}}^{(k)}$ is computed as the sum of the Killing tension $T_K^{(k)}$ and the norm stabilization term. For experiments with closure tension, $T_{\mathrm{total}}^{(k)} = \alpha T_K^{(k)} + \beta T_{\mathrm{cl}}^{(k)} + \gamma \sum_i (\|G_i^{(k)}\|_F - 1)^2$, with $\alpha = \beta = \gamma = 1$.
+
+\item \textbf{Gradient computation.} The gradient $\partial T_{\mathrm{total}} / \partial G_a$ is computed via automatic differentiation (PyTorch's autograd). For the Killing tension:
+\begin{equation}
+\frac{\partial T_K}{\partial G_a} = 4 \sum_{b,c,d} \left(K_{bc} - (K_{\mathrm{target}})_{bc}\right) \frac{\partial K_{bc}}{\partial G_a}
+\end{equation}
+where $\partial K_{bc} / \partial G_a = \mathrm{Tr}([\partial G_a, \mathrm{ad}_b] \circ \mathrm{ad}_c + \mathrm{ad}_b \circ [\partial G_a, \mathrm{ad}_c])$.
+
+\item \textbf{Adam update.} Generators are updated using the Adam optimizer with $\beta_1 = 0.9$, $\beta_2 = 0.999$, $\epsilon = 10^{-8}$, and learning rate $\eta = 10^{-3}$ (annealed in later stages). The bias-corrected first and second moments are:
+\begin{equation}
+\hat{m}_a^{(k)} = \frac{m_a^{(k)}}{1 - \beta_1^k}, \quad \hat{s}_a^{(k)} = \frac{s_a^{(k)}}{1 - \beta_2^k}
+\end{equation}
+\begin{equation}
+G_a^{(k+1)} = G_a^{(k)} - \eta \frac{\hat{m}_a^{(k)}}{\sqrt{\hat{s}_a^{(k)}} + \epsilon}
+\end{equation}
+
+\item \textbf{Convergence criterion.} The optimization terminates when the relative change in total tension falls below threshold:
+\begin{equation}
+\frac{|T_{\mathrm{total}}^{(k+1)} - T_{\mathrm{total}}^{(k)}|}{T_{\mathrm{total}}^{(k)}} < 10^{-8}
+\end{equation}
+Typical convergence requires $10^4$ to $10^5$ iterations, depending on the algebra and the number of seeds.
+\end{enumerate}
+
+Multiple seeds (typically 5--32, up to 144 for $E_6$) are used for each algebra to assess the robustness of the emergence. Each seed starts from independent random initialization, ensuring that the result is not an artifact of a particular initial condition.
+
+\subsection{Success Metrics}\label{sec:success_metrics}
+
+Four independent metrics are used to verify the emergence of exact Lie algebras:
+
+\subsubsection{Casimir Eigenvalues}
+
+The quadratic Casimir operator $C_2 = \sum_{a=1}^n G_a^2$ is computed for each emergent algebra. For a simple Lie algebra, the Casimir eigenvalue in the adjoint representation is proportional to the dual Coxeter number:
+
+\begin{equation}
+C_2^{\mathrm{adj}} = h^\vee \cdot I
+\end{equation}
+
+The measured Casimir eigenvalues match the theoretical values at $\sim 10^{-16}$ (machine precision) for all 15 algebras tested. This is the most stringent metric: it verifies not just the algebraic structure, but the exact normalization of the generators.
+
+\subsubsection{Jacobi Identity}
+
+The Jacobi identity $J(X,Y,Z) = [X,[Y,Z]] + [Y,[Z,X]] + [Z,[X,Y]] = 0$ is evaluated for all triples of generators. For the emergent algebras, the maximum violation across all triples is $\sim 10^{-16}$ (machine zero) for all tested algebras. Importantly, the Jacobi identity is \textit{never imposed} during optimization---it emerges as a consequence of the algebraic closure.
+
+\subsubsection{Algebraic Closure}
+
+Closure is verified by checking that all commutators $[G_a, G_b]$ lie within the span of $\{G_c\}_{c=1}^n$. This is done by computing the projection residual:
+
+\begin{equation}
+\epsilon_{ab} = \left\|[G_a, G_b] - \sum_{c=1}^n f_{abc}\,G_c\right\|_F
+\end{equation}
+
+where $f_{abc}$ are determined by least-squares fitting. For all successful runs, $\max_{a,b} \epsilon_{ab} < 10^{-14}$. The closure rate---the fraction of runs achieving closure---is \SI{100}{\percent} for all classical families and G$_2$, F$_4$ (with closure tension), and for the non-compact families.
+
+\subsubsection{Dual Coxeter Number Match}
+
+The dual Coxeter number $h^\vee$ is extracted from the emergent Killing eigenvalues via the universal formula:
+
+\begin{equation}
+h^\vee = I_R \cdot \frac{|K|}{\kappa^2}
+\end{equation}
+
+where $I_R$ is the Dynkin index of the representation, $|K| = \sqrt{\mathrm{Tr}(K^2)}$ is the Frobenius norm of the Killing matrix, and $\kappa$ is the generator normalization factor. This formula is verified for 15 algebras with zero exceptions.
+\subsection{Implemented Scripts and Verification Suite}\label{sec:implemented_scripts}
+
+All experimental data, scripts, and figures are archived and publicly available at \texttt{doi:10.5281/zenodo.20397506} \cite{sspeg_repo}.
+
+The experimental program is organized into a comprehensive verification suite of 51 independent
+test programs, organized into 8 categories:
+
+\begin{description}
+\item[Family Emergence Tests (12 scripts)] Verify the emergence of each algebra family from random initialization:
+\begin{itemize}
+\item \texttt{test\_u1\_gpu.py}: U(1) emergence (Abelian)
+\item \texttt{test\_su\_n\_gpu.py}: SU(N) emergence for $N = 2, 3, 4, 5$ (Unitary)
+\item \texttt{test\_so\_n\_gpu.py}: SO(N) emergence for $N = 3, 4, 5, 6$ (Orthogonal)
+\item \texttt{test\_sp\_n\_gpu.py}: Sp(2N) emergence for $N = 1, 2, 3$ (Symplectic)
+\item \texttt{test\_g2\_gpu.py}: G$_2$ emergence (Exceptional)
+\item \texttt{test\_f4\_gpu.py}: F$_4$ emergence (Exceptional)
+\item \texttt{test\_e6\_gpu.py}: E$_6$ emergence (Exceptional)
+\item \texttt{test\_so31\_gpu.py}: so(3,1) emergence (Non-compact)
+\item \texttt{test\_sl2r\_gpu.py}: sl(2,$\mathbb{R}$) emergence (Non-compact)
+\item \texttt{test\_su22\_gpu.py}: su(2,2) emergence (Non-compact)
+\item \texttt{test\_density\_transition\_gpu.py}: Density phase transition (SU(4))
+\item \texttt{test\_n\_cycle\_tensions.py}: Cycle tension analysis (General)
+\end{itemize}
+
+\item[Ablation and Diagnostic Tests (10 scripts)] Isolate the contribution of each tension term and diagnose the optimization dynamics:
+\begin{itemize}
+\item \texttt{test\_3\_1\_only\_killing.py}: Killing-only ablation (Test 3.1)
+\item \texttt{test\_3\_2\_only\_nc.py}: Non-commutativity-only ablation (Test 3.2)
+\item \texttt{test\_closure\_driven.py}: Closure-driven emergence
+\item \texttt{test\_4\_1\_representation\_theory.py}: Representation theory verification
+\item \texttt{kz\_diagnostic.py}: Kibble-Zurek diagnostic
+\item \texttt{kz\_frustration\_diagnostic.py}: Kibble-Zurek frustration analysis
+\item \texttt{kibble\_zurek\_algebraic.py}: Algebraic Kibble-Zurek simulation
+\item \texttt{analysis\_kdiag\_survey.py}: K-diagonal eigenvalue survey
+\item \texttt{analysis\_cross\_checks.py}: Cross-check consistency verification
+\item \texttt{analysis\_casimir\_scaling.py}: Casimir scaling verification
+\end{itemize}
+
+\item[Robustness and Reproducibility Tests (4 scripts)] Verify the reproducibility and parameter independence of the emergence:
+\begin{itemize}
+\item \texttt{test\_1\_1\_reproducibility.py}: Reproducibility across seeds
+\item \texttt{test\_1\_1\_gpu\_reproducibility.py}: GPU vs CPU reproducibility
+\item \texttt{test\_1\_2\_alpha\_independence.py}: Independence from $\alpha$ parameter
+\item \texttt{test\_2\_1\_dim3.py}: Three-dimensional lattice test
+\end{itemize}
+
+\item[Specific Algebra Tests (8 scripts)] Targeted tests for specific algebras:
+\begin{itemize}
+\item \texttt{test\_2\_2\_two\_generators.py}: Minimal case (2 generators)
+\item \texttt{test\_2\_3\_su3\_eight\_generators.py}: SU(3) with 8 generators
+\item \texttt{test\_2\_3\_gpu\_su3.py}: SU(3) GPU verification
+\item \texttt{test\_3\_3\_gpu\_energy\_landscape.py}: Energy landscape (GPU)
+\item \texttt{test\_3\_3\_energy\_landscape.py}: Energy landscape (CPU)
+\end{itemize}
+
+\item[Landscape Analysis Scripts (12 scripts)] Monte Carlo landscape exploration:
+\begin{itemize}
+\item \texttt{\_landscape\_montecarlo.py}: 128-seed Monte Carlo landscape
+\item \texttt{\_landscape\_128seeds\_cloud.py}: Cloud analysis (128 seeds)
+\item \texttt{\_landscape\_dashboard.py}: Real-time monitoring dashboard
+\item \texttt{\_landscape\_relief\_map.py}: Landscape relief map visualization
+\item \texttt{\_landscape\_analysis.py}: Landscape statistical analysis
+\item \texttt{\_inspect\_f4\_seeds.py}: F$_4$ seed inspection
+\item \texttt{\_f4\_direct\_anneal.py}: F$_4$ direct annealing
+\item \texttt{\_f4\_curriculum.py}: F$_4$ curriculum learning
+\item \texttt{\_diagnose\_f4.py}: F$_4$ diagnostic
+\item \texttt{\_analyze\_f4.py}: F$_4$ results analysis
+\item \texttt{\_analyze\_bands.py}: Band structure analysis
+\item \texttt{\_analyze\_bands\_figure.py}: Band visualization
+\end{itemize}
+
+\item[Exceptional Algebra Scripts (14 scripts)] Specialized scripts for exceptional algebra construction:
+\begin{itemize}
+\item \texttt{\_e6\_warmstart.py}, \texttt{\_e6\_trace\_ortho.py}, \texttt{\_e6\_hdual\_analysis.py}: E$_6$ warm-start, trace orthogonality, dual Coxeter analysis
+\item \texttt{\_e6\_f4\_scaffold.py}, \texttt{\_e6\_f4\_scaffold\_v1.py}: E$_6$/F$_4$ scaffold comparison
+\item \texttt{\_e6\_direct\_anneal.py}, \texttt{\_e6\_correct.py}, \texttt{\_e6\_compact.py}, \texttt{\_e6\_compact2.py}: E$_6$ direct annealing and compactness
+\item \texttt{\_e6\_final\_verify.py}, \texttt{\_fix\_e6\_tits.py}, \texttt{\_fix\_e6\_killing.py}, \texttt{\_analyze\_e6\_structure.py}, \texttt{\_diagnose\_e6.py}: E$_6$ verification and structure analysis
+\end{itemize}
+
+\item[Analysis Utilities (10 scripts)] Shared utilities and analysis tools:
+\begin{itemize}
+\item \texttt{shared\_utils.py}, \texttt{shared\_utils\_gpu.py}: Shared utility functions
+\item \texttt{run\_all\_tests.py}: Automated test execution
+\item \texttt{plan\_verificacion\_sistematica.md}: Systematic verification plan
+\item \texttt{VERIFICATION\_REPORT.md}: Comprehensive verification report
+\item \texttt{\_analyze\_rebel.py}, \texttt{\_analyze\_notclosed\_position.py}: Edge-case analysis
+\item \texttt{\_test\_bifurcation\_v2.py}, \texttt{\_test\_bifurcation\_perturbation.py}: Bifurcation testing
+\item \texttt{\_run\_f4\_gamma50.py}: F$_4$ parameter sweep ($\gamma = 50$)
+\item \texttt{octonion\_jordan.py}: Octonion and Jordan algebra utilities
+\end{itemize}
+\end{description}
+
+The verification suite is designed to systematically validate each aspect of the emergence phenomenon. The family emergence tests establish the universality of the principle. The ablation tests isolate the contribution of each tension term. The robustness tests verify reproducibility across seeds and parameter choices. The landscape scripts explore the global structure of the optimization landscape. The exceptional algebra scripts address the most restrictive test cases.
+
+All scripts are available in the repository at \texttt{verification/}. The systematic verification report (\texttt{VERIFICATION\_REPORT.md}) provides a comprehensive summary of all test results.

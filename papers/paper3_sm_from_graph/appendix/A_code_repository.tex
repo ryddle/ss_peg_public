@@ -1,0 +1,161 @@
+\appendix
+
+\section{Code Repository}\label{app:code}
+
+This appendix catalogs all computational resources used in the SS-PEG program. The code is organized into four groups: (1) coupling constant derivation, (2) mass spectrum derivation, (3) flavor mixing derivation, and (4) Selberg/Ihara spectral program. All scripts use experimental data from PDG 2024~\cite{pdg2024} and NuFIT 5.2~\cite{nufit52} as reference values.
+
+\subsection{Coupling Constant Derivation}\label{app:coup_code}
+
+\begin{center}
+\small
+\captionof{table}{Scripts for coupling constant derivation}
+\label{tab:coup_scripts}
+\begin{tabular}{lll}
+\hline\hline
+Script & Purpose & Key Results \\
+\hline
+\texttt{alpha\_definitive.py} & Definitive $\alpha$ formula computation & $\mathcal{R}_3$ formula selection (D1--D6) \\
+\texttt{alpha\_deep\_investigation.py} & Deep investigation of $\alpha$ formulas & 6 Ramanujan definitions comparison \\
+\texttt{alpha\_reconcile\_graphs.py} & Reconciliation between graph bases & CW vs physics (Gell-Mann) basis \\
+\texttt{coupling\_search.py} & Initial coupling formula search & Master formula discovery \\
+\texttt{coupling\_derivation.py} & Spectral function analysis & Spectral action formalism \\
+\texttt{coupling\_derivation\_deep.py} & Deep derivation of master formula & Orthogonality, uniqueness proofs \\
+\texttt{spectral\_action\_principle.py} & Spectral action and saddle points & Saddle point analysis \\
+\texttt{spectral\_full\_graph\_analysis.py} & Full CW graph spectral analysis & Eigenvalue spectrum \\
+\texttt{verify\_alpha\_formula.py} & Formula verification & Validation against PDG 2024 \\
+\texttt{constants\_from\_alpha.py} & Derived constants from $\alpha$ & Derived quantities \\
+\hline\hline
+\end{tabular}
+\end{center}
+
+\subsection{Mass Spectrum Derivation}\label{app:mass_code}
+
+\begin{center}
+\small
+\captionof{table}{Scripts for mass spectrum derivation}
+\label{tab:mass_scripts}
+\begin{tabular}{lll}
+\hline\hline
+Script & Purpose & Key Results \\
+\hline
+\texttt{mass\_ratio\_search.py} & Exhaustive mass ratio search & $9^5 = 59{,}049$ candidates per target \\
+\texttt{discrete\_search.py} & 3-sector simultaneous enumeration & 51,975 lattice points catalogued \\
+\texttt{dimensional\_bridge.py} & Graph $\to$ physics dimensional bridge & 5D $\to$ 3D reduction \\
+\texttt{consistent\_lattice.py} & Consistent lattice from transitivity & 12-particle lattice reconstruction \\
+\texttt{transition\_curves.py} & Parabolic generation curves & $\gamma(g) = ag^2 + bg + c$ for 3 sectors \\
+\texttt{parabolic\_variational.py} & Curvature tensor derivation & $a_p = \alpha(2I_3) + \beta N_c + \gamma$ \\
+\texttt{parameter\_reduction.py} & Rational coefficient analysis & 27 coefficients $\to$ exact fractions \\
+\texttt{survivor\_analysis.py} & Configuration survivor analysis & 2,500 $\to$ 9 $\to$ 1 at 2\% \\
+\texttt{dim\_reduction\_proof.py} & Baker independence verification & 59,049 $\to$ 3,321 unique values \\
+\texttt{residual\_origin.py} & Residual error origin analysis & Lattice resolution vs radiative corrections \\
+\texttt{weight\_identification.py} & Weight identification tests & Root system, Dynkin embedding \\
+\texttt{flatness\_verification.py} & Flatness permutation verification & 1 of 2,500 configs \\
+\texttt{bosonic\_significance.py} & Boson sector significance test & $P < 10^{-7}$, $10^7$ trials \\
+\texttt{boson\_generating\_function.py} & Boson generating function & W, Z, H parabola \\
+\texttt{boson\_fermion\_deep\_comparison.py} & Boson-fermion structural comparison & 5-sector coefficient atlas \\
+\texttt{higgs\_mechanism\_analysis.py} & Higgs mechanism from lattice & SSB as coordinate activation \\
+\texttt{hadron\_mass\_analysis.py} & Hadron mass analysis & 31/31 fit, $p = 0.705$ MC test \\
+\texttt{velocity\_analysis.py} & Velocity vector analysis & Kinetic action computation \\
+\texttt{formula\_interpretation.py} & Structural formula interpretation & Sector spectral analysis \\
+\texttt{prefactor\_analysis.py} & Rational prefactor analysis & Prefactor origin \\
+\texttt{prefactor\_analysis\_v2.py} & Rational prefactor analysis v2 & Prefactor origin \\
+\texttt{prefactor\_analysis\_v3.py} & Rational prefactor analysis v3 & Prefactor origin \\
+\texttt{loop\_corrections.py} & 1-loop radiative correction analysis & Radiative corrections \\
+\texttt{residual\_analysis.py} & Residual error patterns & Sign balance, radiative ceiling \\
+\hline\hline
+\end{tabular}
+\end{center}
+
+\subsection{Flavor Mixing Derivation}\label{app:mixing_code}
+
+\begin{center}
+\small
+\captionof{table}{Scripts for flavor mixing derivation}
+\label{tab:mixing_scripts}
+\begin{tabular}{lll}
+\hline\hline
+Script & Purpose & Key Results \\
+\hline
+\texttt{ckm\_search.py} & CKM parameter search (102M+ formulas) & 4 independent parameters + 23 derived \\
+\texttt{ckm\_geometry.py} & CKM mixing geometry & Unitarity triangle analysis \\
+\texttt{jarlskog\_analysis.py} & $J_{CP}$ structural analysis & $2^{-15}$ uniqueness \\
+\texttt{jarlskog\_31\_solutions.py} & 31 representations of $2^{-15}$ & Structural analysis \\
+\texttt{pmns\_search.py} & PMNS parameter search & 28/28 $< 1\%$ match \\
+\texttt{pmns\_structural\_analysis.py} & PMNS structural analysis & $\sin\theta_{23}$ exact \\
+\texttt{neutrino\_mass\_derivation.py} & Neutrino mass derivation & Dirac masses, seesaw, Majorana \\
+\texttt{ree\_tower\_analysis.py} & $R_{EE}$ power tower analysis & Binary/ternary frontier (65 observables) \\
+\hline\hline
+\end{tabular}
+\end{center}
+
+\subsection{Selberg/Ihara Spectral Program}\label{app:spectral_code}
+
+\begin{center}
+\small
+\captionof{table}{Scripts for the Selberg/Ihara spectral program}
+\label{tab:spectral_scripts}
+\begin{tabular}{lll}
+\hline\hline
+Script & Purpose & Key Results \\
+\hline
+\texttt{ramanujan\_extended.py} & Ramanujan check for 37 algebras & Transitions su(7)$\to$su(8), so(11)$\to$so(13) \\
+\texttt{ramanujan\_theory.py} & Ramanujan transition theory & Degree heterogeneity, hub mechanism \\
+\texttt{ramanujan\_analytical.py} & Analytical Ramanujan analysis & Scaling laws, divergence theorem \\
+\texttt{ihara\_zeta\_adjoint.py} & Ihara zeta for 37 algebras & Pole structure, Sunada failure \\
+\texttt{holonomy\_zeta\_su2.py} & Non-abelian holonomy zeta (SU(2)) & Trace formula with SU(2) \\
+\texttt{toy\_model\_ihara.py} & Ihara zeta toy model & Trace formula verification \\
+\texttt{check\_coxeter\_eigenvalue.py} & Coxeter number verification & Coxeter as universal predictor \\
+\texttt{west\_connection.py} & West et al.\ quantum chaos & OTOC, Krylov complexity, mixing \\
+\hline\hline
+\end{tabular}
+\end{center}
+
+\subsection{Verification Scripts}\label{app:verification_code}
+
+\begin{center}
+\small
+\captionof{table}{Verification scripts (from Paper I)}
+\label{tab:verification_scripts}
+\begin{tabular}{lll}
+\hline\hline
+Script & Purpose & Key Results \\
+\hline
+\texttt{test\_su\_n\_gpu.py} & SU(N) emergence sweep & Universality across SU(2)--SU(5) \\
+\texttt{test\_so\_n\_gpu.py} & SO(N) emergence sweep & Universality across SO(3)--SO(6) \\
+\texttt{test\_sp\_n\_gpu.py} & Sp(2N) emergence sweep & Universality across Sp(2)--Sp(6) \\
+\texttt{test\_g2\_gpu.py} & G$_2$ emergence & Exceptional algebra emergence \\
+\texttt{test\_f4\_gpu.py} & F$_4$ emergence & Exceptional algebra emergence \\
+\texttt{test\_e6\_gpu.py} & E$_6$ emergence & Exceptional algebra emergence \\
+\texttt{test\_so31\_gpu.py} & so(3,1) emergence & Spacetime symmetry emergence \\
+\texttt{test\_sl2r\_gpu.py} & sl(2,$\mathbb{R}$) emergence & Non-compact emergence \\
+\texttt{test\_su22\_gpu.py} & su(2,2) emergence & Non-compact emergence \\
+\texttt{test\_density\_transition\_gpu.py} & Density phase transition & $\rho = 1$ step function \\
+\texttt{test\_n\_cycle\_tensions.py} & Cycle tension analysis & Holonomy verification \\
+\texttt{shared\_utils\_gpu.py} & GPU utilities & Parameterizations, Killing metric \\
+\texttt{run\_all\_tests.py} & Total test execution & Automation \\
+\texttt{VERIFICATION\_REPORT.md} & Global verification report & 100\% closure verification \\
+\texttt{systematic\_verification\_plan.md} & Verification plan & Strategy documentation \\
+\hline\hline
+\end{tabular}
+\end{center}
+
+\subsection{Code Statistics}\label{app:code_stats}
+
+\begin{center}
+\small
+\captionof{table}{Code statistics}
+\begin{tabular}{lc}
+\hline\hline
+Metric & Value \\
+\hline
+Total scripts & 45+ \\
+Python scripts & 43 \\
+Markdown documentation & 4 \\
+Lines of code (approx.) & 12,000+ \\
+Algebraic families tested & 17 (Paper I) \\
+Spectral invariants computed & 37 algebras (Selberg) \\
+Formulas evaluated & 102M+ (CKM) \\
+Randomization trials & $10^7$ (bosonic) \\
+\hline\hline
+\end{tabular}
+\end{center}

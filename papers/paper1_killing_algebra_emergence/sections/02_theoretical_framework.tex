@@ -1,0 +1,160 @@
+\section{Theoretical Framework}\label{sec:variational_principle}
+
+\subsection{The Killing Metric and Relational Tension}\label{sec:killing_metric}
+
+The Killing metric is the fundamental geometric object in our framework. For a set of $n$ operators $\{G_a\}_{a=1}^n$ acting on a $d$-dimensional Hilbert space, the Killing metric is defined as:
+
+\begin{equation}
+K_{ab} = \mathrm{Tr}(\mathrm{ad}_a \circ \mathrm{ad}_b) = \mathrm{Tr}([G_a, \cdot]\,[G_b, \cdot])
+\end{equation}
+
+where $\mathrm{ad}_a(X) = [G_a, X]$ is the adjoint action of $G_a$. In the adjoint representation, if we denote the structure constants by $f_{abc}$ via $[G_a, G_b] = f_{abc}\,G_c$, then:
+
+\begin{equation}
+K_{ab} = f_{acd}\,f_{bcd}
+\end{equation}
+
+The Killing metric possesses three essential properties:
+
+\begin{enumerate}[label=\roman*.]
+\item \textbf{Base invariance.} $K_{ab}$ is invariant under change of basis in the generator space. If $G'_a = M_{ab}G_b$ for invertible $M$, then $K' = M K M^\top$, and the eigenvalues of $K$ are basis-independent.
+
+\item \textbf{Symmetric bilinear form.} $K_{ab} = K_{ba}$, making $K$ a symmetric matrix that defines a quadratic form on the generator space.
+
+\item \textbf{Cartan's criterion.} A Lie algebra is semisimple if and only if $K$ is non-degenerate (i.e., $\det K \neq 0$). For compact algebras, $K$ is negative definite.
+\end{enumerate}
+
+For compact simple Lie algebras, the Killing metric takes the universal form:
+
+\begin{equation}
+K_{ab} = -c \cdot \delta_{ab}
+\end{equation}
+
+where $c > 0$ is a positive constant proportional to the dual Coxeter number $h^\vee$. This is the target geometry: a negative-definite metric proportional to the identity.
+
+The \textbf{Killing tension} measures the deviation from this target:
+
+\begin{equation}
+T_K = \|K - K_{\mathrm{target}}\|^2 = \sum_{a,b=1}^n \left(K_{ab} - (K_{\mathrm{target}})_{ab}\right)^2
+\end{equation}
+
+where $\|\cdot\|$ denotes the Frobenius norm. Minimizing $T_K$ drives the emergent algebra toward the target geometry. The crucial insight is that this single geometric constraint---without any algebraic axioms imposed---uniquely determines the Lie algebra structure.
+
+\subsection{The Variational Principle}\label{sec:variational_principle_detail}
+
+The variational principle is defined by the total tension functional:
+
+\begin{equation}
+T_{\mathrm{total}} = \alpha\, T_K + \beta \sum_{i=1}^n \left(\|G_i\|_F - 1\right)^2
+\end{equation}
+
+The first term $T_K$ drives the Killing metric toward the target geometry. The second term stabilizes the generator norms, preventing divergence. The weights $\alpha$ and $\beta$ are hyperparameters; in all experiments we set $\alpha = \beta = 1$.
+
+For compact algebras, the target is:
+
+\begin{equation}
+K_{\mathrm{target}} = -c \cdot I_n
+\end{equation}
+
+where $c$ is a positive constant (typically $c = 1$ in normalized units). The normalization constraint $\|G_i\|_F = 1$ ensures that the generators are comparable across different algebras and that the Killing eigenvalues encode algebraic rather than scaling information.
+
+The optimization proceeds as follows:
+
+\begin{enumerate}[label=\arabic*.]
+\item Initialize $n$ random $d \times d$ matrices $\{G_a^{(0)}\}$ with the appropriate structural constraint (hermitian traceless, antisymmetric, or symplectic).
+
+\item Compute the Killing metric $K_{ab}^{(k)} = \mathrm{Tr}(\mathrm{ad}_a^{(k)} \circ \mathrm{ad}_b^{(k)})$ at iteration $k$.
+
+\item Compute $T_{\mathrm{total}}^{(k)}$ and its gradient with respect to each generator $G_a^{(k)}$.
+
+\item Update generators using the Adam optimizer: $G_a^{(k+1)} = G_a^{(k)} - \eta\, \hat{m}_a^{(k)} / (\hat{s}_a^{(k)})^{1/2}$, where $\hat{m}$ and $\hat{s}$ are the bias-corrected first and second moments.
+
+\item Repeat until convergence: $\|T_{\mathrm{total}}^{(k+1)} - T_{\mathrm{total}}^{(k)}\| / T_{\mathrm{total}}^{(k)} < 10^{-8}$.
+\end{enumerate}
+
+The initial matrices are drawn from a Gaussian distribution with zero mean and variance $1/d$, ensuring no algebraic structure is present at initialization. The structural constraint (hermitian traceless, antisymmetric, or symplectic) determines the \textit{parameterization class} but is not an algebraic axiom---it specifies the \textit{type} of operator space in which the algebra emerges, not which algebra.
+
+\subsection{Classical and Exceptional Lie Algebras}\label{sec:algebra_classification}
+
+The classification of finite-dimensional simple Lie algebras into four infinite families (the classical series) and five exceptional algebras is a cornerstone of mathematics. The variational principle accesses all of them through the same mechanism, with the only variation being the parameterization class.
+
+\subsubsection{Classical Families}
+
+The classical families are characterized by their dimension, rank, and dual Coxeter number:
+
+\begin{equation}
+\begin{array}{llll}
+\hline
+\text{Family} & \text{Dimension} & \text{Rank} & h^\vee \\
+\hline
+\su(n) & n^2 - 1 & n - 1 & n \\
+\so(2n+1) & n(2n+1) & n & 2n - 1 \\
+\so(2n) & n(2n-1) & n & 2n - 2 \\
+\sp(2n) & n(2n+1) & n & n + 1 \\
+\hline
+\end{array}
+\end{equation}
+
+Each family is accessed through a different parameterization:
+\begin{itemize}
+\item $\su(n)$: Hermitian traceless $n \times n$ matrices (dimension $n^2 - 1$).
+\item $\so(N)$: Antisymmetric $N \times N$ matrices (dimension $N(N-1)/2$).
+\item $\sp(2N)$: Symplectic matrices preserving the antisymmetric form $J = \begin{pmatrix} 0 & I_N \\ -I_N & 0 \end{pmatrix}$ (dimension $N(2N+1)$).
+\end{itemize}
+
+The isomorphisms $\su(2) \cong \sp(2)$, $\su(4) \cong \so(6)$, and $\so(5) \cong \sp(4)$ are verified in our experiments: the invariants (Killing eigenvalues, dual Coxeter numbers) are bit-identical when computed from different parameterizations, confirming that the variational principle accesses the abstract algebra.
+
+\subsubsection{Exceptional Algebras}
+
+The five exceptional Lie algebras---G$_2$, F$_4$, E$_6$, E$_7$, E$_8$---are the most restrictive test of the variational principle. Unlike classical algebras, they cannot fill an entire matrix space; they are proper subalgebras:
+
+\begin{equation}
+\begin{array}{lllll}
+\hline
+\text{Algebra} & \text{Dimension} & \text{Rank} & h^\vee & \text{Embedding fraction} \\
+\hline
+\text{G}_2 & 14 & 2 & 4 & 29\%\ \text{of}\ \so(7) \\
+\text{F}_4 & 52 & 4 & 9 & 15\%\ \text{of}\ \so(27) \\
+\text{E}_6 & 78 & 6 & 12 & 22\%\ \text{of}\ \so(27) \\
+\text{E}_7 & 133 & 7 & 18 & \text{smaller} \\
+\text{E}_8 & 248 & 8 & 30 & \text{smaller} \\
+\hline
+\end{array}
+\end{equation}
+
+G$_2$ is the automorphism group of the octonions. F$_4$ is the automorphism group of the exceptional Jordan algebra of $3 \times 3$ octonionic Hermitian matrices. E$_6$ is the automorphism group of the 27-dimensional exceptional Jordan algebra. These geometric definitions provide the constructive input for our experiments.
+
+The blind discovery of G$_2$ and F$_4$---without octonionic input---is achieved by adding the closure tension $T_{\mathrm{cl}} = \sum_{a,b} \|[G_a, G_b]\|^2$ to the loss. The optimizer discovers the exceptional geometry purely from the requirement that commutators close within the generator span. E$_6$ resists blind discovery (0/144 trials), requiring specific warm-start conditions.
+
+\subsection{The Cartan--Weyl Graph as Fundamental Object}\label{sec:cartan_weyl_graph}
+
+The Cartan--Weyl (CW) root graph provides a bridge between the continuous algebraic structure and the discrete graph topology of the SS-PEG framework. For a simple Lie algebra $\mathfrak{g}$, the CW graph is defined as follows:
+
+\begin{definition}[Cartan--Weyl Graph]
+Let $\Phi$ be the root system of $\mathfrak{g}$ with simple roots $\{\alpha_1, \ldots, \alpha_r\}$. The CW graph $G_{\mathrm{CW}} = (V, E)$ has:
+\begin{itemize}
+\item Vertices $V = \Phi$: one for each root.
+\item Edges $(\alpha, \beta) \in E$ if and only if $\langle \alpha, \beta^\vee \rangle \neq 0$, where $\beta^\vee = 2\beta / (\beta, \beta)$ is the coroot.
+\end{itemize}
+\end{definition}
+
+The CW graph encodes the root system geometry: edges connect roots that are non-orthogonal, and the edge weights are the Cartan integers $\langle \alpha, \beta^\vee \rangle \in \{0, \pm 1, \pm 2, \pm 3\}$. For the Standard Model gauge algebra $\mathfrak{su}(3) \oplus \mathfrak{su}(2) \oplus \mathfrak{u}(1)$, the CW graph has two disconnected components corresponding to the SU(3) and SU(2) factors.
+
+The CW graph is related to the Killing metric through the following relationship. The adjacency matrix $A$ of $G_{\mathrm{CW}}$ satisfies:
+
+\begin{equation}
+A_{\alpha\beta} = \begin{cases}
+1 & \text{if } \langle \alpha, \beta^\vee \rangle \neq 0 \\
+0 & \text{otherwise}
+\end{cases}
+\end{equation}
+
+The spectrum of $A$ determines the \textbf{Ramanujan ratio} $\mathcal{R}$, a measure of the spectral expansion quality of the graph. A graph is Ramanujan if all non-trivial eigenvalues $\lambda$ satisfy $|\lambda| \leq 2\sqrt{d_{\mathrm{avg}} - 1}$, where $d_{\mathrm{avg}}$ is the average degree. The Ramanujan property is equivalent to optimal spectral expansion and maximal chaos in the corresponding quantum system.
+
+\begin{theorem}[Ramanujan Property of SM Factors]
+The CW graphs of $\mathfrak{su}(2)$ and $\mathfrak{su}(3)$ are Ramanujan with ratios $\mathcal{R}(\mathfrak{su}(2)) = 1/2$ and $\mathcal{R}(\mathfrak{su}(3)) = (\sqrt{57} - 3)/(2\sqrt{17}) \approx 0.5523$, respectively. Both pass all six alternative definitions of the Ramanujan property unanimously.
+\end{theorem}
+
+The Ramanujan property is not merely a mathematical curiosity. Paper II proves that it is a necessary condition for spectral optimality: the SM factors are deeply Ramanujan because the variational principle selects graphs with optimal spectral expansion. The product $\mathfrak{su}(3) \oplus \mathfrak{su}(2)$ is also Ramanujan (ratio 0.657), confirming P7: Ramanujan $\times$ Ramanujan $\to$ Ramanujan.
+
+The CW graph thus serves as the fundamental object connecting the continuous algebraic structure (Killing metric) to the discrete graph topology (relational density, spectral properties). In the SS-PEG framework, the CW graph is the ``skeleton'' of the emergent algebra: its topology determines which algebras are accessible, and its spectral properties determine which are optimal.

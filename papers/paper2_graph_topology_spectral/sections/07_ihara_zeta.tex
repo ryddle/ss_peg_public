@@ -1,0 +1,73 @@
+\section{Ihara Zeta and Pole Structure}\label{sec:ihara_zeta}
+
+\subsection{The Ihara Zeta Function of Adjoint Commutation Graphs}\label{sec:ihara_def}
+
+We present the first systematic computation of the Ihara zeta function for the $37$ simple Lie algebras. For each algebra $\g$, the adjoint representation defines a graph whose Ihara zeta function is:
+
+\begin{equation}
+Z(u)^{-1} = (1-u^2)^{r-1} \det(I - uA + u^2 Q)
+\end{equation}
+
+where $A$ is the adjacency matrix of the adjoint commutation graph, $Q$ is the degree matrix, and $r$ is the cyclomatic number. Equivalently, via the Hashimoto operator:
+
+\begin{equation}
+Z(u)^{-1} = \det(I - uT_e)
+\end{equation}
+
+where $T_e$ is the non-backtracking transition operator.
+
+\subsection{Sunada's Equivalence: Complete Failure for Irregular Graphs}\label{sec:sunada_failure}
+
+For regular graphs, the Ramanujan property is equivalent to poles lying on $|u| = 1/\sqrt{q}$. This is Sunada's celebrated equivalence between the spectral Ramanujan property and the Riemann hypothesis for the Ihara zeta function.
+
+\textbf{This equivalence fails for all adjoint commutation graphs} (except su(2)). The cause is graph irregularity: the adjoint graphs are inherently heterogeneous---the Cartan subalgebra acts as a hub while root vertices have lower degree. We find $19$ discrepancies: Ramanujan algebras where the Riemann hypothesis for the Ihara zeta function fails.
+
+\subsection{Soft Equivalence: Pole Concentration as Order Parameter}\label{sec:soft_equivalence}
+
+While Sunada's exact equivalence fails, we discover a \emph{soft equivalence}: the concentration of poles around the Ramanujan circle serves as an order parameter for the Ramanujan phase transition.
+
+For Ramanujan algebras:
+\begin{equation}
+\mathrm{frac\_in\_ring} = 1.0, \quad \sigma(|u|) \approx 0.01\text{--}0.02
+\end{equation}
+
+For non-Ramanujan algebras:
+\begin{equation}
+\mathrm{frac\_in\_ring} \to 0.87, \quad \sigma(|u|) \to 0.04
+\end{equation}
+
+The fraction of poles in the ring around $|u| = 1/\sqrt{q}$ and the spread $\sigma$ are sharp discriminators between the Ramanujan and non-Ramanujan phases.
+
+\subsection{Pole Migration Velocity: First-Order-like Discontinuity}\label{sec:pole_migration}
+
+The pole migration velocity $\Delta(\mathrm{inner}/r_c) / \Delta h$ exhibits a first-order-like discontinuity at the Ramanujan transition:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c c}
+\hline\hline
+Transition & $h$ & $\Delta(\mathrm{inner}/r_c)/\Delta h$ \\
+\hline
+su(5) $\to$ su(6) & 6 & $-0.008$ \\
+su(7) $\to$ su(8) & 7 & $-0.012$ \\
+su(8) $\to$ su(9) & 8 & \textbf{$-0.221$} \\
+su(9) $\to$ su(10) & 9 & $-0.088$ \\
+su(10) $\to$ su(11) & 10 & $-0.045$ \\
+su(11) $\to$ su(12) & 11 & $-0.028$ \\
+\hline\hline
+\end{tabular}
+\caption{Pole migration velocity across the Ramanujan transition.}
+\end{table}
+
+The $18\times$ jump between su(7)$\to$su(8) ($-0.012$, gradual) and su(8)$\to$su(9) ($-0.221$, discontinuous) is the hallmark of a first-order-like phase transition in the spectral domain.
+
+\subsection{Scaling: Pole Migration in the $A_n$ Family}\label{sec:pole_scaling}
+
+In the $A_n$ family (su($n+1$)):
+\begin{itemize}
+    \item Inner pole ratio $\to 0$ as $n \to \infty$
+    \item $\mathrm{frac\_in\_ring} \to 0.87$ (finite limit $< 1$)
+    \item Pole distribution becomes bimodal for large rank
+\end{itemize}
+
+This confirms that the Ramanujan transition is not an artifact of finite rank but a genuine asymptotic property of the classical families.

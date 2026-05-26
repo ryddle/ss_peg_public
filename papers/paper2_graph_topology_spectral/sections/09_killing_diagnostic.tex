@@ -1,0 +1,67 @@
+\section{Killing: Diagnostic vs. Generative}\label{sec:killing_diagnostic}
+
+\subsection{G\_RAG-21: Killing is Selector, Not Creator}\label{sec:g_rag_21}
+
+The Algebraic Graph RAG experiments (5 experiments, 27 generalizations) provide decisive evidence for the following result:
+
+\begin{theorem}[G\_RAG-21]\label{th:g_rag_21}
+The Killing form is \textbf{diagnostic, not generative}. The Killing potential $T_K$ alone does not create non-commutativity---it selects and purifies structures that are already present from the topological (cycle) dynamics.
+\end{theorem}
+
+In graph terms: the cyclic edges (Aggregation tension) are \emph{created} by the closure condition---the requirement that commutators remain within the generator span. The Killing metric then \emph{evaluates} how well those cycles are organized. This is the graph-theoretic version of the Potential $\to$ Cycle $\to$ Invariant chain:
+
+\begin{equation}
+\underbrace{\text{Closure}}_{\text{Creates cycles}} \;\to\; \underbrace{\Kil_{ab}}_{\text{Evaluates quality}} \;\to\; \underbrace{\hve, \, \Phi, \, \text{Ramanujan}}_{\text{Selects optimum}}
+\end{equation}
+
+\subsection{The Tempering Protocol: Two-Phase Graph Construction}\label{sec:tempering_protocol}
+
+The RAG Experiment 5 (G\_RAG-25) discovered that the Killing signal is \emph{maximally pure after withdrawal of cycle pressure}---a tempering effect where removing the generative force (closure) allows the diagnostic force (Killing) to anneal the structure into its optimal configuration.
+
+\begin{table}[h]
+\fontsize{7pt}{10pt}\selectfont
+\centering
+\begin{tabular}{l l l l}
+\hline\hline
+Phase & Duration & Active tensions & Graph effect \\
+\hline
+\textbf{Dosing} (cycle pressure ON) & $\sim\!200$ epochs & $T_{\mathrm{closure}} + T_K + T_{\mathrm{ortho}}$ & Cyclic edges form \\
+\quad & \quad & \quad & Killing entangled with off-diagonal noise \\
+\textbf{Withdrawal} (cycle pressure OFF) & $\sim\!200$ epochs & $T_K + T_{\mathrm{ortho}}$ only & Off-diagonal relaxation \\
+\quad & \quad & \quad & $\Kil_{\mathrm{rr}}$ $\AUC$ improves $0.52 \to 0.98$ \\
+\hline\hline
+\end{tabular}
+\caption{The tempering protocol: dosing vs. withdrawal phases.}
+\end{table}
+
+This maps to a \textbf{two-stage graph construction rule}: first build the topology (close cycles), then refine the metric (anneal with Killing). The graph's structure is generated in the first phase and purified in the second.
+
+\subsection{Two Phase Transitions in Graph Crystallization}\label{sec:two_phase_crystallization}
+
+The RAG program revealed that the $\ro = 1$ crystallization is itself composed of two sub-transitions:
+
+\begin{enumerate}
+    \item \textbf{Activation} ($\sim\!50$ epochs): Enough cycle pressure for the Killing form to begin separating edge types---but this is \emph{transient}. Remove the pressure and the edges relax to disorder. The graph has temporary topology.
+    
+    \item \textbf{Hardening} ($\sim\!200$ epochs, 4$\times$ activation): The edge structure undergoes a \emph{permanent basin transition}. The graph's algebraic structure becomes self-sustaining---it persists even under Killing-only annealing. The graph has permanent topology.
+\end{enumerate}
+
+The hardening threshold is sharp---between D100 and D200, $\Kil_{\mathrm{rr}}$ retention jumps from collapse ($\sim\!0.32$) to amplification ($0.93+$). This suggests that the $\ro = 1$ crystallization, while appearing as a step function in the final state, involves an internal two-stage process: \textbf{nucleation} (activation) $\to$ \textbf{solidification} (hardening).
+
+\subsection{Abelian Collapse as Entropic Default}\label{sec:abelian_collapse}
+
+The RAG Experiment 4 (G\_RAG-19) showed that $T_K$ in mixed knowledge graphs drives \emph{abelian collapse}: operators evolve toward commuting configurations (minimal non-commutativity) as the default equilibrium. This is the Entropy tension winning---without cycle pressure, the graph relaxes to Archetype III (cycle + strand) or IV (pure free), losing its non-abelian cyclic structure.
+
+This explains the $53.1\%$ non-simple result in the $128$-seed Monte Carlo: most random trajectories lack sufficient ``cycle pressure'' (topological constraints) to sustain simple algebras. The non-simple products represent \textbf{partial abelian collapse} where some sectors crystallize and others decouple.
+
+\subsection{Dissociation $T_K$--Holonomy: Independent Algebraic Properties}\label{sec:tk_holonomy_dissociation}
+
+The RAG Experiment 3 (G\_RAG-16, B2) demonstrated that $T_K$ minimization and holonomy detection are independent:
+
+\begin{itemize}
+    \item $T_K$ collapses from $88.25 \to 80.72$ while retaining $\mathrm{hol\_sep} = 14.17\times$
+    \item Adam state preserves $T_K$ without transferring holonomy
+    \item The Killing signal and holonomy structure are \emph{algebraically independent} properties
+\end{itemize}
+
+This dissociation supports the diagnostic interpretation: $T_K$ evaluates the metric structure, while holonomy measures the topological structure. They can evolve on different timescales and reach different equilibria.
