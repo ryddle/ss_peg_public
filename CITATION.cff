@@ -1,0 +1,27 @@
+cff-version: "1.2.0"
+message: "If you use this software, please cite it as below."
+type: software
+title: "SS-PEG: Space of States and Projections of the Evolution Graph"
+version: "1.0.0"
+description: "Experimental program on emergent gauge symmetries from Killing metric geometry. The entire algebraic structure of gauge symmetry commutation relations, Jacobi identities, Casimir operators, dual Coxeter numbers, representation invariants emerges as the unique output of a purely geometric variational principle acting on the Killing metric. No algebraic axioms are required."
+authors:
+  - family-names: "Moreno"
+    given-names: "José M."
+    orcid: "https://orcid.org/0009-0004-3241-2277"
+    affiliation: "Independent Researcher"
+repository-code: "https://github.com/ryddle/sspeg-public"
+license: MIT
+keywords:
+  - "gauge symmetry"
+  - "Lie algebras"
+  - "emergent gravity"
+  - "relational physics"
+  - "Killing metric"
+  - "dark matter"
+  - "Standard Model"
+  - "spectral geometry"
+  - "Killing tension"
+  - "geometric variational principle"
+date-released: "2026-05-24"
+doi: ""
+url: "https://github.com/ryddle/sspeg-public"
