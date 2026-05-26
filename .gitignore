@@ -1,5 +1,4 @@
 # Git LFS tracking for large files
-*.npz
 *.log
 *.json
 
