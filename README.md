@@ -16,11 +16,11 @@ The entire algebraic structure of gauge symmetry — commutation relations, Jaco
 
 ## Publications
 
-| Paper | Title | arXiv |
+| Paper | Title | Zenodo |
 |-------|-------|-------|
-| **Paper I** | Lie Algebras from the Killing Metric: Gauge Symmetries as Emergent Consequences of Relational Geometry | [pending] |
-| **Paper II** | Graph Topology & Spectral Analysis: Ramanujan Properties and the Selberg Zeta Function | [pending] |
-| **Paper III** | Standard Model from Graph Topology: Coupling Constants, Mass Spectrum, and Flavor Mixing | [pending] |
+| **Paper I** | Lie Algebras from the Killing Metric: Gauge Symmetries as Emergent Consequences of Relational Geometry | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20399251.svg)](https://doi.org/10.5281/zenodo.20399251) |
+| **Paper II** | Graph Topology & Spectral Analysis: Ramanujan Properties and the Selberg Zeta Function | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20399273.svg)](https://doi.org/10.5281/zenodo.20399273) |
+| **Paper III** | Standard Model from Graph Topology: Coupling Constants, Mass Spectrum, and Flavor Mixing | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20399653.svg)](https://doi.org/10.5281/zenodo.20399653) |
 
 ---
 
