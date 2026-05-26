@@ -83,7 +83,7 @@ git clone https://github.com/ryddle/sspeg-public.git
 cd sspeg-public
 
 # Install dependencies
-pip install -r requirements.txt  # if available
+pip install -r requirements.txt
 
 # Run all verification tests
 python scripts/verification/run_all_tests.py
@@ -100,7 +100,7 @@ python scripts/verification/_landscape_montecarlo.py
 | Experiment | Script | Description |
 |------------|--------|-------------|
 | Killing-only ablation | `test_3_1_only_killing.py` | Proves $T_K$ generates algebra, $T_{nc}$ is redundant |
-| Density phase transition | `test_density_transition_gpu.py` | Step function at $ho = 1$ |
+| Density phase transition | `test_density_transition_gpu.py` | Step function at $ho = 1$ |
 | Landscape analysis | `_landscape_montecarlo.py` | 128 seeds in so(27) |
 | F4 bifurcation | `_test_bifurcation_v2.py` | History-dependent symmetry selection |
 | E6 blind discovery | `test_e6_gpu.py` | E6 from random initialization |
@@ -114,7 +114,10 @@ python scripts/verification/_landscape_montecarlo.py
 
 - **51 core tests**, 17 Lie algebras, 4 classical families, 3 exceptional algebras
 - **100% success rate** across all classical and exceptional families
-- **Density phase transition**: Step function at $ho = 1$ (0% closure for $ho < 1$, 100% at $ho = 1$)
+- **Density phase transition**: Step function at $
+ho = 1$ (0% closure for $
+ho < 1$, 100% at $
+ho = 1$)
 - **Killing-only ablation**: $T_K$ alone generates algebra; $T_{nc}$ is redundant
 - **F4 bifurcation**: History-dependent symmetry selection via Adam optimizer state
 - **Landscape analysis**: Non-simple products dominate (53.1% of seeds)
@@ -135,6 +138,8 @@ python scripts/verification/_landscape_montecarlo.py
 José M. Moreno  
 Independent Researcher  
 SS-PEG Project
+
+All scripts in this repository were created by Claude Opus 4.6.
 
 ---
 
