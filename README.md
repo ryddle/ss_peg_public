@@ -145,7 +145,7 @@ All scripts in this repository were created by Claude Opus 4.6.
 
 ## Zenodo DOI
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/1247778422.svg)](https://doi.org/10.5281/zenodo.20397506)
 
 ---
 
